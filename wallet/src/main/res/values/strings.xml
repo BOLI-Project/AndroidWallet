@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name" translatable="false">BolivarCoin wallet</string>
+    <string name="app_name" translatable="false">Bolicoin wallet</string>
     <string name="app_package" translatable="false">com.boli.wallet</string>
     <string name="coinomi_website" translatable="false">https://bolis.info</string>
     <string name="almost_equal_to" translatable="false">≈</string>
@@ -205,7 +205,7 @@
     </plurals>
     <!-- About Activity -->
     <string name="title_activity_about">About BolivarCoin wallet</string>
-    <string name="app_name_long">BolivarCoin wallet</string>
+    <string name="app_name_long">Bolicoin wallet</string>
     <string name="project">bolis.info project</string>
     <string name="about_licence">An open source project\nhttps://github.com/MFrcoin/android-wallet based on Coinomi project</string>
     <string name="about_credits_nubits">Server infrastructure donated by NuBits - The World\'s First Stable Digital Currency\nhttps://nubits.com/</string>

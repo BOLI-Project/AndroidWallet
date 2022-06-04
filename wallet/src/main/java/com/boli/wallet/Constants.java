@@ -242,7 +242,7 @@ public class Constants {
         COINS_ICONS.put(CoinID.MFCOIN_MAIN.getCoinType(), R.mipmap.mfcoin);
         COINS_ICONS.put(CoinID.AREPACOIN_MAIN.getCoinType(), R.mipmap.arepacoin);
         COINS_ICONS.put(CoinID.BITCOIN_MAIN.getCoinType(), R.mipmap.bitcoin);
-        COINS_ICONS.put(CoinID.BOLIVARCOIN_MAIN.getCoinType(), R.mipmap.bolivarcoin);
+        COINS_ICONS.put(CoinID.BOLIVARCOIN_MAIN.getCoinType(), R.drawable.bolicoin_logo);
         COINS_ICONS.put(CoinID.LITECOIN_MAIN.getCoinType(), R.mipmap.litecoin);
         COINS_ICONS.put(CoinID.DOGECOIN_MAIN.getCoinType(), R.mipmap.dogecoin);
         COINS_ICONS.put(CoinID.DASH_MAIN.getCoinType(), R.mipmap.dash);
