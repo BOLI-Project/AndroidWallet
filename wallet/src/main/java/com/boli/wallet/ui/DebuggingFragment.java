@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import com.boli.core.wallet.Wallet;
 import com.boli.wallet.R;
 import com.boli.wallet.WalletApplication;
+import com.boli.wallet.databinding.FragmentDebuggingBinding;
 
 import org.bitcoinj.core.Sha256Hash;
 import org.bitcoinj.crypto.DeterministicKey;
@@ -41,6 +42,7 @@ public class DebuggingFragment extends Fragment {
     private CharSequence password;
     private PasswordTestTask passwordTestTask;
     private Wallet wallet;
+    private FragmentDebuggingBinding binding;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -52,10 +54,10 @@ public class DebuggingFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_debugging, container, false);
-        ButterKnife.bind(this, view);
+        binding = FragmentDebuggingBinding.inflate(inflater, container, false);
+        onExecutePasswordTest();
 
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -71,15 +73,16 @@ public class DebuggingFragment extends Fragment {
         wallet = application.getWallet();
     }
 
-    @OnClick(R.id.button_execute_password_test)
     void onExecutePasswordTest() {
-        if (wallet.isEncrypted()) {
-            showUnlockDialog();
-        } else {
-            DialogBuilder.warn(getActivity(), R.string.wallet_is_not_locked_message)
-                    .setPositiveButton(R.string.button_ok, null)
-                    .create().show();
-        }
+        binding.buttonExecutePasswordTest.setOnClickListener(view -> {
+            if (wallet.isEncrypted()) {
+                showUnlockDialog();
+            } else {
+                DialogBuilder.warn(getActivity(), R.string.wallet_is_not_locked_message)
+                        .setPositiveButton(R.string.button_ok, null)
+                        .create().show();
+            }
+        });
     }
 
     private void showUnlockDialog() {

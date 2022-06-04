@@ -241,7 +241,7 @@ public class MakeTransactionFragment extends Fragment {
             }
         });
         poweredByShapeshiftBinding.poweredByShapeshift.setVisibility((isExchangeNeeded() ? View.VISIBLE : View.GONE));
-
+        setOnclickListeners();
         return binding.getRoot();
     }
 
@@ -251,13 +251,18 @@ public class MakeTransactionFragment extends Fragment {
         ButterKnife.unbind(this);
     }
 
-    @OnClick(R.id.button_confirm)
+    private void setOnclickListeners(){
+        onConfirmClick();
+    }
+
     void onConfirmClick() {
-        if (binding.password.isShown()) {
-            Keyboard.hideKeyboard(getActivity());
-            password = binding.password.getText().toString();
-        }
-        maybeStartSignAndBroadcast();
+        binding.buttonConfirm.setOnClickListener(view -> {
+            if (binding.password.isShown()) {
+                Keyboard.hideKeyboard(getActivity());
+                password = binding.password.getText().toString();
+            }
+            maybeStartSignAndBroadcast();
+        });
     }
 
     private void showTransaction() {

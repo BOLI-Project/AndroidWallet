@@ -309,6 +309,7 @@ public class SendFragment extends WalletFragment {
         binding.amountWarningMessage.setVisibility(View.GONE);
 
         setupTxMessage();
+        setOnClickListeners();
 
         return binding.getRoot();
     }
@@ -462,10 +463,18 @@ public class SendFragment extends WalletFragment {
         }
     }
 
-    @OnClick(R.id.erase_address)
+    private void setOnClickListeners(){
+        onAddressClearClick();
+        handleScan();
+        onSendClick();
+        onStaticAddressClick();
+    }
+
     public void onAddressClearClick() {
-        clearAddress(true);
-        updateView();
+        binding.eraseAddress.setOnClickListener(view -> {
+            clearAddress(true);
+            updateView();
+        });
     }
 
     private void clearAddress(boolean clearTextField) {
@@ -527,19 +536,21 @@ public class SendFragment extends WalletFragment {
         }
     }
 
-    @OnClick(R.id.scan_qr_code)
     void handleScan() {
-        startActivityForResult(new Intent(getActivity(), ScanActivity.class), REQUEST_CODE_SCAN);
+        binding.scanQrCode.setOnClickListener(view -> {
+            startActivityForResult(new Intent(getActivity(), ScanActivity.class), REQUEST_CODE_SCAN);
+        });
     }
 
-    @OnClick(R.id.send_confirm)
     public void onSendClick() {
-        validateAddress();
-        validateAmount();
-        if (everythingValid())
-            handleSendConfirm();
-        else
-            requestFocusFirst();
+        binding.sendConfirm.setOnClickListener(view -> {
+            validateAddress();
+            validateAmount();
+            if (everythingValid())
+                handleSendConfirm();
+            else
+                requestFocusFirst();
+        });
     }
 
     private void handleSendConfirm() {
@@ -1062,38 +1073,39 @@ public class SendFragment extends WalletFragment {
         }
     }
 
-    @OnClick(R.id.send_to_address_static)
     void onStaticAddressClick() {
-        if (address != null) {
-            final boolean showChangeType = addressTypeCanChange &&
-                    GenericUtils.hasMultipleTypes(address);
-            ActionMode.Callback callback = new UiUtils.AddressActionModeCallback(
-                    address, application.getApplicationContext(), getFragmentManager()) {
+        binding.sendToAddressStatic.setOnClickListener(view -> {
+            if (address != null) {
+                final boolean showChangeType = addressTypeCanChange &&
+                        GenericUtils.hasMultipleTypes(address);
+                ActionMode.Callback callback = new UiUtils.AddressActionModeCallback(
+                        address, application.getApplicationContext(), getFragmentManager()) {
 
-                @Override
-                public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                    mode.getMenuInflater().inflate(R.menu.address_options_extra, menu);
-                    menu.findItem(R.id.action_change_address_type).setVisible(showChangeType);
-                    return super.onCreateActionMode(mode, menu);
-                }
-
-                @Override
-                public boolean onActionItemClicked(ActionMode mode, MenuItem menuItem) {
-                    switch (menuItem.getItemId()) {
-                        case R.id.action_change_address_type:
-                            if (listener != null) listener.showPayToDialog(getAddress().toString());
-                            mode.finish();
-                            return true;
+                    @Override
+                    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                        mode.getMenuInflater().inflate(R.menu.address_options_extra, menu);
+                        menu.findItem(R.id.action_change_address_type).setVisible(showChangeType);
+                        return super.onCreateActionMode(mode, menu);
                     }
-                    return super.onActionItemClicked(mode, menuItem);
+
+                    @Override
+                    public boolean onActionItemClicked(ActionMode mode, MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.action_change_address_type:
+                                if (listener != null) listener.showPayToDialog(getAddress().toString());
+                                mode.finish();
+                                return true;
+                        }
+                        return super.onActionItemClicked(mode, menuItem);
+                    }
+                };
+                actionMode = UiUtils.startActionMode(getActivity(), callback);
+                // Hack to dismiss this action mode when back is pressed
+                if (listener != null && listener instanceof WalletActivity) {
+                    ((WalletActivity) listener).registerActionMode(actionMode);
                 }
-            };
-            actionMode = UiUtils.startActionMode(getActivity(), callback);
-            // Hack to dismiss this action mode when back is pressed
-            if (listener != null && listener instanceof WalletActivity) {
-                ((WalletActivity) listener).registerActionMode(actionMode);
             }
-        }
+        });
     }
 
     private void finishActionMode() {

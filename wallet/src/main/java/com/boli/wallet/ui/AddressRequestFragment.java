@@ -182,6 +182,7 @@ public class AddressRequestFragment extends WalletFragment {
         binding.requestLocalAmount.setFormat(FiatType.FRIENDLY_FORMAT);
 
         amountCalculatorLink = new CurrencyCalculatorLink(binding.requestCoinAmount, binding.requestLocalAmount);
+        setOnclickListeners();
 
         return binding.getRoot();
     }
@@ -198,29 +199,35 @@ public class AddressRequestFragment extends WalletFragment {
     public void onDestroyView() {
         amountCalculatorLink = null;
         lastQrContent = null;
-        ButterKnife.unbind(this);
         super.onDestroyView();
     }
 
-    @OnClick(R.id.request_address_view)
     public void onAddressClick() {
-        if (showAddress != null) {
-            receiveAddress =  showAddress;
-        }
-        Activity activity = getActivity();
-        ActionMode actionMode = UiUtils.startAddressActionMode(receiveAddress, activity,
-                getFragmentManager());
-        // Hack to dismiss this action mode when back is pressed
-        if (activity != null && activity instanceof WalletActivity) {
-            ((WalletActivity) activity).registerActionMode(actionMode);
-        }
+        binding.requestAddressView.setOnClickListener(view -> {
+            if (showAddress != null) {
+                receiveAddress =  showAddress;
+            }
+            Activity activity = getActivity();
+            ActionMode actionMode = UiUtils.startAddressActionMode(receiveAddress, activity,
+                    getFragmentManager());
+            // Hack to dismiss this action mode when back is pressed
+            if (activity != null && activity instanceof WalletActivity) {
+                ((WalletActivity) activity).registerActionMode(actionMode);
+            }
+        });
     }
 
-    @OnClick(R.id.view_previous_addresses)
+    private void setOnclickListeners(){
+        onAddressClick();
+        onPreviousAddressesClick();
+    }
+
     public void onPreviousAddressesClick() {
-        Intent intent = new Intent(getActivity(), PreviousAddressesActivity.class);
-        intent.putExtra(Constants.ARG_ACCOUNT_ID, accountId);
-        startActivity(intent);
+        binding.viewPreviousAddresses.setOnClickListener(view -> {
+            Intent intent = new Intent(getActivity(), PreviousAddressesActivity.class);
+            intent.putExtra(Constants.ARG_ACCOUNT_ID, accountId);
+            startActivity(intent);
+        });
     }
 
     @Override

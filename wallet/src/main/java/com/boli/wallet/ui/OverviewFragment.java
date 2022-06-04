@@ -15,6 +15,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -162,6 +163,8 @@ public class OverviewFragment extends Fragment{
         binding.accountRows.setAdapter(adapter);
         adapter.setExchangeRates(exchangeRates);
 
+        setOnClickListener();
+
         return binding.getRoot();
     }
 
@@ -235,47 +238,57 @@ public class OverviewFragment extends Fragment{
         super.onPause();
     }
 
-    @OnClick(R.id.account_balance)
-    public void onMainAmountClick(View v) {
-        if (listener != null) listener.onLocalAmountClick();
+    private void setOnClickListener(){
+        onMainAmountClick();
+        onAmountClick();
+        onAmountLongClick();
     }
 
-    @OnItemClick(R.id.account_rows)
-    public void onAmountClick(int position) {
-        if (position >= binding.accountRows.getHeaderViewsCount()) {
-            // Note the usage of getItemAtPosition() instead of adapter's getItem() because
-            // the latter does not take into account the header (which has position 0).
-            Object obj = binding.accountRows.getItemAtPosition(position);
-
-            if (listener != null && obj != null && obj instanceof WalletAccount) {
-                listener.onAccountSelected(((WalletAccount) obj).getId());
-            } else {
-                showGenericError();
-            }
-        }
+    public void onMainAmountClick() {
+        headerBinding.accountBalance.setOnClickListener(view -> {
+            if (listener != null) listener.onLocalAmountClick();
+        });
     }
 
-    @OnItemLongClick(R.id.account_rows)
-    public boolean onAmountLongClick(int position) {
-        if (position >= binding.accountRows.getHeaderViewsCount()) {
-            // Note the usage of getItemAtPosition() instead of adapter's getItem() because
-            // the latter does not take into account the header (which has position 0).
-            Object obj = binding.accountRows.getItemAtPosition(position);
-            Activity activity = getActivity();
+    public void onAmountClick() {
+        binding.accountRows.setOnItemClickListener((adapterView, view, i, l) -> {
+            if (i >= binding.accountRows.getHeaderViewsCount()) {
+                // Note the usage of getItemAtPosition() instead of adapter's getItem() because
+                // the latter does not take into account the header (which has position 0).
+                Object obj = binding.accountRows.getItemAtPosition(i);
 
-            if (obj != null && obj instanceof WalletAccount && activity != null) {
-                ActionMode actionMode = UiUtils.startAccountActionMode(
-                        (WalletAccount) obj, activity, getFragmentManager());
-                // Hack to dismiss this action mode when back is pressed
-                if (activity instanceof WalletActivity) {
-                    ((WalletActivity) activity).registerActionMode(actionMode);
+                if (listener != null && obj != null && obj instanceof WalletAccount) {
+                    listener.onAccountSelected(((WalletAccount) obj).getId());
+                } else {
+                    showGenericError();
                 }
-
-                return true;
-            } else {
-                showGenericError();
             }
-        }
+        });
+    }
+
+    public boolean onAmountLongClick() {
+        binding.accountRows.setOnItemLongClickListener((adapterView, view, i, l) -> {
+            if (i >= binding.accountRows.getHeaderViewsCount()) {
+                // Note the usage of getItemAtPosition() instead of adapter's getItem() because
+                // the latter does not take into account the header (which has position 0).
+                Object obj = binding.accountRows.getItemAtPosition(i);
+                Activity activity = getActivity();
+
+                if (obj != null && obj instanceof WalletAccount && activity != null) {
+                    ActionMode actionMode = UiUtils.startAccountActionMode(
+                            (WalletAccount) obj, activity, getFragmentManager());
+                    // Hack to dismiss this action mode when back is pressed
+                    if (activity instanceof WalletActivity) {
+                        ((WalletActivity) activity).registerActionMode(actionMode);
+                    }
+
+                    return true;
+                } else {
+                    showGenericError();
+                }
+            }
+            return false;
+        });
         return false;
     }
 

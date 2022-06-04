@@ -14,6 +14,7 @@ import android.support.v4.content.Loader;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -156,7 +157,7 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
                 application.getApplicationContext(), type.getSymbol(), config.getExchangeCurrencyCode());
         // Update the amount
         updateBalance(pocket.getBalance());
-
+        setOnClickListeners();
         return binding.getRoot();
     }
 
@@ -213,33 +214,42 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
         handler.sendMessageDelayed(handler.obtainMessage(WALLET_CHANGED), 2000);
     }
 
-    @OnItemClick(R.id.transaction_rows)
-    public void onItemClick(int position) {
-        if (position >= binding.transactionRows.getHeaderViewsCount()) {
-            // Note the usage of getItemAtPosition() instead of adapter's getItem() because
-            // the latter does not take into account the header (which has position 0).
-            Object obj = binding.transactionRows.getItemAtPosition(position);
+    private void setOnClickListeners(){
+        onItemClick();
+        onMainAmountClick();
+        onLocalAmountClick();
+    }
 
-            if (obj != null && obj instanceof AbstractTransaction) {
-                Intent intent = new Intent(getActivity(), TransactionDetailsActivity.class);
-                intent.putExtra(Constants.ARG_ACCOUNT_ID, accountId);
-                intent.putExtra(Constants.ARG_TRANSACTION_ID, ((AbstractTransaction) obj).getHashAsString());
-                startActivity(intent);
-            } else {
-                Toast.makeText(getActivity(), getString(R.string.get_tx_info_error), Toast.LENGTH_LONG).show();
+    public void onItemClick() {
+        binding.transactionRows.setOnItemClickListener((adapterView, view, i, l) -> {
+            if (i >= binding.transactionRows.getHeaderViewsCount()) {
+                // Note the usage of getItemAtPosition() instead of adapter's getItem() because
+                // the latter does not take into account the header (which has position 0).
+                Object obj = binding.transactionRows.getItemAtPosition(i);
+
+                if (obj != null && obj instanceof AbstractTransaction) {
+                    Intent intent = new Intent(getActivity(), TransactionDetailsActivity.class);
+                    intent.putExtra(Constants.ARG_ACCOUNT_ID, accountId);
+                    intent.putExtra(Constants.ARG_TRANSACTION_ID, ((AbstractTransaction) obj).getHashAsString());
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getActivity(), getString(R.string.get_tx_info_error), Toast.LENGTH_LONG).show();
+                }
             }
-        }
+        });
     }
 
-    @OnClick(R.id.account_balance)
     public void onMainAmountClick() {
-        isFullAmount = !isFullAmount;
-        updateView();
+        headerBinding.accountBalance.setOnClickListener(view -> {
+            isFullAmount = !isFullAmount;
+            updateView();
+        });
     }
 
-    @OnClick(R.id.account_exchanged_balance)
     public void onLocalAmountClick() {
-        if (listener != null) listener.onLocalAmountClick();
+        headerBinding.accountExchangedBalance.setOnClickListener(view -> {
+            if (listener != null) listener.onLocalAmountClick();
+        });
     }
 
     @Override

@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -134,6 +136,10 @@ public class SweepWalletFragment extends Fragment {
             binding.sweepWalletKey.setText(getArguments().getString(Constants.ARG_PRIVATE_KEY));
         }
 
+        setOnclickListeners();
+        onPrivateKeyInputFocusChange();
+        onPrivateKeyInputTextChange();
+
         return binding.getRoot();
     }
 
@@ -185,27 +191,47 @@ public class SweepWalletFragment extends Fragment {
         listener = null;
     }
 
-    @OnClick(R.id.scan_qr_code)
+    private void setOnclickListeners(){
+        handleScan();
+        verifyKeyAndProceed();
+    }
+
     void handleScan() {
-        startActivityForResult(new Intent(getActivity(), ScanActivity.class), REQUEST_CODE_SCAN);
+        binding.scanQrCode.setOnClickListener(view -> startActivityForResult(new Intent(getActivity(), ScanActivity.class), REQUEST_CODE_SCAN));
     }
 
-    @OnClick(R.id.button_next)
     void verifyKeyAndProceed() {
-        Keyboard.hideKeyboard(getActivity());
-        if (validatePrivateKey()) {
-            maybeStartSweepTask();
-        }
+        binding.buttonNext.setOnClickListener(view -> {
+            Keyboard.hideKeyboard(getActivity());
+            if (validatePrivateKey()) {
+                maybeStartSweepTask();
+            }
+        });
     }
 
-    @OnFocusChange(R.id.sweep_wallet_key)
-    void onPrivateKeyInputFocusChange(final boolean hasFocus) {
-        if (!hasFocus) validatePrivateKey();
+    void onPrivateKeyInputFocusChange() {
+        binding.sweepWalletKey.setOnFocusChangeListener((view, b) -> {
+            if (!b) validatePrivateKey();
+        });
     }
 
-    @OnTextChanged(value = R.id.sweep_wallet_key, callback = AFTER_TEXT_CHANGED)
     void onPrivateKeyInputTextChange() {
-        validatePrivateKey(true);
+        binding.sweepWalletKey.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                validatePrivateKey(true);
+            }
+        });
     }
 
     @Override

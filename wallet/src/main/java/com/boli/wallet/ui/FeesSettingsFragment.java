@@ -58,15 +58,22 @@ public class FeesSettingsFragment extends Fragment implements SharedPreferences.
         binding = FragmentFeesSettingsListBinding.inflate(inflater, container, false);
         binding.coinsList.setAdapter(adapter);
 
+        setOnClickListeners();
+
         return binding.getRoot();
     }
 
-    @OnItemClick(R.id.coins_list)
-    void editFee(int currentSelection) {
-        Value fee = (Value) binding.coinsList.getItemAtPosition(currentSelection);
-        // Create the fragment and show it as a dialog.
-        DialogFragment editFeeDialog = EditFeeDialog.newInstance(fee.type);
-        editFeeDialog.show(getFragmentManager(), EDIT_FEE_DIALOG);
+    private void setOnClickListeners(){
+        editFee();
+    }
+
+    void editFee() {
+        binding.coinsList.setOnItemClickListener((adapterView, view, i, l) -> {
+            Value fee = (Value) binding.coinsList.getItemAtPosition(i);
+            // Create the fragment and show it as a dialog.
+            DialogFragment editFeeDialog = EditFeeDialog.newInstance(fee.type);
+            editFeeDialog.show(getFragmentManager(), EDIT_FEE_DIALOG);
+        });
     }
 
     @Override
