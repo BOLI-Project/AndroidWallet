@@ -4,7 +4,7 @@
 package com.boli.core.protos;
 
 public final class Protos {
-  private Protos() {}
+  protected Protos() {}
   public static void registerAllExtensions(
       com.google.protobuf.ExtensionRegistry registry) {
   }
@@ -47,13 +47,13 @@ public final class Protos {
       // @@protoc_insertion_point(message_implements:com.coinomi.core.protos.PeerAddress)
       PeerAddressOrBuilder {
     // Use PeerAddress.newBuilder() to construct.
-    private PeerAddress(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    protected PeerAddress(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private PeerAddress(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    protected PeerAddress(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final PeerAddress defaultInstance;
+    protected static final PeerAddress defaultInstance;
     public static PeerAddress getDefaultInstance() {
       return defaultInstance;
     }
@@ -62,13 +62,13 @@ public final class Protos {
       return defaultInstance;
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    protected final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
     }
-    private PeerAddress(
+    protected PeerAddress(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -145,9 +145,9 @@ public final class Protos {
       return PARSER;
     }
 
-    private int bitField0_;
+    protected int bitField0_;
     public static final int IP_ADDRESS_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString ipAddress_;
+    protected com.google.protobuf.ByteString ipAddress_;
     /**
      * <code>required bytes ip_address = 1;</code>
      */
@@ -162,7 +162,7 @@ public final class Protos {
     }
 
     public static final int PORT_FIELD_NUMBER = 2;
-    private int port_;
+    protected int port_;
     /**
      * <code>required uint32 port = 2;</code>
      */
@@ -177,7 +177,7 @@ public final class Protos {
     }
 
     public static final int SERVICES_FIELD_NUMBER = 3;
-    private long services_;
+    protected long services_;
     /**
      * <code>required uint64 services = 3;</code>
      */
@@ -191,12 +191,12 @@ public final class Protos {
       return services_;
     }
 
-    private void initFields() {
+    protected void initFields() {
       ipAddress_ = com.google.protobuf.ByteString.EMPTY;
       port_ = 0;
       services_ = 0L;
     }
-    private byte memoizedIsInitialized = -1;
+    protected byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -233,7 +233,7 @@ public final class Protos {
       getUnknownFields().writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    protected int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
@@ -256,7 +256,7 @@ public final class Protos {
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
+    protected static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
@@ -349,20 +349,20 @@ public final class Protos {
       }
 
       // Construct using com.coinomi.core.protos.Protos.PeerAddress.newBuilder()
-      private Builder() {
+      protected Builder() {
         maybeForceBuilderInitialization();
       }
 
-      private Builder(
+      protected Builder(
           com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
-      private void maybeForceBuilderInitialization() {
+      protected void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
+      protected static Builder create() {
         return new Builder();
       }
 
@@ -476,9 +476,9 @@ public final class Protos {
         }
         return this;
       }
-      private int bitField0_;
+      protected int bitField0_;
 
-      private com.google.protobuf.ByteString ipAddress_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString ipAddress_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>required bytes ip_address = 1;</code>
        */
@@ -513,7 +513,7 @@ public final class Protos {
         return this;
       }
 
-      private int port_ ;
+      protected int port_ ;
       /**
        * <code>required uint32 port = 2;</code>
        */
@@ -545,7 +545,7 @@ public final class Protos {
         return this;
       }
 
-      private long services_ ;
+      protected long services_ ;
       /**
        * <code>required uint64 services = 3;</code>
        */
@@ -610,21 +610,21 @@ public final class Protos {
     com.google.protobuf.ByteString getInitialisationVector();
 
     /**
-     * <code>required bytes encrypted_private_key = 2;</code>
+     * <code>required bytes encrypted_protected_key = 2;</code>
      *
      * <pre>
-     * The encrypted private key
+     * The encrypted protected key
      * </pre>
      */
-    boolean hasEncryptedPrivateKey();
+    boolean hasEncryptedprotectedKey();
     /**
-     * <code>required bytes encrypted_private_key = 2;</code>
+     * <code>required bytes encrypted_protected_key = 2;</code>
      *
      * <pre>
-     * The encrypted private key
+     * The encrypted protected key
      * </pre>
      */
-    com.google.protobuf.ByteString getEncryptedPrivateKey();
+    com.google.protobuf.ByteString getEncryptedprotectedKey();
   }
   /**
    * Protobuf type {@code com.coinomi.core.protos.EncryptedData}
@@ -634,13 +634,13 @@ public final class Protos {
       // @@protoc_insertion_point(message_implements:com.coinomi.core.protos.EncryptedData)
       EncryptedDataOrBuilder {
     // Use EncryptedData.newBuilder() to construct.
-    private EncryptedData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    protected EncryptedData(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private EncryptedData(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    protected EncryptedData(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final EncryptedData defaultInstance;
+    protected static final EncryptedData defaultInstance;
     public static EncryptedData getDefaultInstance() {
       return defaultInstance;
     }
@@ -649,13 +649,13 @@ public final class Protos {
       return defaultInstance;
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    protected final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
     }
-    private EncryptedData(
+    protected EncryptedData(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -685,7 +685,7 @@ public final class Protos {
             }
             case 18: {
               bitField0_ |= 0x00000002;
-              encryptedPrivateKey_ = input.readBytes();
+              encryptedprotectedKey_ = input.readBytes();
               break;
             }
           }
@@ -727,9 +727,9 @@ public final class Protos {
       return PARSER;
     }
 
-    private int bitField0_;
+    protected int bitField0_;
     public static final int INITIALISATION_VECTOR_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString initialisationVector_;
+    protected com.google.protobuf.ByteString initialisationVector_;
     /**
      * <code>required bytes initialisation_vector = 1;</code>
      *
@@ -751,34 +751,34 @@ public final class Protos {
       return initialisationVector_;
     }
 
-    public static final int ENCRYPTED_PRIVATE_KEY_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString encryptedPrivateKey_;
+    public static final int ENCRYPTED_protected_KEY_FIELD_NUMBER = 2;
+    protected com.google.protobuf.ByteString encryptedprotectedKey_;
     /**
-     * <code>required bytes encrypted_private_key = 2;</code>
+     * <code>required bytes encrypted_protected_key = 2;</code>
      *
      * <pre>
-     * The encrypted private key
+     * The encrypted protected key
      * </pre>
      */
-    public boolean hasEncryptedPrivateKey() {
+    public boolean hasEncryptedprotectedKey() {
       return ((bitField0_ & 0x00000002) == 0x00000002);
     }
     /**
-     * <code>required bytes encrypted_private_key = 2;</code>
+     * <code>required bytes encrypted_protected_key = 2;</code>
      *
      * <pre>
-     * The encrypted private key
+     * The encrypted protected key
      * </pre>
      */
-    public com.google.protobuf.ByteString getEncryptedPrivateKey() {
-      return encryptedPrivateKey_;
+    public com.google.protobuf.ByteString getEncryptedprotectedKey() {
+      return encryptedprotectedKey_;
     }
 
-    private void initFields() {
+    protected void initFields() {
       initialisationVector_ = com.google.protobuf.ByteString.EMPTY;
-      encryptedPrivateKey_ = com.google.protobuf.ByteString.EMPTY;
+      encryptedprotectedKey_ = com.google.protobuf.ByteString.EMPTY;
     }
-    private byte memoizedIsInitialized = -1;
+    protected byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -788,7 +788,7 @@ public final class Protos {
         memoizedIsInitialized = 0;
         return false;
       }
-      if (!hasEncryptedPrivateKey()) {
+      if (!hasEncryptedprotectedKey()) {
         memoizedIsInitialized = 0;
         return false;
       }
@@ -803,12 +803,12 @@ public final class Protos {
         output.writeBytes(1, initialisationVector_);
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
-        output.writeBytes(2, encryptedPrivateKey_);
+        output.writeBytes(2, encryptedprotectedKey_);
       }
       getUnknownFields().writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    protected int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
@@ -820,14 +820,14 @@ public final class Protos {
       }
       if (((bitField0_ & 0x00000002) == 0x00000002)) {
         size += com.google.protobuf.CodedOutputStream
-          .computeBytesSize(2, encryptedPrivateKey_);
+          .computeBytesSize(2, encryptedprotectedKey_);
       }
       size += getUnknownFields().getSerializedSize();
       memoizedSerializedSize = size;
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
+    protected static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
@@ -920,20 +920,20 @@ public final class Protos {
       }
 
       // Construct using com.coinomi.core.protos.Protos.EncryptedData.newBuilder()
-      private Builder() {
+      protected Builder() {
         maybeForceBuilderInitialization();
       }
 
-      private Builder(
+      protected Builder(
           com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
-      private void maybeForceBuilderInitialization() {
+      protected void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
+      protected static Builder create() {
         return new Builder();
       }
 
@@ -941,7 +941,7 @@ public final class Protos {
         super.clear();
         initialisationVector_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000001);
-        encryptedPrivateKey_ = com.google.protobuf.ByteString.EMPTY;
+        encryptedprotectedKey_ = com.google.protobuf.ByteString.EMPTY;
         bitField0_ = (bitField0_ & ~0x00000002);
         return this;
       }
@@ -978,7 +978,7 @@ public final class Protos {
         if (((from_bitField0_ & 0x00000002) == 0x00000002)) {
           to_bitField0_ |= 0x00000002;
         }
-        result.encryptedPrivateKey_ = encryptedPrivateKey_;
+        result.encryptedprotectedKey_ = encryptedprotectedKey_;
         result.bitField0_ = to_bitField0_;
         onBuilt();
         return result;
@@ -998,8 +998,8 @@ public final class Protos {
         if (other.hasInitialisationVector()) {
           setInitialisationVector(other.getInitialisationVector());
         }
-        if (other.hasEncryptedPrivateKey()) {
-          setEncryptedPrivateKey(other.getEncryptedPrivateKey());
+        if (other.hasEncryptedprotectedKey()) {
+          setEncryptedprotectedKey(other.getEncryptedprotectedKey());
         }
         this.mergeUnknownFields(other.getUnknownFields());
         return this;
@@ -1010,7 +1010,7 @@ public final class Protos {
           
           return false;
         }
-        if (!hasEncryptedPrivateKey()) {
+        if (!hasEncryptedprotectedKey()) {
           
           return false;
         }
@@ -1034,9 +1034,9 @@ public final class Protos {
         }
         return this;
       }
-      private int bitField0_;
+      protected int bitField0_;
 
-      private com.google.protobuf.ByteString initialisationVector_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString initialisationVector_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>required bytes initialisation_vector = 1;</code>
        *
@@ -1087,53 +1087,53 @@ public final class Protos {
         return this;
       }
 
-      private com.google.protobuf.ByteString encryptedPrivateKey_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString encryptedprotectedKey_ = com.google.protobuf.ByteString.EMPTY;
       /**
-       * <code>required bytes encrypted_private_key = 2;</code>
+       * <code>required bytes encrypted_protected_key = 2;</code>
        *
        * <pre>
-       * The encrypted private key
+       * The encrypted protected key
        * </pre>
        */
-      public boolean hasEncryptedPrivateKey() {
+      public boolean hasEncryptedprotectedKey() {
         return ((bitField0_ & 0x00000002) == 0x00000002);
       }
       /**
-       * <code>required bytes encrypted_private_key = 2;</code>
+       * <code>required bytes encrypted_protected_key = 2;</code>
        *
        * <pre>
-       * The encrypted private key
+       * The encrypted protected key
        * </pre>
        */
-      public com.google.protobuf.ByteString getEncryptedPrivateKey() {
-        return encryptedPrivateKey_;
+      public com.google.protobuf.ByteString getEncryptedprotectedKey() {
+        return encryptedprotectedKey_;
       }
       /**
-       * <code>required bytes encrypted_private_key = 2;</code>
+       * <code>required bytes encrypted_protected_key = 2;</code>
        *
        * <pre>
-       * The encrypted private key
+       * The encrypted protected key
        * </pre>
        */
-      public Builder setEncryptedPrivateKey(com.google.protobuf.ByteString value) {
+      public Builder setEncryptedprotectedKey(com.google.protobuf.ByteString value) {
         if (value == null) {
     throw new NullPointerException();
   }
   bitField0_ |= 0x00000002;
-        encryptedPrivateKey_ = value;
+        encryptedprotectedKey_ = value;
         onChanged();
         return this;
       }
       /**
-       * <code>required bytes encrypted_private_key = 2;</code>
+       * <code>required bytes encrypted_protected_key = 2;</code>
        *
        * <pre>
-       * The encrypted private key
+       * The encrypted protected key
        * </pre>
        */
-      public Builder clearEncryptedPrivateKey() {
+      public Builder clearEncryptedprotectedKey() {
         bitField0_ = (bitField0_ & ~0x00000002);
-        encryptedPrivateKey_ = getDefaultInstance().getEncryptedPrivateKey();
+        encryptedprotectedKey_ = getDefaultInstance().getEncryptedprotectedKey();
         onChanged();
         return this;
       }
@@ -1176,7 +1176,7 @@ public final class Protos {
      * <code>repeated uint32 path = 2;</code>
      *
      * <pre>
-     * The path through the key tree. Each number is encoded in the standard form: high bit set for private derivation
+     * The path through the key tree. Each number is encoded in the standard form: high bit set for protected derivation
      * and high bit unset for public derivation.
      * </pre>
      */
@@ -1185,7 +1185,7 @@ public final class Protos {
      * <code>repeated uint32 path = 2;</code>
      *
      * <pre>
-     * The path through the key tree. Each number is encoded in the standard form: high bit set for private derivation
+     * The path through the key tree. Each number is encoded in the standard form: high bit set for protected derivation
      * and high bit unset for public derivation.
      * </pre>
      */
@@ -1194,7 +1194,7 @@ public final class Protos {
      * <code>repeated uint32 path = 2;</code>
      *
      * <pre>
-     * The path through the key tree. Each number is encoded in the standard form: high bit set for private derivation
+     * The path through the key tree. Each number is encoded in the standard form: high bit set for protected derivation
      * and high bit unset for public derivation.
      * </pre>
      */
@@ -1270,13 +1270,13 @@ public final class Protos {
       // @@protoc_insertion_point(message_implements:com.coinomi.core.protos.DeterministicKey)
       DeterministicKeyOrBuilder {
     // Use DeterministicKey.newBuilder() to construct.
-    private DeterministicKey(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    protected DeterministicKey(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private DeterministicKey(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    protected DeterministicKey(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final DeterministicKey defaultInstance;
+    protected static final DeterministicKey defaultInstance;
     public static DeterministicKey getDefaultInstance() {
       return defaultInstance;
     }
@@ -1285,13 +1285,13 @@ public final class Protos {
       return defaultInstance;
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    protected final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
     }
-    private DeterministicKey(
+    protected DeterministicKey(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -1397,9 +1397,9 @@ public final class Protos {
       return PARSER;
     }
 
-    private int bitField0_;
+    protected int bitField0_;
     public static final int CHAIN_CODE_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString chainCode_;
+    protected com.google.protobuf.ByteString chainCode_;
     /**
      * <code>required bytes chain_code = 1;</code>
      *
@@ -1424,12 +1424,12 @@ public final class Protos {
     }
 
     public static final int PATH_FIELD_NUMBER = 2;
-    private java.util.List<java.lang.Integer> path_;
+    protected java.util.List<java.lang.Integer> path_;
     /**
      * <code>repeated uint32 path = 2;</code>
      *
      * <pre>
-     * The path through the key tree. Each number is encoded in the standard form: high bit set for private derivation
+     * The path through the key tree. Each number is encoded in the standard form: high bit set for protected derivation
      * and high bit unset for public derivation.
      * </pre>
      */
@@ -1441,7 +1441,7 @@ public final class Protos {
      * <code>repeated uint32 path = 2;</code>
      *
      * <pre>
-     * The path through the key tree. Each number is encoded in the standard form: high bit set for private derivation
+     * The path through the key tree. Each number is encoded in the standard form: high bit set for protected derivation
      * and high bit unset for public derivation.
      * </pre>
      */
@@ -1452,7 +1452,7 @@ public final class Protos {
      * <code>repeated uint32 path = 2;</code>
      *
      * <pre>
-     * The path through the key tree. Each number is encoded in the standard form: high bit set for private derivation
+     * The path through the key tree. Each number is encoded in the standard form: high bit set for protected derivation
      * and high bit unset for public derivation.
      * </pre>
      */
@@ -1461,7 +1461,7 @@ public final class Protos {
     }
 
     public static final int ISSUED_SUBKEYS_FIELD_NUMBER = 3;
-    private int issuedSubkeys_;
+    protected int issuedSubkeys_;
     /**
      * <code>optional uint32 issued_subkeys = 3;</code>
      *
@@ -1492,7 +1492,7 @@ public final class Protos {
     }
 
     public static final int LOOKAHEAD_SIZE_FIELD_NUMBER = 4;
-    private int lookaheadSize_;
+    protected int lookaheadSize_;
     /**
      * <code>optional uint32 lookahead_size = 4;</code>
      */
@@ -1507,7 +1507,7 @@ public final class Protos {
     }
 
     public static final int ISFOLLOWING_FIELD_NUMBER = 5;
-    private boolean isFollowing_;
+    protected boolean isFollowing_;
     /**
      * <code>optional bool isFollowing = 5;</code>
      *
@@ -1535,14 +1535,14 @@ public final class Protos {
       return isFollowing_;
     }
 
-    private void initFields() {
+    protected void initFields() {
       chainCode_ = com.google.protobuf.ByteString.EMPTY;
       path_ = java.util.Collections.emptyList();
       issuedSubkeys_ = 0;
       lookaheadSize_ = 0;
       isFollowing_ = false;
     }
-    private byte memoizedIsInitialized = -1;
+    protected byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -1577,7 +1577,7 @@ public final class Protos {
       getUnknownFields().writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    protected int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
@@ -1613,7 +1613,7 @@ public final class Protos {
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
+    protected static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
@@ -1711,20 +1711,20 @@ public final class Protos {
       }
 
       // Construct using com.coinomi.core.protos.Protos.DeterministicKey.newBuilder()
-      private Builder() {
+      protected Builder() {
         maybeForceBuilderInitialization();
       }
 
-      private Builder(
+      protected Builder(
           com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
-      private void maybeForceBuilderInitialization() {
+      protected void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
+      protected static Builder create() {
         return new Builder();
       }
 
@@ -1856,9 +1856,9 @@ public final class Protos {
         }
         return this;
       }
-      private int bitField0_;
+      protected int bitField0_;
 
-      private com.google.protobuf.ByteString chainCode_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString chainCode_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>required bytes chain_code = 1;</code>
        *
@@ -1913,8 +1913,8 @@ public final class Protos {
         return this;
       }
 
-      private java.util.List<java.lang.Integer> path_ = java.util.Collections.emptyList();
-      private void ensurePathIsMutable() {
+      protected java.util.List<java.lang.Integer> path_ = java.util.Collections.emptyList();
+      protected void ensurePathIsMutable() {
         if (!((bitField0_ & 0x00000002) == 0x00000002)) {
           path_ = new java.util.ArrayList<java.lang.Integer>(path_);
           bitField0_ |= 0x00000002;
@@ -1924,7 +1924,7 @@ public final class Protos {
        * <code>repeated uint32 path = 2;</code>
        *
        * <pre>
-       * The path through the key tree. Each number is encoded in the standard form: high bit set for private derivation
+       * The path through the key tree. Each number is encoded in the standard form: high bit set for protected derivation
        * and high bit unset for public derivation.
        * </pre>
        */
@@ -1936,7 +1936,7 @@ public final class Protos {
        * <code>repeated uint32 path = 2;</code>
        *
        * <pre>
-       * The path through the key tree. Each number is encoded in the standard form: high bit set for private derivation
+       * The path through the key tree. Each number is encoded in the standard form: high bit set for protected derivation
        * and high bit unset for public derivation.
        * </pre>
        */
@@ -1947,7 +1947,7 @@ public final class Protos {
        * <code>repeated uint32 path = 2;</code>
        *
        * <pre>
-       * The path through the key tree. Each number is encoded in the standard form: high bit set for private derivation
+       * The path through the key tree. Each number is encoded in the standard form: high bit set for protected derivation
        * and high bit unset for public derivation.
        * </pre>
        */
@@ -1958,7 +1958,7 @@ public final class Protos {
        * <code>repeated uint32 path = 2;</code>
        *
        * <pre>
-       * The path through the key tree. Each number is encoded in the standard form: high bit set for private derivation
+       * The path through the key tree. Each number is encoded in the standard form: high bit set for protected derivation
        * and high bit unset for public derivation.
        * </pre>
        */
@@ -1973,7 +1973,7 @@ public final class Protos {
        * <code>repeated uint32 path = 2;</code>
        *
        * <pre>
-       * The path through the key tree. Each number is encoded in the standard form: high bit set for private derivation
+       * The path through the key tree. Each number is encoded in the standard form: high bit set for protected derivation
        * and high bit unset for public derivation.
        * </pre>
        */
@@ -1987,7 +1987,7 @@ public final class Protos {
        * <code>repeated uint32 path = 2;</code>
        *
        * <pre>
-       * The path through the key tree. Each number is encoded in the standard form: high bit set for private derivation
+       * The path through the key tree. Each number is encoded in the standard form: high bit set for protected derivation
        * and high bit unset for public derivation.
        * </pre>
        */
@@ -2003,7 +2003,7 @@ public final class Protos {
        * <code>repeated uint32 path = 2;</code>
        *
        * <pre>
-       * The path through the key tree. Each number is encoded in the standard form: high bit set for private derivation
+       * The path through the key tree. Each number is encoded in the standard form: high bit set for protected derivation
        * and high bit unset for public derivation.
        * </pre>
        */
@@ -2014,7 +2014,7 @@ public final class Protos {
         return this;
       }
 
-      private int issuedSubkeys_ ;
+      protected int issuedSubkeys_ ;
       /**
        * <code>optional uint32 issued_subkeys = 3;</code>
        *
@@ -2078,7 +2078,7 @@ public final class Protos {
         return this;
       }
 
-      private int lookaheadSize_ ;
+      protected int lookaheadSize_ ;
       /**
        * <code>optional uint32 lookahead_size = 4;</code>
        */
@@ -2110,7 +2110,7 @@ public final class Protos {
         return this;
       }
 
-      private boolean isFollowing_ ;
+      protected boolean isFollowing_ ;
       /**
        * <code>optional bool isFollowing = 5;</code>
        *
@@ -2198,7 +2198,7 @@ public final class Protos {
      * <code>optional bytes secret_bytes = 2;</code>
      *
      * <pre>
-     * Either the private EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
+     * Either the protected EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
      * If the secret is encrypted, or this is a "watching entry" then this is missing.
      * </pre>
      */
@@ -2207,7 +2207,7 @@ public final class Protos {
      * <code>optional bytes secret_bytes = 2;</code>
      *
      * <pre>
-     * Either the private EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
+     * Either the protected EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
      * If the secret is encrypted, or this is a "watching entry" then this is missing.
      * </pre>
      */
@@ -2242,7 +2242,7 @@ public final class Protos {
      * <code>optional bytes public_key = 4;</code>
      *
      * <pre>
-     * The public EC key derived from the private key. We allow both to be stored to avoid mobile clients having to
+     * The public EC key derived from the protected key. We allow both to be stored to avoid mobile clients having to
      * do lots of slow EC math on startup. For DETERMINISTIC_MNEMONIC entries this is missing.
      * </pre>
      */
@@ -2251,7 +2251,7 @@ public final class Protos {
      * <code>optional bytes public_key = 4;</code>
      *
      * <pre>
-     * The public EC key derived from the private key. We allow both to be stored to avoid mobile clients having to
+     * The public EC key derived from the protected key. We allow both to be stored to avoid mobile clients having to
      * do lots of slow EC math on startup. For DETERMINISTIC_MNEMONIC entries this is missing.
      * </pre>
      */
@@ -2302,8 +2302,8 @@ public final class Protos {
    * <pre>
    **
    * A key used to control Bitcoin spending.
-   * Either the private key, the public key or both may be present.  It is recommended that
-   * if the private key is provided that the public key is provided too because deriving it is slow.
+   * Either the protected key, the public key or both may be present.  It is recommended that
+   * if the protected key is provided that the public key is provided too because deriving it is slow.
    * If only the public key is provided, the key can only be used to watch the blockchain and verify
    * transactions, and not for spending.
    * </pre>
@@ -2313,13 +2313,13 @@ public final class Protos {
       // @@protoc_insertion_point(message_implements:com.coinomi.core.protos.Key)
       KeyOrBuilder {
     // Use Key.newBuilder() to construct.
-    private Key(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    protected Key(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private Key(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    protected Key(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final Key defaultInstance;
+    protected static final Key defaultInstance;
     public static Key getDefaultInstance() {
       return defaultInstance;
     }
@@ -2328,13 +2328,13 @@ public final class Protos {
       return defaultInstance;
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    protected final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
     }
-    private Key(
+    protected Key(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -2475,7 +2475,7 @@ public final class Protos {
        *
        * <pre>
        **
-       * Not really a key, but rather contains the mnemonic phrase for a deterministic key hierarchy in the private_key field.
+       * Not really a key, but rather contains the mnemonic phrase for a deterministic key hierarchy in the protected_key field.
        * The label and public_key fields are missing. Creation timestamp will exist.
        * </pre>
        */
@@ -2486,9 +2486,9 @@ public final class Protos {
        * <pre>
        **
        * A key that was derived deterministically. Note that the root seed that created it may NOT be present in the
-       * wallet, for the case of watching wallets. A deterministic key may or may not have the private key bytes present.
+       * wallet, for the case of watching wallets. A deterministic key may or may not have the protected key bytes present.
        * However the public key bytes and the deterministic_key field are guaranteed to exist. In a wallet where there
-       * is a path from this key up to a key that has (possibly encrypted) private bytes, it's expected that the private
+       * is a path from this key up to a key that has (possibly encrypted) protected bytes, it's expected that the protected
        * key can be rederived on the fly.
        * </pre>
        */
@@ -2516,7 +2516,7 @@ public final class Protos {
        *
        * <pre>
        **
-       * Not really a key, but rather contains the mnemonic phrase for a deterministic key hierarchy in the private_key field.
+       * Not really a key, but rather contains the mnemonic phrase for a deterministic key hierarchy in the protected_key field.
        * The label and public_key fields are missing. Creation timestamp will exist.
        * </pre>
        */
@@ -2527,9 +2527,9 @@ public final class Protos {
        * <pre>
        **
        * A key that was derived deterministically. Note that the root seed that created it may NOT be present in the
-       * wallet, for the case of watching wallets. A deterministic key may or may not have the private key bytes present.
+       * wallet, for the case of watching wallets. A deterministic key may or may not have the protected key bytes present.
        * However the public key bytes and the deterministic_key field are guaranteed to exist. In a wallet where there
-       * is a path from this key up to a key that has (possibly encrypted) private bytes, it's expected that the private
+       * is a path from this key up to a key that has (possibly encrypted) protected bytes, it's expected that the protected
        * key can be rederived on the fly.
        * </pre>
        */
@@ -2552,7 +2552,7 @@ public final class Protos {
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<Type>
+      protected static com.google.protobuf.Internal.EnumLiteMap<Type>
           internalValueMap =
             new com.google.protobuf.Internal.EnumLiteMap<Type>() {
               public Type findValueByNumber(int number) {
@@ -2573,7 +2573,7 @@ public final class Protos {
         return com.boli.core.protos.Protos.Key.getDescriptor().getEnumTypes().get(0);
       }
 
-      private static final Type[] VALUES = values();
+      protected static final Type[] VALUES = values();
 
       public static Type valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
@@ -2584,8 +2584,8 @@ public final class Protos {
         return VALUES[desc.getIndex()];
       }
 
-      private final int index;
-      private final int value;
+      protected final int index;
+      protected final int value;
 
       private Type(int index, int value) {
         this.index = index;
@@ -2595,9 +2595,9 @@ public final class Protos {
       // @@protoc_insertion_point(enum_scope:com.coinomi.core.protos.Key.Type)
     }
 
-    private int bitField0_;
+    protected int bitField0_;
     public static final int TYPE_FIELD_NUMBER = 1;
-    private com.boli.core.protos.Protos.Key.Type type_;
+    protected com.boli.core.protos.Protos.Key.Type type_;
     /**
      * <code>required .com.coinomi.core.protos.Key.Type type = 1;</code>
      */
@@ -2612,12 +2612,12 @@ public final class Protos {
     }
 
     public static final int SECRET_BYTES_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString secretBytes_;
+    protected com.google.protobuf.ByteString secretBytes_;
     /**
      * <code>optional bytes secret_bytes = 2;</code>
      *
      * <pre>
-     * Either the private EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
+     * Either the protected EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
      * If the secret is encrypted, or this is a "watching entry" then this is missing.
      * </pre>
      */
@@ -2628,7 +2628,7 @@ public final class Protos {
      * <code>optional bytes secret_bytes = 2;</code>
      *
      * <pre>
-     * Either the private EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
+     * Either the protected EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
      * If the secret is encrypted, or this is a "watching entry" then this is missing.
      * </pre>
      */
@@ -2637,7 +2637,7 @@ public final class Protos {
     }
 
     public static final int ENCRYPTED_DATA_FIELD_NUMBER = 3;
-    private com.boli.core.protos.Protos.EncryptedData encryptedData_;
+    protected com.boli.core.protos.Protos.EncryptedData encryptedData_;
     /**
      * <code>optional .com.coinomi.core.protos.EncryptedData encrypted_data = 3;</code>
      *
@@ -2670,12 +2670,12 @@ public final class Protos {
     }
 
     public static final int PUBLIC_KEY_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString publicKey_;
+    protected com.google.protobuf.ByteString publicKey_;
     /**
      * <code>optional bytes public_key = 4;</code>
      *
      * <pre>
-     * The public EC key derived from the private key. We allow both to be stored to avoid mobile clients having to
+     * The public EC key derived from the protected key. We allow both to be stored to avoid mobile clients having to
      * do lots of slow EC math on startup. For DETERMINISTIC_MNEMONIC entries this is missing.
      * </pre>
      */
@@ -2686,7 +2686,7 @@ public final class Protos {
      * <code>optional bytes public_key = 4;</code>
      *
      * <pre>
-     * The public EC key derived from the private key. We allow both to be stored to avoid mobile clients having to
+     * The public EC key derived from the protected key. We allow both to be stored to avoid mobile clients having to
      * do lots of slow EC math on startup. For DETERMINISTIC_MNEMONIC entries this is missing.
      * </pre>
      */
@@ -2695,7 +2695,7 @@ public final class Protos {
     }
 
     public static final int LABEL_FIELD_NUMBER = 5;
-    private java.lang.Object label_;
+    protected java.lang.Object label_;
     /**
      * <code>optional string label = 5;</code>
      *
@@ -2749,7 +2749,7 @@ public final class Protos {
     }
 
     public static final int DETERMINISTIC_KEY_FIELD_NUMBER = 6;
-    private com.boli.core.protos.Protos.DeterministicKey deterministicKey_;
+    protected com.boli.core.protos.Protos.DeterministicKey deterministicKey_;
     /**
      * <code>optional .com.coinomi.core.protos.DeterministicKey deterministic_key = 6;</code>
      */
@@ -2769,7 +2769,7 @@ public final class Protos {
       return deterministicKey_;
     }
 
-    private void initFields() {
+    protected void initFields() {
       type_ = com.boli.core.protos.Protos.Key.Type.ORIGINAL;
       secretBytes_ = com.google.protobuf.ByteString.EMPTY;
       encryptedData_ = com.boli.core.protos.Protos.EncryptedData.getDefaultInstance();
@@ -2777,7 +2777,7 @@ public final class Protos {
       label_ = "";
       deterministicKey_ = com.boli.core.protos.Protos.DeterministicKey.getDefaultInstance();
     }
-    private byte memoizedIsInitialized = -1;
+    protected byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -2827,7 +2827,7 @@ public final class Protos {
       getUnknownFields().writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    protected int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
@@ -2862,7 +2862,7 @@ public final class Protos {
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
+    protected static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
@@ -2941,8 +2941,8 @@ public final class Protos {
      * <pre>
      **
      * A key used to control Bitcoin spending.
-     * Either the private key, the public key or both may be present.  It is recommended that
-     * if the private key is provided that the public key is provided too because deriving it is slow.
+     * Either the protected key, the public key or both may be present.  It is recommended that
+     * if the protected key is provided that the public key is provided too because deriving it is slow.
      * If only the public key is provided, the key can only be used to watch the blockchain and verify
      * transactions, and not for spending.
      * </pre>
@@ -2964,22 +2964,22 @@ public final class Protos {
       }
 
       // Construct using com.coinomi.core.protos.Protos.Key.newBuilder()
-      private Builder() {
+      protected Builder() {
         maybeForceBuilderInitialization();
       }
 
-      private Builder(
+      protected Builder(
           com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
-      private void maybeForceBuilderInitialization() {
+      protected void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getEncryptedDataFieldBuilder();
           getDeterministicKeyFieldBuilder();
         }
       }
-      private static Builder create() {
+      protected static Builder create() {
         return new Builder();
       }
 
@@ -3142,9 +3142,9 @@ public final class Protos {
         }
         return this;
       }
-      private int bitField0_;
+      protected int bitField0_;
 
-      private com.boli.core.protos.Protos.Key.Type type_ = com.boli.core.protos.Protos.Key.Type.ORIGINAL;
+      protected com.boli.core.protos.Protos.Key.Type type_ = com.boli.core.protos.Protos.Key.Type.ORIGINAL;
       /**
        * <code>required .com.coinomi.core.protos.Key.Type type = 1;</code>
        */
@@ -3179,12 +3179,12 @@ public final class Protos {
         return this;
       }
 
-      private com.google.protobuf.ByteString secretBytes_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString secretBytes_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes secret_bytes = 2;</code>
        *
        * <pre>
-       * Either the private EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
+       * Either the protected EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
        * If the secret is encrypted, or this is a "watching entry" then this is missing.
        * </pre>
        */
@@ -3195,7 +3195,7 @@ public final class Protos {
        * <code>optional bytes secret_bytes = 2;</code>
        *
        * <pre>
-       * Either the private EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
+       * Either the protected EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
        * If the secret is encrypted, or this is a "watching entry" then this is missing.
        * </pre>
        */
@@ -3206,7 +3206,7 @@ public final class Protos {
        * <code>optional bytes secret_bytes = 2;</code>
        *
        * <pre>
-       * Either the private EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
+       * Either the protected EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
        * If the secret is encrypted, or this is a "watching entry" then this is missing.
        * </pre>
        */
@@ -3223,7 +3223,7 @@ public final class Protos {
        * <code>optional bytes secret_bytes = 2;</code>
        *
        * <pre>
-       * Either the private EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
+       * Either the protected EC key bytes (without any ASN.1 wrapping), or the deterministic root seed.
        * If the secret is encrypted, or this is a "watching entry" then this is missing.
        * </pre>
        */
@@ -3234,8 +3234,8 @@ public final class Protos {
         return this;
       }
 
-      private com.boli.core.protos.Protos.EncryptedData encryptedData_ = com.boli.core.protos.Protos.EncryptedData.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
+      protected com.boli.core.protos.Protos.EncryptedData encryptedData_ = com.boli.core.protos.Protos.EncryptedData.getDefaultInstance();
+      protected com.google.protobuf.SingleFieldBuilder<
           com.boli.core.protos.Protos.EncryptedData, com.boli.core.protos.Protos.EncryptedData.Builder, com.boli.core.protos.Protos.EncryptedDataOrBuilder> encryptedDataBuilder_;
       /**
        * <code>optional .com.coinomi.core.protos.EncryptedData encrypted_data = 3;</code>
@@ -3372,7 +3372,7 @@ public final class Protos {
        * If the secret data is encrypted, then secret_bytes is missing and this field is set.
        * </pre>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      protected com.google.protobuf.SingleFieldBuilder<
           com.boli.core.protos.Protos.EncryptedData, com.boli.core.protos.Protos.EncryptedData.Builder, com.boli.core.protos.Protos.EncryptedDataOrBuilder>
           getEncryptedDataFieldBuilder() {
         if (encryptedDataBuilder_ == null) {
@@ -3386,12 +3386,12 @@ public final class Protos {
         return encryptedDataBuilder_;
       }
 
-      private com.google.protobuf.ByteString publicKey_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString publicKey_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes public_key = 4;</code>
        *
        * <pre>
-       * The public EC key derived from the private key. We allow both to be stored to avoid mobile clients having to
+       * The public EC key derived from the protected key. We allow both to be stored to avoid mobile clients having to
        * do lots of slow EC math on startup. For DETERMINISTIC_MNEMONIC entries this is missing.
        * </pre>
        */
@@ -3402,7 +3402,7 @@ public final class Protos {
        * <code>optional bytes public_key = 4;</code>
        *
        * <pre>
-       * The public EC key derived from the private key. We allow both to be stored to avoid mobile clients having to
+       * The public EC key derived from the protected key. We allow both to be stored to avoid mobile clients having to
        * do lots of slow EC math on startup. For DETERMINISTIC_MNEMONIC entries this is missing.
        * </pre>
        */
@@ -3413,7 +3413,7 @@ public final class Protos {
        * <code>optional bytes public_key = 4;</code>
        *
        * <pre>
-       * The public EC key derived from the private key. We allow both to be stored to avoid mobile clients having to
+       * The public EC key derived from the protected key. We allow both to be stored to avoid mobile clients having to
        * do lots of slow EC math on startup. For DETERMINISTIC_MNEMONIC entries this is missing.
        * </pre>
        */
@@ -3430,7 +3430,7 @@ public final class Protos {
        * <code>optional bytes public_key = 4;</code>
        *
        * <pre>
-       * The public EC key derived from the private key. We allow both to be stored to avoid mobile clients having to
+       * The public EC key derived from the protected key. We allow both to be stored to avoid mobile clients having to
        * do lots of slow EC math on startup. For DETERMINISTIC_MNEMONIC entries this is missing.
        * </pre>
        */
@@ -3441,7 +3441,7 @@ public final class Protos {
         return this;
       }
 
-      private java.lang.Object label_ = "";
+      protected java.lang.Object label_ = "";
       /**
        * <code>optional string label = 5;</code>
        *
@@ -3541,8 +3541,8 @@ public final class Protos {
         return this;
       }
 
-      private com.boli.core.protos.Protos.DeterministicKey deterministicKey_ = com.boli.core.protos.Protos.DeterministicKey.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
+      protected com.boli.core.protos.Protos.DeterministicKey deterministicKey_ = com.boli.core.protos.Protos.DeterministicKey.getDefaultInstance();
+      protected com.google.protobuf.SingleFieldBuilder<
           com.boli.core.protos.Protos.DeterministicKey, com.boli.core.protos.Protos.DeterministicKey.Builder, com.boli.core.protos.Protos.DeterministicKeyOrBuilder> deterministicKeyBuilder_;
       /**
        * <code>optional .com.coinomi.core.protos.DeterministicKey deterministic_key = 6;</code>
@@ -3643,7 +3643,7 @@ public final class Protos {
       /**
        * <code>optional .com.coinomi.core.protos.DeterministicKey deterministic_key = 6;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      protected com.google.protobuf.SingleFieldBuilder<
           com.boli.core.protos.Protos.DeterministicKey, com.boli.core.protos.Protos.DeterministicKey.Builder, com.boli.core.protos.Protos.DeterministicKeyOrBuilder>
           getDeterministicKeyFieldBuilder() {
         if (deterministicKeyBuilder_ == null) {
@@ -3765,13 +3765,13 @@ public final class Protos {
       // @@protoc_insertion_point(message_implements:com.coinomi.core.protos.TransactionInput)
       TransactionInputOrBuilder {
     // Use TransactionInput.newBuilder() to construct.
-    private TransactionInput(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    protected TransactionInput(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private TransactionInput(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    protected TransactionInput(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final TransactionInput defaultInstance;
+    protected static final TransactionInput defaultInstance;
     public static TransactionInput getDefaultInstance() {
       return defaultInstance;
     }
@@ -3780,13 +3780,13 @@ public final class Protos {
       return defaultInstance;
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    protected final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
     }
-    private TransactionInput(
+    protected TransactionInput(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -3873,9 +3873,9 @@ public final class Protos {
       return PARSER;
     }
 
-    private int bitField0_;
+    protected int bitField0_;
     public static final int TRANSACTION_OUT_POINT_HASH_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString transactionOutPointHash_;
+    protected com.google.protobuf.ByteString transactionOutPointHash_;
     /**
      * <code>required bytes transaction_out_point_hash = 1;</code>
      *
@@ -3898,7 +3898,7 @@ public final class Protos {
     }
 
     public static final int TRANSACTION_OUT_POINT_INDEX_FIELD_NUMBER = 2;
-    private int transactionOutPointIndex_;
+    protected int transactionOutPointIndex_;
     /**
      * <code>required uint32 transaction_out_point_index = 2;</code>
      *
@@ -3921,7 +3921,7 @@ public final class Protos {
     }
 
     public static final int SCRIPT_BYTES_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString scriptBytes_;
+    protected com.google.protobuf.ByteString scriptBytes_;
     /**
      * <code>required bytes script_bytes = 3;</code>
      *
@@ -3944,7 +3944,7 @@ public final class Protos {
     }
 
     public static final int SEQUENCE_FIELD_NUMBER = 4;
-    private int sequence_;
+    protected int sequence_;
     /**
      * <code>optional uint32 sequence = 4;</code>
      *
@@ -3967,7 +3967,7 @@ public final class Protos {
     }
 
     public static final int VALUE_FIELD_NUMBER = 5;
-    private long value_;
+    protected long value_;
     /**
      * <code>optional int64 value = 5;</code>
      *
@@ -3989,14 +3989,14 @@ public final class Protos {
       return value_;
     }
 
-    private void initFields() {
+    protected void initFields() {
       transactionOutPointHash_ = com.google.protobuf.ByteString.EMPTY;
       transactionOutPointIndex_ = 0;
       scriptBytes_ = com.google.protobuf.ByteString.EMPTY;
       sequence_ = 0;
       value_ = 0L;
     }
-    private byte memoizedIsInitialized = -1;
+    protected byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -4039,7 +4039,7 @@ public final class Protos {
       getUnknownFields().writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    protected int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
@@ -4070,7 +4070,7 @@ public final class Protos {
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
+    protected static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
@@ -4163,20 +4163,20 @@ public final class Protos {
       }
 
       // Construct using com.coinomi.core.protos.Protos.TransactionInput.newBuilder()
-      private Builder() {
+      protected Builder() {
         maybeForceBuilderInitialization();
       }
 
-      private Builder(
+      protected Builder(
           com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
-      private void maybeForceBuilderInitialization() {
+      protected void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
+      protected static Builder create() {
         return new Builder();
       }
 
@@ -4308,9 +4308,9 @@ public final class Protos {
         }
         return this;
       }
-      private int bitField0_;
+      protected int bitField0_;
 
-      private com.google.protobuf.ByteString transactionOutPointHash_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString transactionOutPointHash_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>required bytes transaction_out_point_hash = 1;</code>
        *
@@ -4361,7 +4361,7 @@ public final class Protos {
         return this;
       }
 
-      private int transactionOutPointIndex_ ;
+      protected int transactionOutPointIndex_ ;
       /**
        * <code>required uint32 transaction_out_point_index = 2;</code>
        *
@@ -4409,7 +4409,7 @@ public final class Protos {
         return this;
       }
 
-      private com.google.protobuf.ByteString scriptBytes_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString scriptBytes_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>required bytes script_bytes = 3;</code>
        *
@@ -4460,7 +4460,7 @@ public final class Protos {
         return this;
       }
 
-      private int sequence_ ;
+      protected int sequence_ ;
       /**
        * <code>optional uint32 sequence = 4;</code>
        *
@@ -4508,7 +4508,7 @@ public final class Protos {
         return this;
       }
 
-      private long value_ ;
+      protected long value_ ;
       /**
        * <code>optional int64 value = 5;</code>
        *
@@ -4673,13 +4673,13 @@ public final class Protos {
       // @@protoc_insertion_point(message_implements:com.coinomi.core.protos.TransactionOutput)
       TransactionOutputOrBuilder {
     // Use TransactionOutput.newBuilder() to construct.
-    private TransactionOutput(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    protected TransactionOutput(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private TransactionOutput(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    protected TransactionOutput(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final TransactionOutput defaultInstance;
+    protected static final TransactionOutput defaultInstance;
     public static TransactionOutput getDefaultInstance() {
       return defaultInstance;
     }
@@ -4688,13 +4688,13 @@ public final class Protos {
       return defaultInstance;
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    protected final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
     }
-    private TransactionOutput(
+    protected TransactionOutput(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -4786,9 +4786,9 @@ public final class Protos {
       return PARSER;
     }
 
-    private int bitField0_;
+    protected int bitField0_;
     public static final int VALUE_FIELD_NUMBER = 1;
-    private long value_;
+    protected long value_;
     /**
      * <code>required int64 value = 1;</code>
      */
@@ -4803,7 +4803,7 @@ public final class Protos {
     }
 
     public static final int SCRIPT_BYTES_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString scriptBytes_;
+    protected com.google.protobuf.ByteString scriptBytes_;
     /**
      * <code>required bytes script_bytes = 2;</code>
      *
@@ -4826,7 +4826,7 @@ public final class Protos {
     }
 
     public static final int SPENT_BY_TRANSACTION_HASH_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString spentByTransactionHash_;
+    protected com.google.protobuf.ByteString spentByTransactionHash_;
     /**
      * <code>optional bytes spent_by_transaction_hash = 3;</code>
      *
@@ -4849,7 +4849,7 @@ public final class Protos {
     }
 
     public static final int SPENT_BY_TRANSACTION_INDEX_FIELD_NUMBER = 4;
-    private int spentByTransactionIndex_;
+    protected int spentByTransactionIndex_;
     /**
      * <code>optional int32 spent_by_transaction_index = 4;</code>
      *
@@ -4872,7 +4872,7 @@ public final class Protos {
     }
 
     public static final int IS_SPENT_FIELD_NUMBER = 5;
-    private boolean isSpent_;
+    protected boolean isSpent_;
     /**
      * <code>optional bool is_spent = 5 [default = false];</code>
      *
@@ -4895,7 +4895,7 @@ public final class Protos {
     }
 
     public static final int INDEX_FIELD_NUMBER = 6;
-    private int index_;
+    protected int index_;
     /**
      * <code>optional int32 index = 6;</code>
      *
@@ -4917,7 +4917,7 @@ public final class Protos {
       return index_;
     }
 
-    private void initFields() {
+    protected void initFields() {
       value_ = 0L;
       scriptBytes_ = com.google.protobuf.ByteString.EMPTY;
       spentByTransactionHash_ = com.google.protobuf.ByteString.EMPTY;
@@ -4925,7 +4925,7 @@ public final class Protos {
       isSpent_ = false;
       index_ = 0;
     }
-    private byte memoizedIsInitialized = -1;
+    protected byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -4967,7 +4967,7 @@ public final class Protos {
       getUnknownFields().writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    protected int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
@@ -5002,7 +5002,7 @@ public final class Protos {
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
+    protected static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
@@ -5095,20 +5095,20 @@ public final class Protos {
       }
 
       // Construct using com.coinomi.core.protos.Protos.TransactionOutput.newBuilder()
-      private Builder() {
+      protected Builder() {
         maybeForceBuilderInitialization();
       }
 
-      private Builder(
+      protected Builder(
           com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
-      private void maybeForceBuilderInitialization() {
+      protected void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
+      protected static Builder create() {
         return new Builder();
       }
 
@@ -5245,9 +5245,9 @@ public final class Protos {
         }
         return this;
       }
-      private int bitField0_;
+      protected int bitField0_;
 
-      private long value_ ;
+      protected long value_ ;
       /**
        * <code>required int64 value = 1;</code>
        */
@@ -5279,7 +5279,7 @@ public final class Protos {
         return this;
       }
 
-      private com.google.protobuf.ByteString scriptBytes_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString scriptBytes_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>required bytes script_bytes = 2;</code>
        *
@@ -5330,7 +5330,7 @@ public final class Protos {
         return this;
       }
 
-      private com.google.protobuf.ByteString spentByTransactionHash_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString spentByTransactionHash_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes spent_by_transaction_hash = 3;</code>
        *
@@ -5381,7 +5381,7 @@ public final class Protos {
         return this;
       }
 
-      private int spentByTransactionIndex_ ;
+      protected int spentByTransactionIndex_ ;
       /**
        * <code>optional int32 spent_by_transaction_index = 4;</code>
        *
@@ -5429,7 +5429,7 @@ public final class Protos {
         return this;
       }
 
-      private boolean isSpent_ ;
+      protected boolean isSpent_ ;
       /**
        * <code>optional bool is_spent = 5 [default = false];</code>
        *
@@ -5477,7 +5477,7 @@ public final class Protos {
         return this;
       }
 
-      private int index_ ;
+      protected int index_ ;
       /**
        * <code>optional int32 index = 6;</code>
        *
@@ -5633,13 +5633,13 @@ public final class Protos {
       // @@protoc_insertion_point(message_implements:com.coinomi.core.protos.UnspentOutput)
       UnspentOutputOrBuilder {
     // Use UnspentOutput.newBuilder() to construct.
-    private UnspentOutput(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    protected UnspentOutput(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private UnspentOutput(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    protected UnspentOutput(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final UnspentOutput defaultInstance;
+    protected static final UnspentOutput defaultInstance;
     public static UnspentOutput getDefaultInstance() {
       return defaultInstance;
     }
@@ -5648,13 +5648,13 @@ public final class Protos {
       return defaultInstance;
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    protected final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
     }
-    private UnspentOutput(
+    protected UnspentOutput(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -5741,9 +5741,9 @@ public final class Protos {
       return PARSER;
     }
 
-    private int bitField0_;
+    protected int bitField0_;
     public static final int OUT_POINT_HASH_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString outPointHash_;
+    protected com.google.protobuf.ByteString outPointHash_;
     /**
      * <code>required bytes out_point_hash = 1;</code>
      *
@@ -5766,7 +5766,7 @@ public final class Protos {
     }
 
     public static final int OUT_POINT_INDEX_FIELD_NUMBER = 2;
-    private int outPointIndex_;
+    protected int outPointIndex_;
     /**
      * <code>required uint32 out_point_index = 2;</code>
      *
@@ -5789,7 +5789,7 @@ public final class Protos {
     }
 
     public static final int SCRIPT_BYTES_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString scriptBytes_;
+    protected com.google.protobuf.ByteString scriptBytes_;
     /**
      * <code>required bytes script_bytes = 3;</code>
      *
@@ -5812,7 +5812,7 @@ public final class Protos {
     }
 
     public static final int VALUE_FIELD_NUMBER = 4;
-    private long value_;
+    protected long value_;
     /**
      * <code>required int64 value = 4;</code>
      *
@@ -5835,7 +5835,7 @@ public final class Protos {
     }
 
     public static final int IS_GENERATED_FIELD_NUMBER = 5;
-    private boolean isGenerated_;
+    protected boolean isGenerated_;
     /**
      * <code>optional bool is_generated = 5 [default = false];</code>
      *
@@ -5857,14 +5857,14 @@ public final class Protos {
       return isGenerated_;
     }
 
-    private void initFields() {
+    protected void initFields() {
       outPointHash_ = com.google.protobuf.ByteString.EMPTY;
       outPointIndex_ = 0;
       scriptBytes_ = com.google.protobuf.ByteString.EMPTY;
       value_ = 0L;
       isGenerated_ = false;
     }
-    private byte memoizedIsInitialized = -1;
+    protected byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -5911,7 +5911,7 @@ public final class Protos {
       getUnknownFields().writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    protected int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
@@ -5942,7 +5942,7 @@ public final class Protos {
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
+    protected static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
@@ -6035,20 +6035,20 @@ public final class Protos {
       }
 
       // Construct using com.coinomi.core.protos.Protos.UnspentOutput.newBuilder()
-      private Builder() {
+      protected Builder() {
         maybeForceBuilderInitialization();
       }
 
-      private Builder(
+      protected Builder(
           com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
-      private void maybeForceBuilderInitialization() {
+      protected void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
+      protected static Builder create() {
         return new Builder();
       }
 
@@ -6184,9 +6184,9 @@ public final class Protos {
         }
         return this;
       }
-      private int bitField0_;
+      protected int bitField0_;
 
-      private com.google.protobuf.ByteString outPointHash_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString outPointHash_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>required bytes out_point_hash = 1;</code>
        *
@@ -6237,7 +6237,7 @@ public final class Protos {
         return this;
       }
 
-      private int outPointIndex_ ;
+      protected int outPointIndex_ ;
       /**
        * <code>required uint32 out_point_index = 2;</code>
        *
@@ -6285,7 +6285,7 @@ public final class Protos {
         return this;
       }
 
-      private com.google.protobuf.ByteString scriptBytes_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString scriptBytes_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>required bytes script_bytes = 3;</code>
        *
@@ -6336,7 +6336,7 @@ public final class Protos {
         return this;
       }
 
-      private long value_ ;
+      protected long value_ ;
       /**
        * <code>required int64 value = 4;</code>
        *
@@ -6384,7 +6384,7 @@ public final class Protos {
         return this;
       }
 
-      private boolean isGenerated_ ;
+      protected boolean isGenerated_ ;
       /**
        * <code>optional bool is_generated = 5 [default = false];</code>
        *
@@ -6569,13 +6569,13 @@ public final class Protos {
       // @@protoc_insertion_point(message_implements:com.coinomi.core.protos.TransactionConfidence)
       TransactionConfidenceOrBuilder {
     // Use TransactionConfidence.newBuilder() to construct.
-    private TransactionConfidence(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    protected TransactionConfidence(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private TransactionConfidence(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    protected TransactionConfidence(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final TransactionConfidence defaultInstance;
+    protected static final TransactionConfidence defaultInstance;
     public static TransactionConfidence getDefaultInstance() {
       return defaultInstance;
     }
@@ -6584,13 +6584,13 @@ public final class Protos {
       return defaultInstance;
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    protected final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
     }
-    private TransactionConfidence(
+    protected TransactionConfidence(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -6781,7 +6781,7 @@ public final class Protos {
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<Type>
+      protected static com.google.protobuf.Internal.EnumLiteMap<Type>
           internalValueMap =
             new com.google.protobuf.Internal.EnumLiteMap<Type>() {
               public Type findValueByNumber(int number) {
@@ -6802,7 +6802,7 @@ public final class Protos {
         return com.boli.core.protos.Protos.TransactionConfidence.getDescriptor().getEnumTypes().get(0);
       }
 
-      private static final Type[] VALUES = values();
+      protected static final Type[] VALUES = values();
 
       public static Type valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
@@ -6813,8 +6813,8 @@ public final class Protos {
         return VALUES[desc.getIndex()];
       }
 
-      private final int index;
-      private final int value;
+      protected final int index;
+      protected final int value;
 
       private Type(int index, int value) {
         this.index = index;
@@ -6917,7 +6917,7 @@ public final class Protos {
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<Source>
+      protected static com.google.protobuf.Internal.EnumLiteMap<Source>
           internalValueMap =
             new com.google.protobuf.Internal.EnumLiteMap<Source>() {
               public Source findValueByNumber(int number) {
@@ -6938,7 +6938,7 @@ public final class Protos {
         return com.boli.core.protos.Protos.TransactionConfidence.getDescriptor().getEnumTypes().get(1);
       }
 
-      private static final Source[] VALUES = values();
+      protected static final Source[] VALUES = values();
 
       public static Source valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
@@ -6949,8 +6949,8 @@ public final class Protos {
         return VALUES[desc.getIndex()];
       }
 
-      private final int index;
-      private final int value;
+      protected final int index;
+      protected final int value;
 
       private Source(int index, int value) {
         this.index = index;
@@ -6960,9 +6960,9 @@ public final class Protos {
       // @@protoc_insertion_point(enum_scope:com.coinomi.core.protos.TransactionConfidence.Source)
     }
 
-    private int bitField0_;
+    protected int bitField0_;
     public static final int TYPE_FIELD_NUMBER = 1;
-    private com.boli.core.protos.Protos.TransactionConfidence.Type type_;
+    protected com.boli.core.protos.Protos.TransactionConfidence.Type type_;
     /**
      * <code>optional .com.coinomi.core.protos.TransactionConfidence.Type type = 1;</code>
      *
@@ -6985,7 +6985,7 @@ public final class Protos {
     }
 
     public static final int APPEARED_AT_HEIGHT_FIELD_NUMBER = 2;
-    private int appearedAtHeight_;
+    protected int appearedAtHeight_;
     /**
      * <code>optional int32 appeared_at_height = 2;</code>
      *
@@ -7008,7 +7008,7 @@ public final class Protos {
     }
 
     public static final int OVERRIDING_TRANSACTION_FIELD_NUMBER = 3;
-    private com.google.protobuf.ByteString overridingTransaction_;
+    protected com.google.protobuf.ByteString overridingTransaction_;
     /**
      * <code>optional bytes overriding_transaction = 3;</code>
      *
@@ -7035,7 +7035,7 @@ public final class Protos {
     }
 
     public static final int DEPTH_FIELD_NUMBER = 4;
-    private int depth_;
+    protected int depth_;
     /**
      * <code>optional int32 depth = 4;</code>
      *
@@ -7060,7 +7060,7 @@ public final class Protos {
     }
 
     public static final int BROADCAST_BY_FIELD_NUMBER = 5;
-    private java.util.List<com.boli.core.protos.Protos.PeerAddress> broadcastBy_;
+    protected java.util.List<com.boli.core.protos.Protos.PeerAddress> broadcastBy_;
     /**
      * <code>repeated .com.coinomi.core.protos.PeerAddress broadcast_by = 5;</code>
      */
@@ -7095,7 +7095,7 @@ public final class Protos {
     }
 
     public static final int SOURCE_FIELD_NUMBER = 6;
-    private com.boli.core.protos.Protos.TransactionConfidence.Source source_;
+    protected com.boli.core.protos.Protos.TransactionConfidence.Source source_;
     /**
      * <code>optional .com.coinomi.core.protos.TransactionConfidence.Source source = 6;</code>
      */
@@ -7109,7 +7109,7 @@ public final class Protos {
       return source_;
     }
 
-    private void initFields() {
+    protected void initFields() {
       type_ = com.boli.core.protos.Protos.TransactionConfidence.Type.UNKNOWN;
       appearedAtHeight_ = 0;
       overridingTransaction_ = com.google.protobuf.ByteString.EMPTY;
@@ -7117,7 +7117,7 @@ public final class Protos {
       broadcastBy_ = java.util.Collections.emptyList();
       source_ = com.boli.core.protos.Protos.TransactionConfidence.Source.SOURCE_UNKNOWN;
     }
-    private byte memoizedIsInitialized = -1;
+    protected byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -7157,7 +7157,7 @@ public final class Protos {
       getUnknownFields().writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    protected int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
@@ -7192,7 +7192,7 @@ public final class Protos {
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
+    protected static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
@@ -7292,21 +7292,21 @@ public final class Protos {
       }
 
       // Construct using com.coinomi.core.protos.Protos.TransactionConfidence.newBuilder()
-      private Builder() {
+      protected Builder() {
         maybeForceBuilderInitialization();
       }
 
-      private Builder(
+      protected Builder(
           com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
-      private void maybeForceBuilderInitialization() {
+      protected void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getBroadcastByFieldBuilder();
         }
       }
-      private static Builder create() {
+      protected static Builder create() {
         return new Builder();
       }
 
@@ -7473,9 +7473,9 @@ public final class Protos {
         }
         return this;
       }
-      private int bitField0_;
+      protected int bitField0_;
 
-      private com.boli.core.protos.Protos.TransactionConfidence.Type type_ = com.boli.core.protos.Protos.TransactionConfidence.Type.UNKNOWN;
+      protected com.boli.core.protos.Protos.TransactionConfidence.Type type_ = com.boli.core.protos.Protos.TransactionConfidence.Type.UNKNOWN;
       /**
        * <code>optional .com.coinomi.core.protos.TransactionConfidence.Type type = 1;</code>
        *
@@ -7526,7 +7526,7 @@ public final class Protos {
         return this;
       }
 
-      private int appearedAtHeight_ ;
+      protected int appearedAtHeight_ ;
       /**
        * <code>optional int32 appeared_at_height = 2;</code>
        *
@@ -7574,7 +7574,7 @@ public final class Protos {
         return this;
       }
 
-      private com.google.protobuf.ByteString overridingTransaction_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString overridingTransaction_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes overriding_transaction = 3;</code>
        *
@@ -7633,7 +7633,7 @@ public final class Protos {
         return this;
       }
 
-      private int depth_ ;
+      protected int depth_ ;
       /**
        * <code>optional int32 depth = 4;</code>
        *
@@ -7685,16 +7685,16 @@ public final class Protos {
         return this;
       }
 
-      private java.util.List<com.boli.core.protos.Protos.PeerAddress> broadcastBy_ =
+      protected java.util.List<com.boli.core.protos.Protos.PeerAddress> broadcastBy_ =
         java.util.Collections.emptyList();
-      private void ensureBroadcastByIsMutable() {
+      protected void ensureBroadcastByIsMutable() {
         if (!((bitField0_ & 0x00000010) == 0x00000010)) {
           broadcastBy_ = new java.util.ArrayList<com.boli.core.protos.Protos.PeerAddress>(broadcastBy_);
           bitField0_ |= 0x00000010;
          }
       }
 
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.PeerAddress, com.boli.core.protos.Protos.PeerAddress.Builder, com.boli.core.protos.Protos.PeerAddressOrBuilder> broadcastByBuilder_;
 
       /**
@@ -7910,7 +7910,7 @@ public final class Protos {
            getBroadcastByBuilderList() {
         return getBroadcastByFieldBuilder().getBuilderList();
       }
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.PeerAddress, com.boli.core.protos.Protos.PeerAddress.Builder, com.boli.core.protos.Protos.PeerAddressOrBuilder>
           getBroadcastByFieldBuilder() {
         if (broadcastByBuilder_ == null) {
@@ -7925,7 +7925,7 @@ public final class Protos {
         return broadcastByBuilder_;
       }
 
-      private com.boli.core.protos.Protos.TransactionConfidence.Source source_ = com.boli.core.protos.Protos.TransactionConfidence.Source.SOURCE_UNKNOWN;
+      protected com.boli.core.protos.Protos.TransactionConfidence.Source source_ = com.boli.core.protos.Protos.TransactionConfidence.Source.SOURCE_UNKNOWN;
       /**
        * <code>optional .com.coinomi.core.protos.TransactionConfidence.Source source = 6;</code>
        */
@@ -8300,13 +8300,13 @@ public final class Protos {
       // @@protoc_insertion_point(message_implements:com.coinomi.core.protos.Transaction)
       TransactionOrBuilder {
     // Use Transaction.newBuilder() to construct.
-    private Transaction(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    protected Transaction(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private Transaction(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    protected Transaction(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final Transaction defaultInstance;
+    protected static final Transaction defaultInstance;
     public static Transaction getDefaultInstance() {
       return defaultInstance;
     }
@@ -8315,13 +8315,13 @@ public final class Protos {
       return defaultInstance;
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    protected final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
     }
-    private Transaction(
+    protected Transaction(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -8624,7 +8624,7 @@ public final class Protos {
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<Pool>
+      protected static com.google.protobuf.Internal.EnumLiteMap<Pool>
           internalValueMap =
             new com.google.protobuf.Internal.EnumLiteMap<Pool>() {
               public Pool findValueByNumber(int number) {
@@ -8645,7 +8645,7 @@ public final class Protos {
         return com.boli.core.protos.Protos.Transaction.getDescriptor().getEnumTypes().get(0);
       }
 
-      private static final Pool[] VALUES = values();
+      protected static final Pool[] VALUES = values();
 
       public static Pool valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
@@ -8656,8 +8656,8 @@ public final class Protos {
         return VALUES[desc.getIndex()];
       }
 
-      private final int index;
-      private final int value;
+      protected final int index;
+      protected final int value;
 
       private Pool(int index, int value) {
         this.index = index;
@@ -8667,9 +8667,9 @@ public final class Protos {
       // @@protoc_insertion_point(enum_scope:com.coinomi.core.protos.Transaction.Pool)
     }
 
-    private int bitField0_;
+    protected int bitField0_;
     public static final int VERSION_FIELD_NUMBER = 1;
-    private int version_;
+    protected int version_;
     /**
      * <code>required int32 version = 1;</code>
      *
@@ -8692,7 +8692,7 @@ public final class Protos {
     }
 
     public static final int TIME_FIELD_NUMBER = 11;
-    private int time_;
+    protected int time_;
     /**
      * <code>optional int32 time = 11;</code>
      *
@@ -8715,7 +8715,7 @@ public final class Protos {
     }
 
     public static final int HASH_FIELD_NUMBER = 2;
-    private com.google.protobuf.ByteString hash_;
+    protected com.google.protobuf.ByteString hash_;
     /**
      * <code>required bytes hash = 2;</code>
      */
@@ -8730,7 +8730,7 @@ public final class Protos {
     }
 
     public static final int POOL_FIELD_NUMBER = 3;
-    private com.boli.core.protos.Protos.Transaction.Pool pool_;
+    protected com.boli.core.protos.Protos.Transaction.Pool pool_;
     /**
      * <code>optional .com.coinomi.core.protos.Transaction.Pool pool = 3;</code>
      *
@@ -8759,7 +8759,7 @@ public final class Protos {
     }
 
     public static final int LOCK_TIME_FIELD_NUMBER = 4;
-    private int lockTime_;
+    protected int lockTime_;
     /**
      * <code>optional uint32 lock_time = 4;</code>
      *
@@ -8782,7 +8782,7 @@ public final class Protos {
     }
 
     public static final int UPDATED_AT_FIELD_NUMBER = 5;
-    private long updatedAt_;
+    protected long updatedAt_;
     /**
      * <code>optional int64 updated_at = 5;</code>
      *
@@ -8805,7 +8805,7 @@ public final class Protos {
     }
 
     public static final int TRANSACTION_INPUT_FIELD_NUMBER = 6;
-    private java.util.List<com.boli.core.protos.Protos.TransactionInput> transactionInput_;
+    protected java.util.List<com.boli.core.protos.Protos.TransactionInput> transactionInput_;
     /**
      * <code>repeated .com.coinomi.core.protos.TransactionInput transaction_input = 6;</code>
      */
@@ -8840,7 +8840,7 @@ public final class Protos {
     }
 
     public static final int NUM_OF_OUTPUTS_FIELD_NUMBER = 18;
-    private int numOfOutputs_;
+    protected int numOfOutputs_;
     /**
      * <code>optional int32 num_of_outputs = 18;</code>
      *
@@ -8863,7 +8863,7 @@ public final class Protos {
     }
 
     public static final int TRANSACTION_OUTPUT_FIELD_NUMBER = 7;
-    private java.util.List<com.boli.core.protos.Protos.TransactionOutput> transactionOutput_;
+    protected java.util.List<com.boli.core.protos.Protos.TransactionOutput> transactionOutput_;
     /**
      * <code>repeated .com.coinomi.core.protos.TransactionOutput transaction_output = 7;</code>
      */
@@ -8898,7 +8898,7 @@ public final class Protos {
     }
 
     public static final int BLOCK_HASH_FIELD_NUMBER = 8;
-    private java.util.List<com.google.protobuf.ByteString> blockHash_;
+    protected java.util.List<com.google.protobuf.ByteString> blockHash_;
     /**
      * <code>repeated bytes block_hash = 8;</code>
      *
@@ -8935,7 +8935,7 @@ public final class Protos {
     }
 
     public static final int BLOCK_RELATIVITY_OFFSETS_FIELD_NUMBER = 9;
-    private java.util.List<java.lang.Integer> blockRelativityOffsets_;
+    protected java.util.List<java.lang.Integer> blockRelativityOffsets_;
     /**
      * <code>repeated int32 block_relativity_offsets = 9;</code>
      */
@@ -8957,7 +8957,7 @@ public final class Protos {
     }
 
     public static final int CONFIDENCE_FIELD_NUMBER = 10;
-    private com.boli.core.protos.Protos.TransactionConfidence confidence_;
+    protected com.boli.core.protos.Protos.TransactionConfidence confidence_;
     /**
      * <code>optional .com.coinomi.core.protos.TransactionConfidence confidence = 10;</code>
      *
@@ -8990,7 +8990,7 @@ public final class Protos {
     }
 
     public static final int TOKEN_ID_FIELD_NUMBER = 12;
-    private int tokenId_;
+    protected int tokenId_;
     /**
      * <code>optional int32 token_id = 12;</code>
      */
@@ -9005,7 +9005,7 @@ public final class Protos {
     }
 
     public static final int EXTRA_BYTES_FIELD_NUMBER = 13;
-    private com.google.protobuf.ByteString extraBytes_;
+    protected com.google.protobuf.ByteString extraBytes_;
     /**
      * <code>optional bytes extra_bytes = 13;</code>
      */
@@ -9020,7 +9020,7 @@ public final class Protos {
     }
 
     public static final int IS_TRIMMED_FIELD_NUMBER = 14;
-    private boolean isTrimmed_;
+    protected boolean isTrimmed_;
     /**
      * <code>optional bool is_trimmed = 14 [default = false];</code>
      *
@@ -9043,7 +9043,7 @@ public final class Protos {
     }
 
     public static final int VALUE_SENT_FIELD_NUMBER = 15;
-    private long valueSent_;
+    protected long valueSent_;
     /**
      * <code>optional int64 value_sent = 15 [default = 0];</code>
      *
@@ -9066,7 +9066,7 @@ public final class Protos {
     }
 
     public static final int VALUE_RECEIVED_FIELD_NUMBER = 16;
-    private long valueReceived_;
+    protected long valueReceived_;
     /**
      * <code>optional int64 value_received = 16 [default = 0];</code>
      *
@@ -9089,7 +9089,7 @@ public final class Protos {
     }
 
     public static final int FEE_FIELD_NUMBER = 17;
-    private long fee_;
+    protected long fee_;
     /**
      * <code>optional int64 fee = 17;</code>
      *
@@ -9111,7 +9111,7 @@ public final class Protos {
       return fee_;
     }
 
-    private void initFields() {
+    protected void initFields() {
       version_ = 0;
       time_ = 0;
       hash_ = com.google.protobuf.ByteString.EMPTY;
@@ -9131,7 +9131,7 @@ public final class Protos {
       valueReceived_ = 0L;
       fee_ = 0L;
     }
-    private byte memoizedIsInitialized = -1;
+    protected byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -9227,7 +9227,7 @@ public final class Protos {
       getUnknownFields().writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    protected int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
@@ -9320,7 +9320,7 @@ public final class Protos {
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
+    protected static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
@@ -9413,23 +9413,23 @@ public final class Protos {
       }
 
       // Construct using com.coinomi.core.protos.Protos.Transaction.newBuilder()
-      private Builder() {
+      protected Builder() {
         maybeForceBuilderInitialization();
       }
 
-      private Builder(
+      protected Builder(
           com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
-      private void maybeForceBuilderInitialization() {
+      protected void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getTransactionInputFieldBuilder();
           getTransactionOutputFieldBuilder();
           getConfidenceFieldBuilder();
         }
       }
-      private static Builder create() {
+      protected static Builder create() {
         return new Builder();
       }
 
@@ -9780,9 +9780,9 @@ public final class Protos {
         }
         return this;
       }
-      private int bitField0_;
+      protected int bitField0_;
 
-      private int version_ ;
+      protected int version_ ;
       /**
        * <code>required int32 version = 1;</code>
        *
@@ -9830,7 +9830,7 @@ public final class Protos {
         return this;
       }
 
-      private int time_ ;
+      protected int time_ ;
       /**
        * <code>optional int32 time = 11;</code>
        *
@@ -9878,7 +9878,7 @@ public final class Protos {
         return this;
       }
 
-      private com.google.protobuf.ByteString hash_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString hash_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>required bytes hash = 2;</code>
        */
@@ -9913,7 +9913,7 @@ public final class Protos {
         return this;
       }
 
-      private com.boli.core.protos.Protos.Transaction.Pool pool_ = com.boli.core.protos.Protos.Transaction.Pool.UNSPENT;
+      protected com.boli.core.protos.Protos.Transaction.Pool pool_ = com.boli.core.protos.Protos.Transaction.Pool.UNSPENT;
       /**
        * <code>optional .com.coinomi.core.protos.Transaction.Pool pool = 3;</code>
        *
@@ -9976,7 +9976,7 @@ public final class Protos {
         return this;
       }
 
-      private int lockTime_ ;
+      protected int lockTime_ ;
       /**
        * <code>optional uint32 lock_time = 4;</code>
        *
@@ -10024,7 +10024,7 @@ public final class Protos {
         return this;
       }
 
-      private long updatedAt_ ;
+      protected long updatedAt_ ;
       /**
        * <code>optional int64 updated_at = 5;</code>
        *
@@ -10072,16 +10072,16 @@ public final class Protos {
         return this;
       }
 
-      private java.util.List<com.boli.core.protos.Protos.TransactionInput> transactionInput_ =
+      protected java.util.List<com.boli.core.protos.Protos.TransactionInput> transactionInput_ =
         java.util.Collections.emptyList();
-      private void ensureTransactionInputIsMutable() {
+      protected void ensureTransactionInputIsMutable() {
         if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           transactionInput_ = new java.util.ArrayList<com.boli.core.protos.Protos.TransactionInput>(transactionInput_);
           bitField0_ |= 0x00000040;
          }
       }
 
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.TransactionInput, com.boli.core.protos.Protos.TransactionInput.Builder, com.boli.core.protos.Protos.TransactionInputOrBuilder> transactionInputBuilder_;
 
       /**
@@ -10297,7 +10297,7 @@ public final class Protos {
            getTransactionInputBuilderList() {
         return getTransactionInputFieldBuilder().getBuilderList();
       }
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.TransactionInput, com.boli.core.protos.Protos.TransactionInput.Builder, com.boli.core.protos.Protos.TransactionInputOrBuilder>
           getTransactionInputFieldBuilder() {
         if (transactionInputBuilder_ == null) {
@@ -10312,7 +10312,7 @@ public final class Protos {
         return transactionInputBuilder_;
       }
 
-      private int numOfOutputs_ ;
+      protected int numOfOutputs_ ;
       /**
        * <code>optional int32 num_of_outputs = 18;</code>
        *
@@ -10360,16 +10360,16 @@ public final class Protos {
         return this;
       }
 
-      private java.util.List<com.boli.core.protos.Protos.TransactionOutput> transactionOutput_ =
+      protected java.util.List<com.boli.core.protos.Protos.TransactionOutput> transactionOutput_ =
         java.util.Collections.emptyList();
-      private void ensureTransactionOutputIsMutable() {
+      protected void ensureTransactionOutputIsMutable() {
         if (!((bitField0_ & 0x00000100) == 0x00000100)) {
           transactionOutput_ = new java.util.ArrayList<com.boli.core.protos.Protos.TransactionOutput>(transactionOutput_);
           bitField0_ |= 0x00000100;
          }
       }
 
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.TransactionOutput, com.boli.core.protos.Protos.TransactionOutput.Builder, com.boli.core.protos.Protos.TransactionOutputOrBuilder> transactionOutputBuilder_;
 
       /**
@@ -10585,7 +10585,7 @@ public final class Protos {
            getTransactionOutputBuilderList() {
         return getTransactionOutputFieldBuilder().getBuilderList();
       }
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.TransactionOutput, com.boli.core.protos.Protos.TransactionOutput.Builder, com.boli.core.protos.Protos.TransactionOutputOrBuilder>
           getTransactionOutputFieldBuilder() {
         if (transactionOutputBuilder_ == null) {
@@ -10600,8 +10600,8 @@ public final class Protos {
         return transactionOutputBuilder_;
       }
 
-      private java.util.List<com.google.protobuf.ByteString> blockHash_ = java.util.Collections.emptyList();
-      private void ensureBlockHashIsMutable() {
+      protected java.util.List<com.google.protobuf.ByteString> blockHash_ = java.util.Collections.emptyList();
+      protected void ensureBlockHashIsMutable() {
         if (!((bitField0_ & 0x00000200) == 0x00000200)) {
           blockHash_ = new java.util.ArrayList<com.google.protobuf.ByteString>(blockHash_);
           bitField0_ |= 0x00000200;
@@ -10707,8 +10707,8 @@ public final class Protos {
         return this;
       }
 
-      private java.util.List<java.lang.Integer> blockRelativityOffsets_ = java.util.Collections.emptyList();
-      private void ensureBlockRelativityOffsetsIsMutable() {
+      protected java.util.List<java.lang.Integer> blockRelativityOffsets_ = java.util.Collections.emptyList();
+      protected void ensureBlockRelativityOffsetsIsMutable() {
         if (!((bitField0_ & 0x00000400) == 0x00000400)) {
           blockRelativityOffsets_ = new java.util.ArrayList<java.lang.Integer>(blockRelativityOffsets_);
           bitField0_ |= 0x00000400;
@@ -10773,8 +10773,8 @@ public final class Protos {
         return this;
       }
 
-      private com.boli.core.protos.Protos.TransactionConfidence confidence_ = com.boli.core.protos.Protos.TransactionConfidence.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
+      protected com.boli.core.protos.Protos.TransactionConfidence confidence_ = com.boli.core.protos.Protos.TransactionConfidence.getDefaultInstance();
+      protected com.google.protobuf.SingleFieldBuilder<
           com.boli.core.protos.Protos.TransactionConfidence, com.boli.core.protos.Protos.TransactionConfidence.Builder, com.boli.core.protos.Protos.TransactionConfidenceOrBuilder> confidenceBuilder_;
       /**
        * <code>optional .com.coinomi.core.protos.TransactionConfidence confidence = 10;</code>
@@ -10911,7 +10911,7 @@ public final class Protos {
        * Data describing where the transaction is in the chain.
        * </pre>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      protected com.google.protobuf.SingleFieldBuilder<
           com.boli.core.protos.Protos.TransactionConfidence, com.boli.core.protos.Protos.TransactionConfidence.Builder, com.boli.core.protos.Protos.TransactionConfidenceOrBuilder>
           getConfidenceFieldBuilder() {
         if (confidenceBuilder_ == null) {
@@ -10925,7 +10925,7 @@ public final class Protos {
         return confidenceBuilder_;
       }
 
-      private int tokenId_ ;
+      protected int tokenId_ ;
       /**
        * <code>optional int32 token_id = 12;</code>
        */
@@ -10957,7 +10957,7 @@ public final class Protos {
         return this;
       }
 
-      private com.google.protobuf.ByteString extraBytes_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString extraBytes_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes extra_bytes = 13;</code>
        */
@@ -10992,7 +10992,7 @@ public final class Protos {
         return this;
       }
 
-      private boolean isTrimmed_ ;
+      protected boolean isTrimmed_ ;
       /**
        * <code>optional bool is_trimmed = 14 [default = false];</code>
        *
@@ -11040,7 +11040,7 @@ public final class Protos {
         return this;
       }
 
-      private long valueSent_ ;
+      protected long valueSent_ ;
       /**
        * <code>optional int64 value_sent = 15 [default = 0];</code>
        *
@@ -11088,7 +11088,7 @@ public final class Protos {
         return this;
       }
 
-      private long valueReceived_ ;
+      protected long valueReceived_ ;
       /**
        * <code>optional int64 value_received = 16 [default = 0];</code>
        *
@@ -11136,7 +11136,7 @@ public final class Protos {
         return this;
       }
 
-      private long fee_ ;
+      protected long fee_ ;
       /**
        * <code>optional int64 fee = 17;</code>
        *
@@ -11259,13 +11259,13 @@ public final class Protos {
       // @@protoc_insertion_point(message_implements:com.coinomi.core.protos.AddressStatus)
       AddressStatusOrBuilder {
     // Use AddressStatus.newBuilder() to construct.
-    private AddressStatus(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    protected AddressStatus(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private AddressStatus(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    protected AddressStatus(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final AddressStatus defaultInstance;
+    protected static final AddressStatus defaultInstance;
     public static AddressStatus getDefaultInstance() {
       return defaultInstance;
     }
@@ -11274,13 +11274,13 @@ public final class Protos {
       return defaultInstance;
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    protected final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
     }
-    private AddressStatus(
+    protected AddressStatus(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -11354,9 +11354,9 @@ public final class Protos {
       return PARSER;
     }
 
-    private int bitField0_;
+    protected int bitField0_;
     public static final int ADDRESS_FIELD_NUMBER = 1;
-    private java.lang.Object address_;
+    protected java.lang.Object address_;
     /**
      * <code>required string address = 1;</code>
      *
@@ -11410,7 +11410,7 @@ public final class Protos {
     }
 
     public static final int STATUS_FIELD_NUMBER = 2;
-    private java.lang.Object status_;
+    protected java.lang.Object status_;
     /**
      * <code>required string status = 2;</code>
      *
@@ -11463,11 +11463,11 @@ public final class Protos {
       }
     }
 
-    private void initFields() {
+    protected void initFields() {
       address_ = "";
       status_ = "";
     }
-    private byte memoizedIsInitialized = -1;
+    protected byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -11497,7 +11497,7 @@ public final class Protos {
       getUnknownFields().writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    protected int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
@@ -11516,7 +11516,7 @@ public final class Protos {
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
+    protected static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
@@ -11609,20 +11609,20 @@ public final class Protos {
       }
 
       // Construct using com.coinomi.core.protos.Protos.AddressStatus.newBuilder()
-      private Builder() {
+      protected Builder() {
         maybeForceBuilderInitialization();
       }
 
-      private Builder(
+      protected Builder(
           com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
-      private void maybeForceBuilderInitialization() {
+      protected void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
+      protected static Builder create() {
         return new Builder();
       }
 
@@ -11727,9 +11727,9 @@ public final class Protos {
         }
         return this;
       }
-      private int bitField0_;
+      protected int bitField0_;
 
-      private java.lang.Object address_ = "";
+      protected java.lang.Object address_ = "";
       /**
        * <code>required string address = 1;</code>
        *
@@ -11829,7 +11829,7 @@ public final class Protos {
         return this;
       }
 
-      private java.lang.Object status_ = "";
+      protected java.lang.Object status_ = "";
       /**
        * <code>required string status = 2;</code>
        *
@@ -12161,13 +12161,13 @@ public final class Protos {
       // @@protoc_insertion_point(message_implements:com.coinomi.core.protos.WalletPocket)
       WalletPocketOrBuilder {
     // Use WalletPocket.newBuilder() to construct.
-    private WalletPocket(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    protected WalletPocket(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private WalletPocket(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    protected WalletPocket(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final WalletPocket defaultInstance;
+    protected static final WalletPocket defaultInstance;
     public static WalletPocket getDefaultInstance() {
       return defaultInstance;
     }
@@ -12176,13 +12176,13 @@ public final class Protos {
       return defaultInstance;
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    protected final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
     }
-    private WalletPocket(
+    protected WalletPocket(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -12321,9 +12321,9 @@ public final class Protos {
       return PARSER;
     }
 
-    private int bitField0_;
+    protected int bitField0_;
     public static final int NETWORK_IDENTIFIER_FIELD_NUMBER = 1;
-    private java.lang.Object networkIdentifier_;
+    protected java.lang.Object networkIdentifier_;
     /**
      * <code>required string network_identifier = 1;</code>
      *
@@ -12377,7 +12377,7 @@ public final class Protos {
     }
 
     public static final int DESCRIPTION_FIELD_NUMBER = 2;
-    private java.lang.Object description_;
+    protected java.lang.Object description_;
     /**
      * <code>optional string description = 2;</code>
      *
@@ -12431,7 +12431,7 @@ public final class Protos {
     }
 
     public static final int KEY_FIELD_NUMBER = 3;
-    private java.util.List<com.boli.core.protos.Protos.Key> key_;
+    protected java.util.List<com.boli.core.protos.Protos.Key> key_;
     /**
      * <code>repeated .com.coinomi.core.protos.Key key = 3;</code>
      */
@@ -12466,7 +12466,7 @@ public final class Protos {
     }
 
     public static final int LAST_SEEN_BLOCK_HASH_FIELD_NUMBER = 4;
-    private com.google.protobuf.ByteString lastSeenBlockHash_;
+    protected com.google.protobuf.ByteString lastSeenBlockHash_;
     /**
      * <code>optional bytes last_seen_block_hash = 4;</code>
      *
@@ -12489,7 +12489,7 @@ public final class Protos {
     }
 
     public static final int LAST_SEEN_BLOCK_HEIGHT_FIELD_NUMBER = 5;
-    private int lastSeenBlockHeight_;
+    protected int lastSeenBlockHeight_;
     /**
      * <code>optional uint32 last_seen_block_height = 5;</code>
      *
@@ -12512,7 +12512,7 @@ public final class Protos {
     }
 
     public static final int LAST_SEEN_BLOCK_TIME_SECS_FIELD_NUMBER = 6;
-    private long lastSeenBlockTimeSecs_;
+    protected long lastSeenBlockTimeSecs_;
     /**
      * <code>optional int64 last_seen_block_time_secs = 6;</code>
      */
@@ -12527,7 +12527,7 @@ public final class Protos {
     }
 
     public static final int TRANSACTION_FIELD_NUMBER = 7;
-    private java.util.List<com.boli.core.protos.Protos.Transaction> transaction_;
+    protected java.util.List<com.boli.core.protos.Protos.Transaction> transaction_;
     /**
      * <code>repeated .com.coinomi.core.protos.Transaction transaction = 7;</code>
      */
@@ -12562,7 +12562,7 @@ public final class Protos {
     }
 
     public static final int ADDRESS_STATUS_FIELD_NUMBER = 8;
-    private java.util.List<com.boli.core.protos.Protos.AddressStatus> addressStatus_;
+    protected java.util.List<com.boli.core.protos.Protos.AddressStatus> addressStatus_;
     /**
      * <code>repeated .com.coinomi.core.protos.AddressStatus address_status = 8;</code>
      */
@@ -12597,7 +12597,7 @@ public final class Protos {
     }
 
     public static final int ID_FIELD_NUMBER = 9;
-    private java.lang.Object id_;
+    protected java.lang.Object id_;
     /**
      * <code>optional string id = 9;</code>
      */
@@ -12639,7 +12639,7 @@ public final class Protos {
     }
 
     public static final int UNSPENT_OUTPUT_FIELD_NUMBER = 10;
-    private java.util.List<com.boli.core.protos.Protos.UnspentOutput> unspentOutput_;
+    protected java.util.List<com.boli.core.protos.Protos.UnspentOutput> unspentOutput_;
     /**
      * <code>repeated .com.coinomi.core.protos.UnspentOutput unspent_output = 10;</code>
      */
@@ -12673,7 +12673,7 @@ public final class Protos {
       return unspentOutput_.get(index);
     }
 
-    private void initFields() {
+    protected void initFields() {
       networkIdentifier_ = "";
       description_ = "";
       key_ = java.util.Collections.emptyList();
@@ -12685,7 +12685,7 @@ public final class Protos {
       id_ = "";
       unspentOutput_ = java.util.Collections.emptyList();
     }
-    private byte memoizedIsInitialized = -1;
+    protected byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -12759,7 +12759,7 @@ public final class Protos {
       getUnknownFields().writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    protected int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
@@ -12810,7 +12810,7 @@ public final class Protos {
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
+    protected static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
@@ -12907,16 +12907,16 @@ public final class Protos {
       }
 
       // Construct using com.coinomi.core.protos.Protos.WalletPocket.newBuilder()
-      private Builder() {
+      protected Builder() {
         maybeForceBuilderInitialization();
       }
 
-      private Builder(
+      protected Builder(
           com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
-      private void maybeForceBuilderInitialization() {
+      protected void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getKeyFieldBuilder();
           getTransactionFieldBuilder();
@@ -12924,7 +12924,7 @@ public final class Protos {
           getUnspentOutputFieldBuilder();
         }
       }
-      private static Builder create() {
+      protected static Builder create() {
         return new Builder();
       }
 
@@ -13251,9 +13251,9 @@ public final class Protos {
         }
         return this;
       }
-      private int bitField0_;
+      protected int bitField0_;
 
-      private java.lang.Object networkIdentifier_ = "";
+      protected java.lang.Object networkIdentifier_ = "";
       /**
        * <code>required string network_identifier = 1;</code>
        *
@@ -13353,7 +13353,7 @@ public final class Protos {
         return this;
       }
 
-      private java.lang.Object description_ = "";
+      protected java.lang.Object description_ = "";
       /**
        * <code>optional string description = 2;</code>
        *
@@ -13453,16 +13453,16 @@ public final class Protos {
         return this;
       }
 
-      private java.util.List<com.boli.core.protos.Protos.Key> key_ =
+      protected java.util.List<com.boli.core.protos.Protos.Key> key_ =
         java.util.Collections.emptyList();
-      private void ensureKeyIsMutable() {
+      protected void ensureKeyIsMutable() {
         if (!((bitField0_ & 0x00000004) == 0x00000004)) {
           key_ = new java.util.ArrayList<com.boli.core.protos.Protos.Key>(key_);
           bitField0_ |= 0x00000004;
          }
       }
 
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.Key, com.boli.core.protos.Protos.Key.Builder, com.boli.core.protos.Protos.KeyOrBuilder> keyBuilder_;
 
       /**
@@ -13678,7 +13678,7 @@ public final class Protos {
            getKeyBuilderList() {
         return getKeyFieldBuilder().getBuilderList();
       }
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.Key, com.boli.core.protos.Protos.Key.Builder, com.boli.core.protos.Protos.KeyOrBuilder>
           getKeyFieldBuilder() {
         if (keyBuilder_ == null) {
@@ -13693,7 +13693,7 @@ public final class Protos {
         return keyBuilder_;
       }
 
-      private com.google.protobuf.ByteString lastSeenBlockHash_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString lastSeenBlockHash_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>optional bytes last_seen_block_hash = 4;</code>
        *
@@ -13744,7 +13744,7 @@ public final class Protos {
         return this;
       }
 
-      private int lastSeenBlockHeight_ ;
+      protected int lastSeenBlockHeight_ ;
       /**
        * <code>optional uint32 last_seen_block_height = 5;</code>
        *
@@ -13792,7 +13792,7 @@ public final class Protos {
         return this;
       }
 
-      private long lastSeenBlockTimeSecs_ ;
+      protected long lastSeenBlockTimeSecs_ ;
       /**
        * <code>optional int64 last_seen_block_time_secs = 6;</code>
        */
@@ -13824,16 +13824,16 @@ public final class Protos {
         return this;
       }
 
-      private java.util.List<com.boli.core.protos.Protos.Transaction> transaction_ =
+      protected java.util.List<com.boli.core.protos.Protos.Transaction> transaction_ =
         java.util.Collections.emptyList();
-      private void ensureTransactionIsMutable() {
+      protected void ensureTransactionIsMutable() {
         if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           transaction_ = new java.util.ArrayList<com.boli.core.protos.Protos.Transaction>(transaction_);
           bitField0_ |= 0x00000040;
          }
       }
 
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.Transaction, com.boli.core.protos.Protos.Transaction.Builder, com.boli.core.protos.Protos.TransactionOrBuilder> transactionBuilder_;
 
       /**
@@ -14049,7 +14049,7 @@ public final class Protos {
            getTransactionBuilderList() {
         return getTransactionFieldBuilder().getBuilderList();
       }
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.Transaction, com.boli.core.protos.Protos.Transaction.Builder, com.boli.core.protos.Protos.TransactionOrBuilder>
           getTransactionFieldBuilder() {
         if (transactionBuilder_ == null) {
@@ -14064,16 +14064,16 @@ public final class Protos {
         return transactionBuilder_;
       }
 
-      private java.util.List<com.boli.core.protos.Protos.AddressStatus> addressStatus_ =
+      protected java.util.List<com.boli.core.protos.Protos.AddressStatus> addressStatus_ =
         java.util.Collections.emptyList();
-      private void ensureAddressStatusIsMutable() {
+      protected void ensureAddressStatusIsMutable() {
         if (!((bitField0_ & 0x00000080) == 0x00000080)) {
           addressStatus_ = new java.util.ArrayList<com.boli.core.protos.Protos.AddressStatus>(addressStatus_);
           bitField0_ |= 0x00000080;
          }
       }
 
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.AddressStatus, com.boli.core.protos.Protos.AddressStatus.Builder, com.boli.core.protos.Protos.AddressStatusOrBuilder> addressStatusBuilder_;
 
       /**
@@ -14289,7 +14289,7 @@ public final class Protos {
            getAddressStatusBuilderList() {
         return getAddressStatusFieldBuilder().getBuilderList();
       }
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.AddressStatus, com.boli.core.protos.Protos.AddressStatus.Builder, com.boli.core.protos.Protos.AddressStatusOrBuilder>
           getAddressStatusFieldBuilder() {
         if (addressStatusBuilder_ == null) {
@@ -14304,7 +14304,7 @@ public final class Protos {
         return addressStatusBuilder_;
       }
 
-      private java.lang.Object id_ = "";
+      protected java.lang.Object id_ = "";
       /**
        * <code>optional string id = 9;</code>
        */
@@ -14380,16 +14380,16 @@ public final class Protos {
         return this;
       }
 
-      private java.util.List<com.boli.core.protos.Protos.UnspentOutput> unspentOutput_ =
+      protected java.util.List<com.boli.core.protos.Protos.UnspentOutput> unspentOutput_ =
         java.util.Collections.emptyList();
-      private void ensureUnspentOutputIsMutable() {
+      protected void ensureUnspentOutputIsMutable() {
         if (!((bitField0_ & 0x00000200) == 0x00000200)) {
           unspentOutput_ = new java.util.ArrayList<com.boli.core.protos.Protos.UnspentOutput>(unspentOutput_);
           bitField0_ |= 0x00000200;
          }
       }
 
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.UnspentOutput, com.boli.core.protos.Protos.UnspentOutput.Builder, com.boli.core.protos.Protos.UnspentOutputOrBuilder> unspentOutputBuilder_;
 
       /**
@@ -14605,7 +14605,7 @@ public final class Protos {
            getUnspentOutputBuilderList() {
         return getUnspentOutputFieldBuilder().getBuilderList();
       }
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.UnspentOutput, com.boli.core.protos.Protos.UnspentOutput.Builder, com.boli.core.protos.Protos.UnspentOutputOrBuilder>
           getUnspentOutputFieldBuilder() {
         if (unspentOutputBuilder_ == null) {
@@ -14719,13 +14719,13 @@ public final class Protos {
       // @@protoc_insertion_point(message_implements:com.coinomi.core.protos.ScryptParameters)
       ScryptParametersOrBuilder {
     // Use ScryptParameters.newBuilder() to construct.
-    private ScryptParameters(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    protected ScryptParameters(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private ScryptParameters(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    protected ScryptParameters(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final ScryptParameters defaultInstance;
+    protected static final ScryptParameters defaultInstance;
     public static ScryptParameters getDefaultInstance() {
       return defaultInstance;
     }
@@ -14734,13 +14734,13 @@ public final class Protos {
       return defaultInstance;
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    protected final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
     }
-    private ScryptParameters(
+    protected ScryptParameters(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -14822,9 +14822,9 @@ public final class Protos {
       return PARSER;
     }
 
-    private int bitField0_;
+    protected int bitField0_;
     public static final int SALT_FIELD_NUMBER = 1;
-    private com.google.protobuf.ByteString salt_;
+    protected com.google.protobuf.ByteString salt_;
     /**
      * <code>required bytes salt = 1;</code>
      *
@@ -14847,7 +14847,7 @@ public final class Protos {
     }
 
     public static final int N_FIELD_NUMBER = 2;
-    private long n_;
+    protected long n_;
     /**
      * <code>optional int64 n = 2 [default = 16384];</code>
      *
@@ -14870,7 +14870,7 @@ public final class Protos {
     }
 
     public static final int R_FIELD_NUMBER = 3;
-    private int r_;
+    protected int r_;
     /**
      * <code>optional int32 r = 3 [default = 8];</code>
      *
@@ -14893,7 +14893,7 @@ public final class Protos {
     }
 
     public static final int P_FIELD_NUMBER = 4;
-    private int p_;
+    protected int p_;
     /**
      * <code>optional int32 p = 4 [default = 1];</code>
      *
@@ -14915,13 +14915,13 @@ public final class Protos {
       return p_;
     }
 
-    private void initFields() {
+    protected void initFields() {
       salt_ = com.google.protobuf.ByteString.EMPTY;
       n_ = 16384L;
       r_ = 8;
       p_ = 1;
     }
-    private byte memoizedIsInitialized = -1;
+    protected byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -14953,7 +14953,7 @@ public final class Protos {
       getUnknownFields().writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    protected int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
@@ -14980,7 +14980,7 @@ public final class Protos {
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
+    protected static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
@@ -15081,20 +15081,20 @@ public final class Protos {
       }
 
       // Construct using com.coinomi.core.protos.Protos.ScryptParameters.newBuilder()
-      private Builder() {
+      protected Builder() {
         maybeForceBuilderInitialization();
       }
 
-      private Builder(
+      protected Builder(
           com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
-      private void maybeForceBuilderInitialization() {
+      protected void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
         }
       }
-      private static Builder create() {
+      protected static Builder create() {
         return new Builder();
       }
 
@@ -15209,9 +15209,9 @@ public final class Protos {
         }
         return this;
       }
-      private int bitField0_;
+      protected int bitField0_;
 
-      private com.google.protobuf.ByteString salt_ = com.google.protobuf.ByteString.EMPTY;
+      protected com.google.protobuf.ByteString salt_ = com.google.protobuf.ByteString.EMPTY;
       /**
        * <code>required bytes salt = 1;</code>
        *
@@ -15262,7 +15262,7 @@ public final class Protos {
         return this;
       }
 
-      private long n_ = 16384L;
+      protected long n_ = 16384L;
       /**
        * <code>optional int64 n = 2 [default = 16384];</code>
        *
@@ -15310,7 +15310,7 @@ public final class Protos {
         return this;
       }
 
-      private int r_ = 8;
+      protected int r_ = 8;
       /**
        * <code>optional int32 r = 3 [default = 8];</code>
        *
@@ -15358,7 +15358,7 @@ public final class Protos {
         return this;
       }
 
-      private int p_ = 1;
+      protected int p_ = 1;
       /**
        * <code>optional int32 p = 4 [default = 1];</code>
        *
@@ -15533,13 +15533,13 @@ public final class Protos {
       // @@protoc_insertion_point(message_implements:com.coinomi.core.protos.Wallet)
       WalletOrBuilder {
     // Use Wallet.newBuilder() to construct.
-    private Wallet(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
+    protected Wallet(com.google.protobuf.GeneratedMessage.Builder<?> builder) {
       super(builder);
       this.unknownFields = builder.getUnknownFields();
     }
-    private Wallet(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
+    protected Wallet(boolean noInit) { this.unknownFields = com.google.protobuf.UnknownFieldSet.getDefaultInstance(); }
 
-    private static final Wallet defaultInstance;
+    protected static final Wallet defaultInstance;
     public static Wallet getDefaultInstance() {
       return defaultInstance;
     }
@@ -15548,13 +15548,13 @@ public final class Protos {
       return defaultInstance;
     }
 
-    private final com.google.protobuf.UnknownFieldSet unknownFields;
+    protected final com.google.protobuf.UnknownFieldSet unknownFields;
     @java.lang.Override
     public final com.google.protobuf.UnknownFieldSet
         getUnknownFields() {
       return this.unknownFields;
     }
-    private Wallet(
+    protected Wallet(
         com.google.protobuf.CodedInputStream input,
         com.google.protobuf.ExtensionRegistryLite extensionRegistry)
         throws com.google.protobuf.InvalidProtocolBufferException {
@@ -15767,7 +15767,7 @@ public final class Protos {
           internalGetValueMap() {
         return internalValueMap;
       }
-      private static com.google.protobuf.Internal.EnumLiteMap<EncryptionType>
+      protected static com.google.protobuf.Internal.EnumLiteMap<EncryptionType>
           internalValueMap =
             new com.google.protobuf.Internal.EnumLiteMap<EncryptionType>() {
               public EncryptionType findValueByNumber(int number) {
@@ -15788,7 +15788,7 @@ public final class Protos {
         return com.boli.core.protos.Protos.Wallet.getDescriptor().getEnumTypes().get(0);
       }
 
-      private static final EncryptionType[] VALUES = values();
+      protected static final EncryptionType[] VALUES = values();
 
       public static EncryptionType valueOf(
           com.google.protobuf.Descriptors.EnumValueDescriptor desc) {
@@ -15799,8 +15799,8 @@ public final class Protos {
         return VALUES[desc.getIndex()];
       }
 
-      private final int index;
-      private final int value;
+      protected final int index;
+      protected final int value;
 
       private EncryptionType(int index, int value) {
         this.index = index;
@@ -15810,9 +15810,9 @@ public final class Protos {
       // @@protoc_insertion_point(enum_scope:com.coinomi.core.protos.Wallet.EncryptionType)
     }
 
-    private int bitField0_;
+    protected int bitField0_;
     public static final int VERSION_FIELD_NUMBER = 1;
-    private int version_;
+    protected int version_;
     /**
      * <code>optional int32 version = 1 [default = 1];</code>
      *
@@ -15837,7 +15837,7 @@ public final class Protos {
     }
 
     public static final int SEED_FIELD_NUMBER = 2;
-    private com.boli.core.protos.Protos.Key seed_;
+    protected com.boli.core.protos.Protos.Key seed_;
     /**
      * <code>optional .com.coinomi.core.protos.Key seed = 2;</code>
      */
@@ -15858,7 +15858,7 @@ public final class Protos {
     }
 
     public static final int SEED_PASSWORD_PROTECTED_FIELD_NUMBER = 7;
-    private boolean seedPasswordProtected_;
+    protected boolean seedPasswordProtected_;
     /**
      * <code>optional bool seed_password_protected = 7;</code>
      */
@@ -15873,7 +15873,7 @@ public final class Protos {
     }
 
     public static final int MASTER_KEY_FIELD_NUMBER = 3;
-    private com.boli.core.protos.Protos.Key masterKey_;
+    protected com.boli.core.protos.Protos.Key masterKey_;
     /**
      * <code>required .com.coinomi.core.protos.Key master_key = 3;</code>
      */
@@ -15894,7 +15894,7 @@ public final class Protos {
     }
 
     public static final int ENCRYPTION_TYPE_FIELD_NUMBER = 4;
-    private com.boli.core.protos.Protos.Wallet.EncryptionType encryptionType_;
+    protected com.boli.core.protos.Protos.Wallet.EncryptionType encryptionType_;
     /**
      * <code>optional .com.coinomi.core.protos.Wallet.EncryptionType encryption_type = 4 [default = UNENCRYPTED];</code>
      */
@@ -15909,7 +15909,7 @@ public final class Protos {
     }
 
     public static final int ENCRYPTION_PARAMETERS_FIELD_NUMBER = 5;
-    private com.boli.core.protos.Protos.ScryptParameters encryptionParameters_;
+    protected com.boli.core.protos.Protos.ScryptParameters encryptionParameters_;
     /**
      * <code>optional .com.coinomi.core.protos.ScryptParameters encryption_parameters = 5;</code>
      */
@@ -15930,7 +15930,7 @@ public final class Protos {
     }
 
     public static final int POCKETS_FIELD_NUMBER = 6;
-    private java.util.List<com.boli.core.protos.Protos.WalletPocket> pockets_;
+    protected java.util.List<com.boli.core.protos.Protos.WalletPocket> pockets_;
     /**
      * <code>repeated .com.coinomi.core.protos.WalletPocket pockets = 6;</code>
      */
@@ -15964,7 +15964,7 @@ public final class Protos {
       return pockets_.get(index);
     }
 
-    private void initFields() {
+    protected void initFields() {
       version_ = 1;
       seed_ = com.boli.core.protos.Protos.Key.getDefaultInstance();
       seedPasswordProtected_ = false;
@@ -15973,7 +15973,7 @@ public final class Protos {
       encryptionParameters_ = com.boli.core.protos.Protos.ScryptParameters.getDefaultInstance();
       pockets_ = java.util.Collections.emptyList();
     }
-    private byte memoizedIsInitialized = -1;
+    protected byte memoizedIsInitialized = -1;
     public final boolean isInitialized() {
       byte isInitialized = memoizedIsInitialized;
       if (isInitialized == 1) return true;
@@ -16036,7 +16036,7 @@ public final class Protos {
       getUnknownFields().writeTo(output);
     }
 
-    private int memoizedSerializedSize = -1;
+    protected int memoizedSerializedSize = -1;
     public int getSerializedSize() {
       int size = memoizedSerializedSize;
       if (size != -1) return size;
@@ -16075,7 +16075,7 @@ public final class Protos {
       return size;
     }
 
-    private static final long serialVersionUID = 0L;
+    protected static final long serialVersionUID = 0L;
     @java.lang.Override
     protected java.lang.Object writeReplace()
         throws java.io.ObjectStreamException {
@@ -16172,16 +16172,16 @@ public final class Protos {
       }
 
       // Construct using com.coinomi.core.protos.Protos.Wallet.newBuilder()
-      private Builder() {
+      protected Builder() {
         maybeForceBuilderInitialization();
       }
 
-      private Builder(
+      protected Builder(
           com.google.protobuf.GeneratedMessage.BuilderParent parent) {
         super(parent);
         maybeForceBuilderInitialization();
       }
-      private void maybeForceBuilderInitialization() {
+      protected void maybeForceBuilderInitialization() {
         if (com.google.protobuf.GeneratedMessage.alwaysUseFieldBuilders) {
           getSeedFieldBuilder();
           getMasterKeyFieldBuilder();
@@ -16189,7 +16189,7 @@ public final class Protos {
           getPocketsFieldBuilder();
         }
       }
-      private static Builder create() {
+      protected static Builder create() {
         return new Builder();
       }
 
@@ -16409,9 +16409,9 @@ public final class Protos {
         }
         return this;
       }
-      private int bitField0_;
+      protected int bitField0_;
 
-      private int version_ = 1;
+      protected int version_ = 1;
       /**
        * <code>optional int32 version = 1 [default = 1];</code>
        *
@@ -16463,8 +16463,8 @@ public final class Protos {
         return this;
       }
 
-      private com.boli.core.protos.Protos.Key seed_ = com.boli.core.protos.Protos.Key.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
+      protected com.boli.core.protos.Protos.Key seed_ = com.boli.core.protos.Protos.Key.getDefaultInstance();
+      protected com.google.protobuf.SingleFieldBuilder<
           com.boli.core.protos.Protos.Key, com.boli.core.protos.Protos.Key.Builder, com.boli.core.protos.Protos.KeyOrBuilder> seedBuilder_;
       /**
        * <code>optional .com.coinomi.core.protos.Key seed = 2;</code>
@@ -16565,7 +16565,7 @@ public final class Protos {
       /**
        * <code>optional .com.coinomi.core.protos.Key seed = 2;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      protected com.google.protobuf.SingleFieldBuilder<
           com.boli.core.protos.Protos.Key, com.boli.core.protos.Protos.Key.Builder, com.boli.core.protos.Protos.KeyOrBuilder>
           getSeedFieldBuilder() {
         if (seedBuilder_ == null) {
@@ -16579,7 +16579,7 @@ public final class Protos {
         return seedBuilder_;
       }
 
-      private boolean seedPasswordProtected_ ;
+      protected boolean seedPasswordProtected_ ;
       /**
        * <code>optional bool seed_password_protected = 7;</code>
        */
@@ -16611,8 +16611,8 @@ public final class Protos {
         return this;
       }
 
-      private com.boli.core.protos.Protos.Key masterKey_ = com.boli.core.protos.Protos.Key.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
+      protected com.boli.core.protos.Protos.Key masterKey_ = com.boli.core.protos.Protos.Key.getDefaultInstance();
+      protected com.google.protobuf.SingleFieldBuilder<
           com.boli.core.protos.Protos.Key, com.boli.core.protos.Protos.Key.Builder, com.boli.core.protos.Protos.KeyOrBuilder> masterKeyBuilder_;
       /**
        * <code>required .com.coinomi.core.protos.Key master_key = 3;</code>
@@ -16713,7 +16713,7 @@ public final class Protos {
       /**
        * <code>required .com.coinomi.core.protos.Key master_key = 3;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      protected com.google.protobuf.SingleFieldBuilder<
           com.boli.core.protos.Protos.Key, com.boli.core.protos.Protos.Key.Builder, com.boli.core.protos.Protos.KeyOrBuilder>
           getMasterKeyFieldBuilder() {
         if (masterKeyBuilder_ == null) {
@@ -16727,7 +16727,7 @@ public final class Protos {
         return masterKeyBuilder_;
       }
 
-      private com.boli.core.protos.Protos.Wallet.EncryptionType encryptionType_ = com.boli.core.protos.Protos.Wallet.EncryptionType.UNENCRYPTED;
+      protected com.boli.core.protos.Protos.Wallet.EncryptionType encryptionType_ = com.boli.core.protos.Protos.Wallet.EncryptionType.UNENCRYPTED;
       /**
        * <code>optional .com.coinomi.core.protos.Wallet.EncryptionType encryption_type = 4 [default = UNENCRYPTED];</code>
        */
@@ -16762,8 +16762,8 @@ public final class Protos {
         return this;
       }
 
-      private com.boli.core.protos.Protos.ScryptParameters encryptionParameters_ = com.boli.core.protos.Protos.ScryptParameters.getDefaultInstance();
-      private com.google.protobuf.SingleFieldBuilder<
+      protected com.boli.core.protos.Protos.ScryptParameters encryptionParameters_ = com.boli.core.protos.Protos.ScryptParameters.getDefaultInstance();
+      protected com.google.protobuf.SingleFieldBuilder<
           com.boli.core.protos.Protos.ScryptParameters, com.boli.core.protos.Protos.ScryptParameters.Builder, com.boli.core.protos.Protos.ScryptParametersOrBuilder> encryptionParametersBuilder_;
       /**
        * <code>optional .com.coinomi.core.protos.ScryptParameters encryption_parameters = 5;</code>
@@ -16864,7 +16864,7 @@ public final class Protos {
       /**
        * <code>optional .com.coinomi.core.protos.ScryptParameters encryption_parameters = 5;</code>
        */
-      private com.google.protobuf.SingleFieldBuilder<
+      protected com.google.protobuf.SingleFieldBuilder<
           com.boli.core.protos.Protos.ScryptParameters, com.boli.core.protos.Protos.ScryptParameters.Builder, com.boli.core.protos.Protos.ScryptParametersOrBuilder>
           getEncryptionParametersFieldBuilder() {
         if (encryptionParametersBuilder_ == null) {
@@ -16878,16 +16878,16 @@ public final class Protos {
         return encryptionParametersBuilder_;
       }
 
-      private java.util.List<com.boli.core.protos.Protos.WalletPocket> pockets_ =
+      protected java.util.List<com.boli.core.protos.Protos.WalletPocket> pockets_ =
         java.util.Collections.emptyList();
-      private void ensurePocketsIsMutable() {
+      protected void ensurePocketsIsMutable() {
         if (!((bitField0_ & 0x00000040) == 0x00000040)) {
           pockets_ = new java.util.ArrayList<com.boli.core.protos.Protos.WalletPocket>(pockets_);
           bitField0_ |= 0x00000040;
          }
       }
 
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.WalletPocket, com.boli.core.protos.Protos.WalletPocket.Builder, com.boli.core.protos.Protos.WalletPocketOrBuilder> pocketsBuilder_;
 
       /**
@@ -17103,7 +17103,7 @@ public final class Protos {
            getPocketsBuilderList() {
         return getPocketsFieldBuilder().getBuilderList();
       }
-      private com.google.protobuf.RepeatedFieldBuilder<
+      protected com.google.protobuf.RepeatedFieldBuilder<
           com.boli.core.protos.Protos.WalletPocket, com.boli.core.protos.Protos.WalletPocket.Builder, com.boli.core.protos.Protos.WalletPocketOrBuilder>
           getPocketsFieldBuilder() {
         if (pocketsBuilder_ == null) {
@@ -17129,69 +17129,69 @@ public final class Protos {
     // @@protoc_insertion_point(class_scope:com.coinomi.core.protos.Wallet)
   }
 
-  private static final com.google.protobuf.Descriptors.Descriptor
+  protected static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_coinomi_core_protos_PeerAddress_descriptor;
-  private static
+  protected static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_coinomi_core_protos_PeerAddress_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  protected static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_coinomi_core_protos_EncryptedData_descriptor;
-  private static
+  protected static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_coinomi_core_protos_EncryptedData_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  protected static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_coinomi_core_protos_DeterministicKey_descriptor;
-  private static
+  protected static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_coinomi_core_protos_DeterministicKey_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  protected static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_coinomi_core_protos_Key_descriptor;
-  private static
+  protected static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_coinomi_core_protos_Key_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  protected static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_coinomi_core_protos_TransactionInput_descriptor;
-  private static
+  protected static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_coinomi_core_protos_TransactionInput_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  protected static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_coinomi_core_protos_TransactionOutput_descriptor;
-  private static
+  protected static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_coinomi_core_protos_TransactionOutput_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  protected static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_coinomi_core_protos_UnspentOutput_descriptor;
-  private static
+  protected static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_coinomi_core_protos_UnspentOutput_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  protected static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_coinomi_core_protos_TransactionConfidence_descriptor;
-  private static
+  protected static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_coinomi_core_protos_TransactionConfidence_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  protected static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_coinomi_core_protos_Transaction_descriptor;
-  private static
+  protected static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_coinomi_core_protos_Transaction_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  protected static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_coinomi_core_protos_AddressStatus_descriptor;
-  private static
+  protected static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_coinomi_core_protos_AddressStatus_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  protected static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_coinomi_core_protos_WalletPocket_descriptor;
-  private static
+  protected static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_coinomi_core_protos_WalletPocket_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  protected static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_coinomi_core_protos_ScryptParameters_descriptor;
-  private static
+  protected static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_coinomi_core_protos_ScryptParameters_fieldAccessorTable;
-  private static final com.google.protobuf.Descriptors.Descriptor
+  protected static final com.google.protobuf.Descriptors.Descriptor
     internal_static_com_coinomi_core_protos_Wallet_descriptor;
-  private static
+  protected static
     com.google.protobuf.GeneratedMessage.FieldAccessorTable
       internal_static_com_coinomi_core_protos_Wallet_fieldAccessorTable;
 
@@ -17199,7 +17199,7 @@ public final class Protos {
       getDescriptor() {
     return descriptor;
   }
-  private static com.google.protobuf.Descriptors.FileDescriptor
+  protected static com.google.protobuf.Descriptors.FileDescriptor
       descriptor;
   static {
     java.lang.String[] descriptorData = {
@@ -17207,7 +17207,7 @@ public final class Protos {
       "A\n\013PeerAddress\022\022\n\nip_address\030\001 \002(\014\022\014\n\004po" +
       "rt\030\002 \002(\r\022\020\n\010services\030\003 \002(\004\"M\n\rEncryptedD" +
       "ata\022\035\n\025initialisation_vector\030\001 \002(\014\022\035\n\025en" +
-      "crypted_private_key\030\002 \002(\014\"y\n\020Determinist" +
+      "crypted_protected_key\030\002 \002(\014\"y\n\020Determinist" +
       "icKey\022\022\n\nchain_code\030\001 \002(\014\022\014\n\004path\030\002 \003(\r\022" +
       "\026\n\016issued_subkeys\030\003 \001(\r\022\026\n\016lookahead_siz" +
       "e\030\004 \001(\r\022\023\n\013isFollowing\030\005 \001(\010\"\330\002\n\003Key\022/\n\004" +
@@ -17308,7 +17308,7 @@ public final class Protos {
     internal_static_com_coinomi_core_protos_EncryptedData_fieldAccessorTable = new
       com.google.protobuf.GeneratedMessage.FieldAccessorTable(
         internal_static_com_coinomi_core_protos_EncryptedData_descriptor,
-        new java.lang.String[] { "InitialisationVector", "EncryptedPrivateKey", });
+        new java.lang.String[] { "InitialisationVector", "EncryptedprotectedKey", });
     internal_static_com_coinomi_core_protos_DeterministicKey_descriptor =
       getDescriptor().getMessageTypes().get(2);
     internal_static_com_coinomi_core_protos_DeterministicKey_fieldAccessorTable = new
