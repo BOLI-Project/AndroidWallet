@@ -44,6 +44,8 @@ import com.boli.wallet.ExchangeHistoryProvider.ExchangeEntry;
 import com.boli.wallet.ExchangeRatesProvider;
 import com.boli.wallet.R;
 import com.boli.wallet.WalletApplication;
+import com.boli.wallet.databinding.FragmentMakeTransactionBinding;
+import com.boli.wallet.databinding.PoweredByShapeshiftBinding;
 import com.boli.wallet.ui.widget.SendOutput;
 import com.boli.wallet.ui.widget.TransactionAmountVisualizer;
 import com.boli.wallet.util.Keyboard;
@@ -128,10 +130,8 @@ public class MakeTransactionFragment extends Fragment {
     private HashMap<String, ExchangeRate> localRates = new HashMap<>();
     private CountDownTimer countDownTimer;
 
-    @Bind(R.id.transaction_info) TextView transactionInfo;
-    @Bind(R.id.password) EditText passwordView;
-    @Bind(R.id.transaction_amount_visualizer) TransactionAmountVisualizer txVisualizer;
-    @Bind(R.id.transaction_trade_withdraw) SendOutput tradeWithdrawSendOutput;
+    private FragmentMakeTransactionBinding binding;
+    private PoweredByShapeshiftBinding poweredByShapeshiftBinding;
 
     public static MakeTransactionFragment newInstance(Bundle args) {
         MakeTransactionFragment fragment = new MakeTransactionFragment();
@@ -211,28 +211,26 @@ public class MakeTransactionFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_make_transaction, container, false);
-        ButterKnife.bind(this, view);
+        binding = FragmentMakeTransactionBinding.inflate(inflater, container, false);
+        poweredByShapeshiftBinding = PoweredByShapeshiftBinding.inflate(inflater, null, false);
 
-        if (error != null) return view;
+        if (error != null) return binding.getRoot();
 
-        transactionInfo.setVisibility(View.GONE);
+        binding.transactionInfo.setVisibility(View.GONE);
 
-        final TextView passwordLabelView = (TextView) view.findViewById(R.id.enter_password_label);
         if (sourceAccount != null && sourceAccount.isEncrypted()) {
-            passwordView.requestFocus();
-            passwordView.setVisibility(View.VISIBLE);
-            passwordLabelView.setVisibility(View.VISIBLE);
+            binding.password.requestFocus();
+            binding.password.setVisibility(View.VISIBLE);
+            binding.enterPasswordLabel.setVisibility(View.VISIBLE);
         } else {
-            passwordView.setVisibility(View.GONE);
-            passwordLabelView.setVisibility(View.GONE);
+            binding.password.setVisibility(View.GONE);
+            binding.enterPasswordLabel.setVisibility(View.GONE);
         }
 
-        tradeWithdrawSendOutput.setVisibility(View.GONE);
+        binding.transactionTradeWithdraw.setVisibility(View.GONE);
         showTransaction();
 
-        TextView poweredByShapeShift = (TextView) view.findViewById(R.id.powered_by_shapeshift);
-        poweredByShapeShift.setOnClickListener(new View.OnClickListener() {
+        poweredByShapeshiftBinding.poweredByShapeshift.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new AlertDialog.Builder(getActivity())
@@ -242,9 +240,9 @@ public class MakeTransactionFragment extends Fragment {
                         .create().show();
             }
         });
-        poweredByShapeShift.setVisibility((isExchangeNeeded() ? View.VISIBLE : View.GONE));
+        poweredByShapeshiftBinding.poweredByShapeshift.setVisibility((isExchangeNeeded() ? View.VISIBLE : View.GONE));
 
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -255,28 +253,28 @@ public class MakeTransactionFragment extends Fragment {
 
     @OnClick(R.id.button_confirm)
     void onConfirmClick() {
-        if (passwordView.isShown()) {
+        if (binding.password.isShown()) {
             Keyboard.hideKeyboard(getActivity());
-            password = passwordView.getText().toString();
+            password = binding.password.getText().toString();
         }
         maybeStartSignAndBroadcast();
     }
 
     private void showTransaction() {
-        if (request != null && txVisualizer != null) {
-            txVisualizer.setTransaction(sourceAccount, request.tx);
+        if (request != null && binding.transactionAmountVisualizer != null) {
+            binding.transactionAmountVisualizer.setTransaction(sourceAccount, request.tx);
             if (tradeWithdrawAmount != null && tradeWithdrawAddress != null) {
-                tradeWithdrawSendOutput.setVisibility(View.VISIBLE);
+                binding.transactionTradeWithdraw.setVisibility(View.VISIBLE);
                 if (sendingToAccount) {
-                    tradeWithdrawSendOutput.setSending(false);
+                    binding.transactionTradeWithdraw.setSending(false);
                 } else {
-                    tradeWithdrawSendOutput.setSending(true);
-                    tradeWithdrawSendOutput.setLabelAndAddress(tradeWithdrawAddress);
+                    binding.transactionTradeWithdraw.setSending(true);
+                    binding.transactionTradeWithdraw.setLabelAndAddress(tradeWithdrawAddress);
                 }
-                tradeWithdrawSendOutput.setAmount(GenericUtils.formatValue(tradeWithdrawAmount));
-                tradeWithdrawSendOutput.setSymbol(tradeWithdrawAmount.type.getSymbol());
-                txVisualizer.getOutputs().get(0).setSendLabel(getString(R.string.trade));
-                txVisualizer.hideAddresses(); // Hide exchange address
+                binding.transactionTradeWithdraw.setAmount(GenericUtils.formatValue(tradeWithdrawAmount));
+                binding.transactionTradeWithdraw.setSymbol(tradeWithdrawAmount.type.getSymbol());
+                binding.transactionAmountVisualizer.getOutputs().get(0).setSendLabel(getString(R.string.trade));
+                binding.transactionAmountVisualizer.hideAddresses(); // Hide exchange address
             }
             updateLocalRates();
         }
@@ -405,11 +403,11 @@ public class MakeTransactionFragment extends Fragment {
         if (transactionBroadcast) { // Transaction already sent, so the trade is not expired
             return;
         }
-        if (transactionInfo.getVisibility() != View.VISIBLE) {
-            transactionInfo.setVisibility(View.VISIBLE);
+        if (binding.transactionInfo.getVisibility() != View.VISIBLE) {
+            binding.transactionInfo.setVisibility(View.VISIBLE);
         }
         String errorString = getString(R.string.trade_expired);
-        transactionInfo.setText(errorString);
+        binding.transactionInfo.setText(errorString);
 
         if (listener != null) {
             error = new Exception(errorString);
@@ -419,8 +417,8 @@ public class MakeTransactionFragment extends Fragment {
 
 
     private void onUpdateTradeCountDown(int secondsRemaining) {
-        if (transactionInfo.getVisibility() != View.VISIBLE) {
-            transactionInfo.setVisibility(View.VISIBLE);
+        if (binding.transactionInfo.getVisibility() != View.VISIBLE) {
+            binding.transactionInfo.setVisibility(View.VISIBLE);
         }
 
         int minutes = secondsRemaining / 60;
@@ -438,7 +436,7 @@ public class MakeTransactionFragment extends Fragment {
         }
 
         String message = getString(R.string.tx_confirm_timer_message, timeLeft);
-        transactionInfo.setText(message);
+        binding.transactionInfo.setText(message);
     }
 
     /**
@@ -466,15 +464,15 @@ public class MakeTransactionFragment extends Fragment {
 
     private void updateLocalRates() {
         if (localRates != null) {
-            if (txVisualizer != null && localRates.containsKey(sourceType.getSymbol())) {
-                txVisualizer.setExchangeRate(localRates.get(sourceType.getSymbol()));
+            if (binding.transactionAmountVisualizer != null && localRates.containsKey(sourceType.getSymbol())) {
+                binding.transactionAmountVisualizer.setExchangeRate(localRates.get(sourceType.getSymbol()));
             }
 
             if (tradeWithdrawAmount != null && localRates.containsKey(tradeWithdrawAmount.type.getSymbol())) {
                 ExchangeRate rate = localRates.get(tradeWithdrawAmount.type.getSymbol());
                 Value fiatAmount = rate.convert(tradeWithdrawAmount);
-                tradeWithdrawSendOutput.setAmountLocal(GenericUtils.formatFiatValue(fiatAmount));
-                tradeWithdrawSendOutput.setSymbolLocal(fiatAmount.type.getSymbol());
+                binding.transactionTradeWithdraw.setAmountLocal(GenericUtils.formatFiatValue(fiatAmount));
+                binding.transactionTradeWithdraw.setSymbolLocal(fiatAmount.type.getSymbol());
             }
         }
     }
@@ -704,7 +702,7 @@ public class MakeTransactionFragment extends Fragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 password = null;
-                                passwordView.setText(null);
+                                binding.password.setText(null);
                                 signAndBroadcastTask = null;
                                 error = null;
                             }

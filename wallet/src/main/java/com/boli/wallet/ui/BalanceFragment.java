@@ -32,6 +32,8 @@ import com.boli.wallet.ExchangeRatesProvider;
 import com.boli.wallet.ExchangeRatesProvider.ExchangeRate;
 import com.boli.wallet.R;
 import com.boli.wallet.WalletApplication;
+import com.boli.wallet.databinding.FragmentBalanceBinding;
+import com.boli.wallet.databinding.FragmentBalanceHeaderBinding;
 import com.boli.wallet.ui.widget.Amount;
 import com.boli.wallet.ui.widget.SwipeRefreshLayout;
 import com.boli.wallet.util.ThrottlingWalletChangeListener;
@@ -88,12 +90,9 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
     private final MyHandler handler = new MyHandler(this);
     private final ContentObserver addressBookObserver = new AddressBookObserver(handler);
 
-            @Bind(R.id.transaction_rows) ListView transactionRows;
-    @Bind(R.id.swipeContainer) SwipeRefreshLayout swipeContainer;
-    @Bind(R.id.history_empty) View emptyPocketMessage;
-    @Bind(R.id.account_balance) Amount accountBalance;
-    @Bind(R.id.account_exchanged_balance) Amount accountExchangedBalance;
-    @Bind(R.id.connection_label) TextView connectionLabel;
+    private FragmentBalanceBinding binding;
+    private FragmentBalanceHeaderBinding headerBinding;
+
     private TransactionsListAdapter adapter;
     private Listener listener;
     private ContentResolver resolver;
@@ -140,26 +139,25 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_balance, container, false);
-        addHeaderAndFooterToList(inflater, container, view);
-        ButterKnife.bind(this, view);
+        binding = FragmentBalanceBinding.inflate(inflater, container, false);
+        addHeaderAndFooterToList(inflater, container, binding.getRoot());
 
         setupSwipeContainer();
 
         // TODO show empty message
         // Hide empty message if have some transaction history
         if (pocket.getTransactions().size() > 0) {
-            emptyPocketMessage.setVisibility(View.GONE);
+            headerBinding.historyEmpty.setVisibility(View.GONE);
         }
 
         setupAdapter(inflater);
-        accountBalance.setSymbol(type.getSymbol());
+        headerBinding.accountBalance.setSymbol(type.getSymbol());
         exchangeRate = ExchangeRatesProvider.getRate(
                 application.getApplicationContext(), type.getSymbol(), config.getExchangeCurrencyCode());
         // Update the amount
         updateBalance(pocket.getBalance());
 
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -173,12 +171,12 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
         // Init list adapter
         adapter = new TransactionsListAdapter(inflater.getContext(), (AbstractWallet) pocket);
         adapter.setPrecision(AMOUNT_MEDIUM_PRECISION, 0);
-        transactionRows.setAdapter(adapter);
+        binding.transactionRows.setAdapter(adapter);
     }
 
     private void setupSwipeContainer() {
         // Setup refresh listener which triggers new data loading
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        binding.swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (listener != null) {
@@ -187,7 +185,7 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
             }
         });
         // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(
+        binding.swipeContainer.setColorSchemeResources(
                 R.color.progress_bar_color_1,
                 R.color.progress_bar_color_2,
                 R.color.progress_bar_color_3,
@@ -195,11 +193,11 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
     }
 
     private void addHeaderAndFooterToList(LayoutInflater inflater, ViewGroup container, View view) {
-        ListView list = ButterKnife.findById(view, R.id.transaction_rows);
+        ListView list = binding.transactionRows;
 
         // Initialize header
-        View header = inflater.inflate(R.layout.fragment_balance_header, null);
-        list.addHeaderView(header, null, true);
+        headerBinding = FragmentBalanceHeaderBinding.inflate(inflater, null, false);
+        list.addHeaderView(headerBinding.getRoot(), null, true);
 
         // Set a space in the end of the list
         View listFooter = new View(inflater.getContext());
@@ -217,10 +215,10 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
 
     @OnItemClick(R.id.transaction_rows)
     public void onItemClick(int position) {
-        if (position >= transactionRows.getHeaderViewsCount()) {
+        if (position >= binding.transactionRows.getHeaderViewsCount()) {
             // Note the usage of getItemAtPosition() instead of adapter's getItem() because
             // the latter does not take into account the header (which has position 0).
-            Object obj = transactionRows.getItemAtPosition(position);
+            Object obj = binding.transactionRows.getItemAtPosition(position);
 
             if (obj != null && obj instanceof AbstractTransaction) {
                 Intent intent = new Intent(getActivity(), TransactionDetailsActivity.class);
@@ -258,12 +256,12 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
     // TODO use the ListView feature that shows a view on empty list. Check exchange rates fragment
     @Deprecated
     private void checkEmptyPocketMessage() {
-        if (emptyPocketMessage.isShown()) {
+        if (headerBinding.historyEmpty.isShown()) {
             if (!pocket.isNew()) {
                 handler.post(new Runnable() {
                     @Override
                     public void run() {
-                        emptyPocketMessage.setVisibility(View.GONE);
+                        headerBinding.historyEmpty.setVisibility(View.GONE);
                     }
                 });
             }
@@ -288,10 +286,10 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
         switch (connectivity) {
             case CONNECTED:
             case LOADING:
-                connectionLabel.setVisibility(View.GONE);
+                headerBinding.connectionLabel.setVisibility(View.GONE);
                 break;
             case DISCONNECTED:
-                connectionLabel.setVisibility(View.VISIBLE);
+                headerBinding.connectionLabel.setVisibility(View.VISIBLE);
                 break;
             default:
                 throw new RuntimeException("Unknown connectivity status: " + connectivity);
@@ -495,22 +493,22 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
         if (currentBalance != null) {
             String newBalanceStr = GenericUtils.formatCoinValue(type, currentBalance,
                     isFullAmount ? AMOUNT_FULL_PRECISION : AMOUNT_SHORT_PRECISION, AMOUNT_SHIFT);
-            accountBalance.setAmount(newBalanceStr);
+            headerBinding.accountBalance.setAmount(newBalanceStr);
         }
 
         if (currentBalance != null && exchangeRate != null && getView() != null) {
             try {
                 Value fiatAmount = exchangeRate.rate.convert(type, currentBalance);
-                accountExchangedBalance.setAmount(GenericUtils.formatFiatValue(fiatAmount));
-                accountExchangedBalance.setSymbol(fiatAmount.type.getSymbol());
+                headerBinding.accountExchangedBalance.setAmount(GenericUtils.formatFiatValue(fiatAmount));
+                headerBinding.accountExchangedBalance.setSymbol(fiatAmount.type.getSymbol());
             } catch (Exception e) {
                 // Should not happen
-                accountExchangedBalance.setAmount("");
-                accountExchangedBalance.setSymbol("ERROR");
+                headerBinding.accountExchangedBalance.setAmount("");
+                headerBinding.accountExchangedBalance.setSymbol("ERROR");
             }
         }
 
-        swipeContainer.setRefreshing(pocket.isLoading());
+        binding.swipeContainer.setRefreshing(pocket.isLoading());
 
         if (adapter != null) adapter.clearLabelCache();
     }

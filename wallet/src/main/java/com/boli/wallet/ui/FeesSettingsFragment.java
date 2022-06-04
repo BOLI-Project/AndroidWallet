@@ -14,6 +14,7 @@ import com.boli.core.coins.Value;
 import com.boli.wallet.Configuration;
 import com.boli.wallet.R;
 import com.boli.wallet.WalletApplication;
+import com.boli.wallet.databinding.FragmentFeesSettingsListBinding;
 import com.boli.wallet.ui.adaptors.FeesListAdapter;
 import com.boli.wallet.ui.dialogs.EditFeeDialog;
 
@@ -27,7 +28,8 @@ import butterknife.OnItemClick;
 public class FeesSettingsFragment extends Fragment implements SharedPreferences.OnSharedPreferenceChangeListener {
     private static final String EDIT_FEE_DIALOG = "edit_fee_dialog";
 
-    @Bind(R.id.coins_list) ListView coinList;
+
+    private FragmentFeesSettingsListBinding binding;
 
     private Configuration config;
     private Context context;
@@ -53,16 +55,15 @@ public class FeesSettingsFragment extends Fragment implements SharedPreferences.
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_fees_settings_list, container, false);
-        ButterKnife.bind(this, view);
-        coinList.setAdapter(adapter);
+        binding = FragmentFeesSettingsListBinding.inflate(inflater, container, false);
+        binding.coinsList.setAdapter(adapter);
 
-        return view;
+        return binding.getRoot();
     }
 
     @OnItemClick(R.id.coins_list)
     void editFee(int currentSelection) {
-        Value fee = (Value) coinList.getItemAtPosition(currentSelection);
+        Value fee = (Value) binding.coinsList.getItemAtPosition(currentSelection);
         // Create the fragment and show it as a dialog.
         DialogFragment editFeeDialog = EditFeeDialog.newInstance(fee.type);
         editFeeDialog.show(getFragmentManager(), EDIT_FEE_DIALOG);

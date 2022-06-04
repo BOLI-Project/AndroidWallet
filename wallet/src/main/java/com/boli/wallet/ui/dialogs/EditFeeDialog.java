@@ -17,6 +17,7 @@ import com.boli.wallet.Configuration;
 import com.boli.wallet.Constants;
 import com.boli.wallet.R;
 import com.boli.wallet.WalletApplication;
+import com.boli.wallet.databinding.EditFeeDialogBinding;
 import com.boli.wallet.ui.DialogBuilder;
 import com.boli.wallet.ui.widget.AmountEditView;
 
@@ -29,12 +30,11 @@ import static com.boli.core.Preconditions.checkState;
  * @author John L. Jegutanis
  */
 public class EditFeeDialog extends DialogFragment {
-    @Bind(R.id.fee_description)
-    TextView description;
-    @Bind(R.id.fee_amount)
-    AmountEditView feeAmount;
+
     Configuration configuration;
     Resources resources;
+
+    private EditFeeDialogBinding binding;
 
     public static EditFeeDialog newInstance(ValueType type) {
         EditFeeDialog dialog = new EditFeeDialog();
@@ -53,14 +53,13 @@ public class EditFeeDialog extends DialogFragment {
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         checkState(getArguments().containsKey(Constants.ARG_COIN_ID), "Must provide coin id");
-        View view = View.inflate(getActivity(), R.layout.edit_fee_dialog, null);
-        ButterKnife.bind(this, view);
+        binding = EditFeeDialogBinding.inflate(getLayoutInflater(), null, false);
 
         // TODO move to xml
-        feeAmount.setSingleLine(true);
+        binding.feeAmount.setSingleLine(true);
 
         final CoinType type = CoinID.typeFromId(getArguments().getString(Constants.ARG_COIN_ID));
-        feeAmount.resetType(type);
+        binding.feeAmount.resetType(type);
 
         String feePolicy;
         switch (type.getFeePolicy()) {
@@ -73,20 +72,20 @@ public class EditFeeDialog extends DialogFragment {
             default:
                 throw new RuntimeException("Unknown fee policy " + type.getFeePolicy());
         }
-        description.setText(resources.getString(R.string.tx_fees_description, feePolicy));
+        binding.feeDescription.setText(resources.getString(R.string.tx_fees_description, feePolicy));
 
         final Value fee = configuration.getFeeValue(type);
-        feeAmount.setAmount(fee, false);
+        binding.feeAmount.setAmount(fee, false);
 
         final DialogBuilder builder = new DialogBuilder(getActivity());
         builder.setTitle(resources.getString(R.string.tx_fees_title, type.getName()));
-        builder.setView(view);
+        builder.setView(binding.getRoot());
         DialogInterface.OnClickListener onClickListener = new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 switch (which) {
                     case DialogInterface.BUTTON_POSITIVE:
-                        Value newFee = feeAmount.getAmount();
+                        Value newFee = binding.feeAmount.getAmount();
                         if (newFee != null && !newFee.equals(fee)) {
                             configuration.setFeeValue(newFee);
                         }

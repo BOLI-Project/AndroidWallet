@@ -27,6 +27,8 @@ import com.boli.wallet.ExchangeRatesProvider;
 import com.boli.wallet.ExchangeRatesProvider.ExchangeRate;
 import com.boli.wallet.R;
 import com.boli.wallet.WalletApplication;
+import com.boli.wallet.databinding.FragmentOverviewBinding;
+import com.boli.wallet.databinding.FragmentOverviewHeaderBinding;
 import com.boli.wallet.ui.adaptors.AccountListAdapter;
 import com.boli.wallet.ui.widget.Amount;
 import com.boli.wallet.ui.widget.SwipeRefreshLayout;
@@ -93,9 +95,8 @@ public class OverviewFragment extends Fragment{
     Map<String, ExchangeRate> exchangeRates;
     private NavigationDrawerFragment mNavigationDrawerFragment;
 
-    @Bind(R.id.swipeContainer) SwipeRefreshLayout swipeContainer;
-    @Bind(R.id.account_rows) ListView accountRows;
-    @Bind(R.id.account_balance) Amount mainAmount;
+    private FragmentOverviewBinding binding;
+    private FragmentOverviewHeaderBinding headerBinding;
 
     private Listener listener;
 
@@ -127,18 +128,16 @@ public class OverviewFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_overview, container, false);
-        View header = inflater.inflate(R.layout.fragment_overview_header, null);
-        accountRows = ButterKnife.findById(view, R.id.account_rows);
-        accountRows.addHeaderView(header, null, false);
-        ButterKnife.bind(this, view);
+        binding = FragmentOverviewBinding.inflate(inflater, container, false);
+        headerBinding = FragmentOverviewHeaderBinding.inflate(inflater, null, false);
+        binding.accountRows.addHeaderView(headerBinding.getRoot(), null, false);
 
         if (wallet == null) {
-            return view;
+            return binding.getRoot();
         }
 
         // Setup refresh listener which triggers new data loading
-        swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        binding.swipeContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
                 if (listener != null) {
@@ -147,7 +146,7 @@ public class OverviewFragment extends Fragment{
             }
         });
         // Configure the refreshing colors
-        swipeContainer.setColorSchemeResources(
+        binding.swipeContainer.setColorSchemeResources(
                 R.color.progress_bar_color_1,
                 R.color.progress_bar_color_2,
                 R.color.progress_bar_color_3,
@@ -156,14 +155,14 @@ public class OverviewFragment extends Fragment{
         // Set a space in the end of the list
         View listFooter = new View(getActivity());
         listFooter.setMinimumHeight(getResources().getDimensionPixelSize(R.dimen.activity_vertical_margin));
-        accountRows.addFooterView(listFooter);
+        binding.accountRows.addFooterView(listFooter);
 
         // Init list adapter
         adapter = new AccountListAdapter(inflater.getContext(), wallet);
-        accountRows.setAdapter(adapter);
+        binding.accountRows.setAdapter(adapter);
         adapter.setExchangeRates(exchangeRates);
 
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -243,10 +242,10 @@ public class OverviewFragment extends Fragment{
 
     @OnItemClick(R.id.account_rows)
     public void onAmountClick(int position) {
-        if (position >= accountRows.getHeaderViewsCount()) {
+        if (position >= binding.accountRows.getHeaderViewsCount()) {
             // Note the usage of getItemAtPosition() instead of adapter's getItem() because
             // the latter does not take into account the header (which has position 0).
-            Object obj = accountRows.getItemAtPosition(position);
+            Object obj = binding.accountRows.getItemAtPosition(position);
 
             if (listener != null && obj != null && obj instanceof WalletAccount) {
                 listener.onAccountSelected(((WalletAccount) obj).getId());
@@ -258,10 +257,10 @@ public class OverviewFragment extends Fragment{
 
     @OnItemLongClick(R.id.account_rows)
     public boolean onAmountLongClick(int position) {
-        if (position >= accountRows.getHeaderViewsCount()) {
+        if (position >= binding.accountRows.getHeaderViewsCount()) {
             // Note the usage of getItemAtPosition() instead of adapter's getItem() because
             // the latter does not take into account the header (which has position 0).
-            Object obj = accountRows.getItemAtPosition(position);
+            Object obj = binding.accountRows.getItemAtPosition(position);
             Activity activity = getActivity();
 
             if (obj != null && obj instanceof WalletAccount && activity != null) {
@@ -344,14 +343,14 @@ public class OverviewFragment extends Fragment{
     public void updateView() {
         if (currentBalance != null) {
             String newBalanceStr = GenericUtils.formatFiatValue(currentBalance);
-            mainAmount.setAmount(newBalanceStr);
-            mainAmount.setSymbol(currentBalance.type.getSymbol());
+            headerBinding.accountBalance.setAmount(newBalanceStr);
+            headerBinding.accountBalance.setSymbol(currentBalance.type.getSymbol());
         } else {
-            mainAmount.setAmount("-.--");
-            mainAmount.setSymbol("");
+            headerBinding.accountBalance.setAmount("-.--");
+            headerBinding.accountBalance.setSymbol("");
         }
 
-        swipeContainer.setRefreshing(wallet.isLoading());
+        binding.swipeContainer.setRefreshing(wallet.isLoading());
     }
 
     public interface Listener extends EditAccountFragment.Listener {

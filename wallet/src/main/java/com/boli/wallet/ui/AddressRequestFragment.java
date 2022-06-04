@@ -38,6 +38,7 @@ import com.boli.wallet.Constants;
 import com.boli.wallet.ExchangeRatesProvider;
 import com.boli.wallet.R;
 import com.boli.wallet.WalletApplication;
+import com.boli.wallet.databinding.FragmentRequestBinding;
 import com.boli.wallet.ui.dialogs.CreateNewAddressDialog;
 import com.boli.wallet.ui.widget.AmountEditView;
 import com.boli.wallet.util.QrUtils;
@@ -82,11 +83,8 @@ public class AddressRequestFragment extends WalletFragment {
     private WalletAccount account;
     private String message;
 
-    @Bind(R.id.request_address_label) TextView addressLabelView;
-    @Bind(R.id.request_address) TextView addressView;
-    @Bind(R.id.request_coin_amount) AmountEditView sendCoinAmountView;
-    @Bind(R.id.view_previous_addresses) View previousAddressesLink;
-    @Bind(R.id.qr_code) ImageView qrView;
+    private FragmentRequestBinding binding;
+
     String lastQrContent;
     CurrencyCalculatorLink amountCalculatorLink;
     ContentResolver resolver;
@@ -177,17 +175,15 @@ public class AddressRequestFragment extends WalletFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_request, container, false);
-        ButterKnife.bind(this, view);
+        binding = FragmentRequestBinding.inflate(inflater, container, false);
 
-        sendCoinAmountView.resetType(type, true);
+        binding.requestCoinAmount.resetType(type, true);
 
-        AmountEditView sendLocalAmountView = ButterKnife.findById(view, R.id.request_local_amount);
-        sendLocalAmountView.setFormat(FiatType.FRIENDLY_FORMAT);
+        binding.requestLocalAmount.setFormat(FiatType.FRIENDLY_FORMAT);
 
-        amountCalculatorLink = new CurrencyCalculatorLink(sendCoinAmountView, sendLocalAmountView);
+        amountCalculatorLink = new CurrencyCalculatorLink(binding.requestCoinAmount, binding.requestLocalAmount);
 
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -314,9 +310,9 @@ public class AddressRequestFragment extends WalletFragment {
 
         // Don't show previous addresses link if we are showing a specific address
         if (showAddress == null && account.hasUsedAddresses()) {
-            previousAddressesLink.setVisibility(View.VISIBLE);
+            binding.viewPreviousAddresses.setVisibility(View.VISIBLE);
         } else {
-            previousAddressesLink.setVisibility(View.GONE);
+            binding.viewPreviousAddresses.setVisibility(View.GONE);
         }
 
         // TODO, add message
@@ -342,7 +338,7 @@ public class AddressRequestFragment extends WalletFragment {
      */
     private void updateQrCode(final String qrContent) {
         if (lastQrContent == null || !lastQrContent.equals(qrContent)) {
-            QrUtils.setQr(qrView, getResources(), qrContent);
+            QrUtils.setQr(binding.qrCode, getResources(), qrContent);
             lastQrContent = qrContent;
         }
     }
@@ -350,16 +346,16 @@ public class AddressRequestFragment extends WalletFragment {
     private void updateLabel() {
         label = resolveLabel(receiveAddress);
         if (label != null) {
-            addressLabelView.setText(label);
-            addressLabelView.setTypeface(Typeface.DEFAULT);
-            addressView.setText(
+            binding.requestAddressLabel.setText(label);
+            binding.requestAddressLabel.setTypeface(Typeface.DEFAULT);
+            binding.requestAddress.setText(
                     GenericUtils.addressSplitToGroups(receiveAddress));
-            addressView.setVisibility(View.VISIBLE);
+            binding.requestAddress.setVisibility(View.VISIBLE);
         } else {
-            addressLabelView.setText(
+            binding.requestAddressLabel.setText(
                     GenericUtils.addressSplitToGroupsMultiline(receiveAddress));
-            addressLabelView.setTypeface(Typeface.MONOSPACE);
-            addressView.setVisibility(View.GONE);
+            binding.requestAddressLabel.setTypeface(Typeface.MONOSPACE);
+            binding.requestAddress.setVisibility(View.GONE);
         }
     }
 
