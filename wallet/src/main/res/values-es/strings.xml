@@ -6,7 +6,7 @@
     <string name="action_edit_label">Editar etiqueta</string>
     <string name="action_empty_wallet">Vaciar billetera</string>
     <string name="action_settings">Configuración</string>
-    <string name="action_about">Sobre BolivarCoin</string>
+    <string name="action_about">Sobre Bolicoin</string>
     <string name="action_refresh">Renovar</string>
     <string name="action_sign_verify_message">Firmar / verificar mensaje</string>
     <string name="action_account_details">Detalles de su cuenta</string>
@@ -63,7 +63,7 @@
     <string name="trade">intercambiar</string>
     <string name="receive">recibir</string>
     <!-- Welcome fragment -->
-    <string name="welcome_text">Bienvenido a la billetera BolivarCoin</string>
+    <string name="welcome_text">Bienvenido a la billetera Bolicoin</string>
     <string name="create_wallet">Crear una billetera nueva</string>
     <string name="restore_wallet">Recuperar una billetera</string>
     <string name="test_wallet">Probar Cartera</string>
@@ -89,7 +89,7 @@
     <!-- Wallet activity -->
     <string name="test_wallet_message">Esta es una billetera de pruebas, donde se pueden enviar y recibir TestNet Bitcoins, Litecoin y Dogecoins.\n\nSi desea utilizar La billetera con dinero real por favor vaya a: <b>Configuración &amp; gt; Restaurar billetera &amp; gt; Crear una nueva billetera</b>.</string>
     <string name="wallet_update_title">Nueva versión disponible</string>
-    <string name="wallet_update_message">Una nueva versión de BolivarCoin está disponible, contiene nuevas características y correcciones.</string>
+    <string name="wallet_update_message">Una nueva versión de Bolicoin está disponible, contiene nuevas características y correcciones.</string>
     <string name="pay_with">Enviar con</string>
     <string name="exchange_and_pay_title">Cambiar y enviar</string>
     <!-- PayToDialog-->
@@ -171,8 +171,8 @@
         <item quantity="other">%d segundos</item>
     </plurals>
     <!-- About Activity -->
-    <string name="title_activity_about">Acerca de BolivarCoin</string>
-    <string name="app_name_long">BolivarCoin para Android</string>
+    <string name="title_activity_about">Acerca de Bolicoin</string>
+    <string name="app_name_long">Bolicoin para Android</string>
     <string name="about_licence">Un proyecto de código abierto\nhttps://github.com/MFrcoin/android-wallet\nCódigo fuente bajo licencia GNU General Public License 3</string>
     <string name="about_credits_nubits">Infraestructura de servidor donado por NuBits - Primera moneda digital estable del mundo\nhttps://nubits.com/</string>
     <string name="about_credits_translations">Traducciones proporcionadas por:</string>
@@ -313,7 +313,7 @@
     <!-- Sweep paper wallet means to redeem coins from a code usually printed on a paper -->
     <string name="title_activity_sweep_wallet">Importar billetera de papel</string>
     <string name="action_sweep_wallet">Importar billetera de papel</string>
-    <string name="sweep_wallet_info">"Está a punto de transferir monedas de una billetera de papel a su billetera BolivarCoin. Una vez finalizada la transferencia, evite volver a utilizar la billetera de papel por razones de seguridad. Formatos soportados: WIF, BIP38, Mini clave privada. "</string>
+    <string name="sweep_wallet_info">"Está a punto de transferir monedas de una billetera de papel a su billetera Bolicoin. Una vez finalizada la transferencia, evite volver a utilizar la billetera de papel por razones de seguridad. Formatos soportados: WIF, BIP38, Mini clave privada. "</string>
     <string name="sweep_wallet_key_title">Clave privada</string>
     <string name="sweep_wallet_key_password">Contraseña de clave privada</string>
     <string name="sweep_wallet_key_hint">"escriba o escanee una clave privada "</string>
@@ -358,7 +358,7 @@
     <!-- About -->
     <string name="web_site">Nuestra Página Web: https://bolis.info/</string>
     <string name="social_networks">Nuestras Redes Sociales</string>
-    <string name="main_logo">BolivarCoin</string>
+    <string name="main_logo">Bolicoin</string>
     <string name="facebook">Facebook</string>
     <string name="instagram">Instagram</string>
     <string name="twitter">Twitter</string>
@@ -369,9 +369,9 @@
     <string name="terms_of_service">NOTA LEGAL\n
 \n
 \n
-1. Riesgos relacionados con el uso de BolivarCoin Wallet\n
+1. Riesgos relacionados con el uso de Bolicoin Wallet\n
 \n
-BolivarCoin no será responsable por ninguna pérdida, daños o reclamaciones derivadas de sucesos comprendidos en el ámbito de las cinco categorías siguientes:\n
+Bolicoin no será responsable por ninguna pérdida, daños o reclamaciones derivadas de sucesos comprendidos en el ámbito de las cinco categorías siguientes:\n
 \n
 (1) Errores cometidos por el usuario de cualquier software o servicio relacionado con la criptomoneda, por ejemplo, contraseñas olvidadas, pagos enviados a direcciones de monedas incorrectas y eliminación accidental de billeteras.\n
 \n
@@ -416,7 +416,7 @@ El usuario de la billetera acepta arbitrar cualquier disputa que surja de o en c
 \n
 8. Custodia\n
 \n
-BolivarCoin es un software abierto, libre y gratuito que no ofrece ningún tipo de garantía, cada usuario es responsable de la custodia de sus llaves privadas.\n
+Bolicoin es un software abierto, libre y gratuito que no ofrece ningún tipo de garantía, cada usuario es responsable de la custodia de sus llaves privadas.\n
 \n
 \n
 </string>

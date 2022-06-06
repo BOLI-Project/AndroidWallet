@@ -15,7 +15,7 @@ public class BolivarcoinMain extends BitFamily {
         spendableCoinbaseDepth = 100;
         dumpedPrivateKeyHeader = 213;
 
-        name = "Bolivarcoin";
+        name = "Bolicoin";
         symbol = "BOLI";
         uriScheme = "bolivarcoin";
         bip44Index = 278;
