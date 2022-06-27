@@ -36,7 +36,7 @@ public class KeyUtils {
             // case the caller in DeterministicKeyChain will take care of setting the type.
             EncryptedData data = item.getEncryptedData();
             proto.getEncryptedDataBuilder()
-                    .setEncryptedPrivateKey(ByteString.copyFrom(data.encryptedBytes))
+                    .setEncryptedprotectedKey(ByteString.copyFrom(data.encryptedBytes))
                     .setInitialisationVector(ByteString.copyFrom(data.initialisationVector));
             // We don't allow mixing of encryption types at the moment.
             checkState(item.getEncryptionType() == org.bitcoinj.wallet.Protos.Wallet.EncryptionType.ENCRYPTED_SCRYPT_AES, "We don't allow mixing of encryption types at the moment");
@@ -82,7 +82,7 @@ public class KeyUtils {
             if (key.hasEncryptedData()) {
                 Protos.EncryptedData proto = key.getEncryptedData();
                 EncryptedData data = new EncryptedData(proto.getInitialisationVector().toByteArray(),
-                        proto.getEncryptedPrivateKey().toByteArray());
+                        proto.getEncryptedprotectedKey().toByteArray());
                 checkNotNull(crypter, "Encountered an encrypted key but no key crypter provided");
                 detkey = new DeterministicKey(immutablePath, chainCode, crypter, pubkey, data, parent);
             } else {

@@ -55,6 +55,7 @@ import com.boli.wallet.Constants;
 import com.boli.wallet.ExchangeRatesProvider;
 import com.boli.wallet.R;
 import com.boli.wallet.WalletApplication;
+import com.boli.wallet.databinding.FragmentSendBinding;
 import com.boli.wallet.tasks.MarketInfoPollTask;
 import com.boli.wallet.ui.widget.AddressView;
 import com.boli.wallet.ui.widget.AmountEditView;
@@ -143,21 +144,8 @@ public class SendFragment extends WalletFragment {
     private Configuration config;
     private Map<String, ExchangeRate> localRates = new HashMap<>();
     private ShapeShiftMarketInfo marketInfo;
+    private FragmentSendBinding binding;
 
-    @Bind(R.id.send_to_address)         AutoCompleteTextView sendToAddressView;
-    @Bind(R.id.send_to_address_static)  AddressView sendToStaticAddressView;
-    @Bind(R.id.send_coin_amount)        AmountEditView sendCoinAmountView;
-    @Bind(R.id.send_local_amount)       AmountEditView sendLocalAmountView;
-    @Bind(R.id.address_error_message)   TextView addressError;
-    @Bind(R.id.amount_error_message)    TextView amountError;
-    @Bind(R.id.amount_warning_message)  TextView amountWarning;
-    @Bind(R.id.scan_qr_code)            ImageButton scanQrCodeButton;
-    @Bind(R.id.erase_address)           ImageButton eraseAddressButton;
-    @Bind(R.id.tx_message_add_remove)   Button txMessageButton;
-    @Bind(R.id.tx_message_label)        TextView txMessageLabel;
-    @Bind(R.id.tx_message)              EditText txMessageView;
-    @Bind(R.id.tx_message_counter)      TextView txMessageCounter;
-    @Bind(R.id.send_confirm)            Button sendConfirmButton;
     @Nullable ReceivingAddressViewAdapter sendToAdapter;
     CurrencyCalculatorLink amountCalculatorLink;
     Timer timer;
@@ -302,28 +290,28 @@ public class SendFragment extends WalletFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_send, container, false);
-        ButterKnife.bind(this, view);
+        binding = FragmentSendBinding.inflate(inflater, container, false);
 
         sendToAdapter = new ReceivingAddressViewAdapter(inflater.getContext());
-        sendToAddressView.setAdapter(sendToAdapter);
-        sendToAddressView.setOnFocusChangeListener(receivingAddressListener);
-        sendToAddressView.addTextChangedListener(receivingAddressListener);
+        binding.sendToAddress.setAdapter(sendToAdapter);
+        binding.sendToAddress.setOnFocusChangeListener(receivingAddressListener);
+        binding.sendToAddress.addTextChangedListener(receivingAddressListener);
 
-        sendCoinAmountView.resetType(sendAmountType, true);
-        if (sendAmount != null) sendCoinAmountView.setAmount(sendAmount, false);
-        sendLocalAmountView.setFormat(FiatType.FRIENDLY_FORMAT);
-        amountCalculatorLink = new CurrencyCalculatorLink(sendCoinAmountView, sendLocalAmountView);
+        binding.sendCoinAmount.resetType(sendAmountType, true);
+        if (sendAmount != null) binding.sendCoinAmount.setAmount(sendAmount, false);
+        binding.sendLocalAmount.setFormat(FiatType.FRIENDLY_FORMAT);
+        amountCalculatorLink = new CurrencyCalculatorLink(binding.sendCoinAmount, binding.sendLocalAmount);
         amountCalculatorLink.setExchangeDirection(config.getLastExchangeDirection());
         amountCalculatorLink.setExchangeRate(getCurrentRate());
 
-        addressError.setVisibility(View.GONE);
-        amountError.setVisibility(View.GONE);
-        amountWarning.setVisibility(View.GONE);
+        binding.addressErrorMessage.setVisibility(View.GONE);
+        binding.amountErrorMessage.setVisibility(View.GONE);
+        binding.amountWarningMessage.setVisibility(View.GONE);
 
         setupTxMessage();
+        setOnClickListeners();
 
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -378,16 +366,16 @@ public class SendFragment extends WalletFragment {
 
     private void setupTxMessage() {
         if (account == null || messageFactory == null) {
-            txMessageButton.setVisibility(GONE);
+            binding.txMessageAddRemove.setVisibility(GONE);
             // Remove old listener if needed
             if (txMessageViewTextChangeListener != null) {
-                txMessageView.removeTextChangedListener(txMessageViewTextChangeListener);
+                binding.txMessage.removeTextChangedListener(txMessageViewTextChangeListener);
             }
             return;
         }
 
-        txMessageButton.setVisibility(View.VISIBLE);
-        txMessageButton.setOnClickListener(new OnClickListener() {
+        binding.txMessageAddRemove.setVisibility(View.VISIBLE);
+        binding.txMessageAddRemove.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isTxMessageAdded) { // if tx message added, remove it
@@ -400,7 +388,7 @@ public class SendFragment extends WalletFragment {
 
         final int maxMessageBytes = messageFactory.maxMessageSizeBytes();
         final int messageLengthThreshold = (int) (maxMessageBytes * .8); // 80% full
-        final int txMessageCounterPaddingOriginal = txMessageView.getPaddingBottom();
+        final int txMessageCounterPaddingOriginal = binding.txMessage.getPaddingBottom();
         final int txMessageCounterPadding =
                 getResources().getDimensionPixelSize(R.dimen.tx_message_counter_padding);
         final int colorWarn = getResources().getColor(R.color.fg_warning);
@@ -408,7 +396,7 @@ public class SendFragment extends WalletFragment {
 
         // Remove old listener if needed
         if (txMessageViewTextChangeListener != null) {
-            txMessageView.removeTextChangedListener(txMessageViewTextChangeListener);
+            binding.txMessage.removeTextChangedListener(txMessageViewTextChangeListener);
         }
         // This listener checks the length of the message and displays a counter if it passes a
         // threshold or the max size. It also changes the bottom padding of the message field
@@ -420,22 +408,22 @@ public class SendFragment extends WalletFragment {
                 int length = s.toString().getBytes(Charsets.UTF_8).length;
                 boolean isTxMessageValidNow = true;
                 if (length < messageLengthThreshold) {
-                    if (txMessageCounter.getVisibility() != GONE) {
-                        txMessageCounter.setVisibility(GONE);
-                        txMessageView.setPadding(0, 0, 0, txMessageCounterPaddingOriginal);
+                    if (binding.txMessageCounter.getVisibility() != GONE) {
+                        binding.txMessageCounter.setVisibility(GONE);
+                        binding.txMessage.setPadding(0, 0, 0, txMessageCounterPaddingOriginal);
                     }
                 } else {
                     int remaining = maxMessageBytes - length;
-                    if (txMessageCounter.getVisibility() != VISIBLE) {
-                        txMessageCounter.setVisibility(VISIBLE);
-                        txMessageView.setPadding(0, 0, 0, txMessageCounterPadding);
+                    if (binding.txMessageCounter.getVisibility() != VISIBLE) {
+                        binding.txMessageCounter.setVisibility(VISIBLE);
+                        binding.txMessage.setPadding(0, 0, 0, txMessageCounterPadding);
                     }
-                    txMessageCounter.setText(Integer.toString(remaining));
+                    binding.txMessageCounter.setText(Integer.toString(remaining));
                     if (length <= maxMessageBytes) {
-                        txMessageCounter.setTextColor(colorWarn);
+                        binding.txMessageCounter.setTextColor(colorWarn);
                     } else {
                         isTxMessageValidNow = false;
-                        txMessageCounter.setTextColor(colorError);
+                        binding.txMessageCounter.setTextColor(colorError);
                     }
                 }
                 // Update view only if the message validity changed
@@ -453,14 +441,13 @@ public class SendFragment extends WalletFragment {
             }
         };
 
-        txMessageView.addTextChangedListener(txMessageViewTextChangeListener);
+        binding.txMessage.addTextChangedListener(txMessageViewTextChangeListener);
     }
 
     private void showTxMessage() {
         if (messageFactory != null) {
-            txMessageButton.setText(R.string.tx_message_public_remove);
-            txMessageLabel.setVisibility(View.VISIBLE);
-            txMessageView.setVisibility(View.VISIBLE);
+            binding.txMessageAddRemove.setText(R.string.tx_message_public_remove);
+            binding.txMessage.setVisibility(View.VISIBLE);
             isTxMessageAdded = true;
             isTxMessageValid = true; // Initially the empty message is valid, even if it is ignored
         }
@@ -468,19 +455,26 @@ public class SendFragment extends WalletFragment {
 
     private void hideTxMessage() {
         if (messageFactory != null) {
-            txMessageButton.setText(R.string.tx_message_public_add);
-            txMessageLabel.setVisibility(View.GONE);
-            txMessageView.setText(null);
-            txMessageView.setVisibility(View.GONE);
+            binding.txMessageAddRemove.setText(R.string.tx_message_public_add);
+            binding.txMessage.setText(null);
+            binding.txMessage.setVisibility(View.GONE);
             isTxMessageAdded = false;
             isTxMessageValid = false;
         }
     }
 
-    @OnClick(R.id.erase_address)
+    private void setOnClickListeners(){
+        onAddressClearClick();
+        handleScan();
+        onSendClick();
+        onStaticAddressClick();
+    }
+
     public void onAddressClearClick() {
-        clearAddress(true);
-        updateView();
+        binding.eraseAddress.setOnClickListener(view -> {
+            clearAddress(true);
+            updateView();
+        });
     }
 
     private void clearAddress(boolean clearTextField) {
@@ -542,19 +536,21 @@ public class SendFragment extends WalletFragment {
         }
     }
 
-    @OnClick(R.id.scan_qr_code)
     void handleScan() {
-        startActivityForResult(new Intent(getActivity(), ScanActivity.class), REQUEST_CODE_SCAN);
+        binding.scanQrCode.setOnClickListener(view -> {
+            startActivityForResult(new Intent(getActivity(), ScanActivity.class), REQUEST_CODE_SCAN);
+        });
     }
 
-    @OnClick(R.id.send_confirm)
     public void onSendClick() {
-        validateAddress();
-        validateAmount();
-        if (everythingValid())
-            handleSendConfirm();
-        else
-            requestFocusFirst();
+        binding.sendConfirm.setOnClickListener(view -> {
+            validateAddress();
+            validateAmount();
+            if (everythingValid())
+                handleSendConfirm();
+            else
+                requestFocusFirst();
+        });
     }
 
     private void handleSendConfirm() {
@@ -574,8 +570,8 @@ public class SendFragment extends WalletFragment {
 
     @Nullable
     private TxMessage getTxMessage() {
-        if (isTxMessageAdded && messageFactory != null && txMessageView.getText().length() != 0) {
-            String message = txMessageView.getText().toString();
+        if (isTxMessageAdded && messageFactory != null && binding.txMessage.getText().length() != 0) {
+            String message = binding.txMessage.getText().toString();
             try {
                 return messageFactory.createPublicMessage(message);
             } catch (Exception e) { // Should not happen
@@ -608,14 +604,14 @@ public class SendFragment extends WalletFragment {
 
         clearAddress(true);
         hideTxMessage();
-        sendToAddressView.setVisibility(View.VISIBLE);
-        sendToStaticAddressView.setVisibility(View.GONE);
+        binding.sendToAddress.setVisibility(View.VISIBLE);
+        binding.sendToAddressStatic.setVisibility(View.GONE);
         amountCalculatorLink.setPrimaryAmount(null);
         sendAmount = null;
         state = State.INPUT;
-        addressError.setVisibility(View.GONE);
-        amountError.setVisibility(View.GONE);
-        amountWarning.setVisibility(View.GONE);
+        binding.addressErrorMessage.setVisibility(View.GONE);
+        binding.amountErrorMessage.setVisibility(View.GONE);
+        binding.amountWarningMessage.setVisibility(View.GONE);
         updateView();
     }
 
@@ -715,32 +711,29 @@ public class SendFragment extends WalletFragment {
     public void updateView() {
         if (isRemoving() || isDetached()) return;
 
-        sendConfirmButton.setEnabled(everythingValid());
+        binding.sendConfirm.setEnabled(everythingValid());
 
         if (address == null) {
-            setVisible(sendToAddressView);
-            setGone(sendToStaticAddressView);
-            setVisible(scanQrCodeButton);
-            setGone(eraseAddressButton);
+            setVisible(binding.sendToAddress);
+            setGone(binding.sendToAddressStatic);
+            setGone(binding.eraseAddress);
 
             finishActionMode();
         } else {
-            setGone(sendToAddressView);
-            setVisible(sendToStaticAddressView);
-            sendToStaticAddressView.setAddressAndLabel(address);
-            setGone(scanQrCodeButton);
-            setVisible(eraseAddressButton);
+            setGone(binding.sendToAddress);
+            setVisible(binding.sendToAddressStatic);
+            binding.sendToAddressStatic.setAddressAndLabel(address);
+            setVisible(binding.eraseAddress);
         }
 
-        if (sendCoinAmountView.resetType(sendAmountType)) {
+        if (binding.sendCoinAmount.resetType(sendAmountType)) {
             amountCalculatorLink.setExchangeRate(getCurrentRate());
         }
 
         startOrStopMarketRatePolling();
 
         // enable actions
-        scanQrCodeButton.setEnabled(state == State.INPUT);
-        eraseAddressButton.setEnabled(state == State.INPUT);
+        binding.eraseAddress.setEnabled(state == State.INPUT);
     }
 
     private boolean isTxMessageValid() {
@@ -810,15 +803,15 @@ public class SendFragment extends WalletFragment {
 
     private void requestFocusFirst() {
         if (!isOutputsValid()) {
-            sendToAddressView.requestFocus();
+            binding.sendToAddress.requestFocus();
         } else if (!isAmountValid()) {
             amountCalculatorLink.requestFocus();
             // FIXME causes problems in older Androids
 //            Keyboard.focusAndShowKeyboard(sendAmountView, getActivity());
         } else if (isTxMessageAdded && !isTxMessageValid()) {
-            txMessageView.requestFocus();
+            binding.txMessage.requestFocus();
         } else if (everythingValid()) {
-            sendConfirmButton.requestFocus();
+            binding.sendConfirm.requestFocus();
         } else {
             log.warn("unclear focus");
         }
@@ -831,8 +824,8 @@ public class SendFragment extends WalletFragment {
     }
 
     private void validateTxMessage() {
-        if (isTxMessageAdded && messageFactory != null && txMessageView != null) {
-            int messageBytes = txMessageView.getText().toString().getBytes(Charsets.UTF_8).length;
+        if (isTxMessageAdded && messageFactory != null) {
+            int messageBytes = binding.txMessage.getText().toString().getBytes(Charsets.UTF_8).length;
             isTxMessageValid = messageBytes <= messageFactory.maxMessageSizeBytes();
             updateView();
         }
@@ -847,23 +840,23 @@ public class SendFragment extends WalletFragment {
 
         if (isAmountValid(amountParsed)) {
             sendAmount = amountParsed;
-            amountError.setVisibility(View.GONE);
+            binding.amountErrorMessage.setVisibility(View.GONE);
             // Show warning that fees apply when entered the full amount inside the account
             if (canCompare(sendAmount, lastBalance) && sendAmount.compareTo(lastBalance) == 0) {
-                amountWarning.setText(R.string.amount_warn_fees_apply);
-                amountWarning.setVisibility(View.VISIBLE);
+                binding.amountWarningMessage.setText(R.string.amount_warn_fees_apply);
+                binding.amountWarningMessage.setVisibility(View.VISIBLE);
             } else {
-                amountWarning.setVisibility(View.GONE);
+                binding.amountWarningMessage.setVisibility(View.GONE);
             }
         } else {
-            amountWarning.setVisibility(View.GONE);
+            binding.amountWarningMessage.setVisibility(View.GONE);
             // ignore printing errors for null and zero amounts
             if (shouldShowErrors(isTyping, amountParsed)) {
                 sendAmount = null;
                 if (amountParsed == null) {
-                    amountError.setText(R.string.amount_error);
+                    binding.amountErrorMessage.setText(R.string.amount_error);
                 } else if (amountParsed.isNegative()) {
-                    amountError.setText(R.string.amount_error_negative);
+                    binding.amountErrorMessage.setText(R.string.amount_error_negative);
                 } else if (!isAmountWithinLimits(amountParsed)) {
                     String message = getString(R.string.error_generic);
                     // If the amount is dust or lower than the deposit limit
@@ -885,13 +878,13 @@ public class SendFragment extends WalletFragment {
                                     marketInfo.limit.toFriendlyString());
                         }
                     }
-                    amountError.setText(message);
+                    binding.amountErrorMessage.setText(message);
                 } else { // Should not happen, but show a generic error
-                    amountError.setText(R.string.amount_error);
+                    binding.amountErrorMessage.setText(R.string.amount_error);
                 }
-                amountError.setVisibility(View.VISIBLE);
+                binding.amountErrorMessage.setVisibility(View.VISIBLE);
             } else {
-                amountError.setVisibility(View.GONE);
+                binding.amountErrorMessage.setVisibility(View.GONE);
             }
         }
         updateView();
@@ -918,7 +911,7 @@ public class SendFragment extends WalletFragment {
 
     private void validateAddress(boolean isTyping) {
         if (address == null) {
-            String input = sendToAddressView.getText().toString().trim();
+            String input = binding.sendToAddress.getText().toString().trim();
 
             try {
                 if (!input.isEmpty()) {
@@ -927,7 +920,7 @@ public class SendFragment extends WalletFragment {
                         if (processInput(input)) return;
                         parseAddress(GenericUtils.fixAddress(input));
                         updateView();
-                        addressError.setVisibility(View.GONE);
+                        binding.addressErrorMessage.setVisibility(View.GONE);
                         return;
                     }
                     // Process fast the input string
@@ -939,13 +932,13 @@ public class SendFragment extends WalletFragment {
                     // empty field should not raise error message
                     clearAddress(false);
                 }
-                addressError.setVisibility(View.GONE);
+                binding.addressErrorMessage.setVisibility(View.GONE);
             } catch (final AddressMalformedException x) {
                 // could not decode address at all
                 if (!isTyping) {
                     clearAddress(false);
-                    addressError.setText(R.string.address_error);
-                    addressError.setVisibility(View.VISIBLE);
+                    binding.addressErrorMessage.setText(R.string.address_error);
+                    binding.addressErrorMessage.setVisibility(View.VISIBLE);
                 }
             }
             updateView();
@@ -954,11 +947,11 @@ public class SendFragment extends WalletFragment {
 
     private void setSendToAddressText(String addressStr) {
         // Remove listener before changing input, to avoid infinite recursion
-        sendToAddressView.removeTextChangedListener(receivingAddressListener);
-        sendToAddressView.setOnFocusChangeListener(null);
-        sendToAddressView.setText(addressStr);
-        sendToAddressView.addTextChangedListener(receivingAddressListener);
-        sendToAddressView.setOnFocusChangeListener(receivingAddressListener);
+        binding.sendToAddress.removeTextChangedListener(receivingAddressListener);
+        binding.sendToAddress.setOnFocusChangeListener(null);
+        binding.sendToAddress.setText(addressStr);
+        binding.sendToAddress.addTextChangedListener(receivingAddressListener);
+        binding.sendToAddress.setOnFocusChangeListener(receivingAddressListener);
     }
 
     private void parseAddress(String addressStr) throws AddressMalformedException {
@@ -1080,38 +1073,39 @@ public class SendFragment extends WalletFragment {
         }
     }
 
-    @OnClick(R.id.send_to_address_static)
     void onStaticAddressClick() {
-        if (address != null) {
-            final boolean showChangeType = addressTypeCanChange &&
-                    GenericUtils.hasMultipleTypes(address);
-            ActionMode.Callback callback = new UiUtils.AddressActionModeCallback(
-                    address, application.getApplicationContext(), getFragmentManager()) {
+        binding.sendToAddressStatic.setOnClickListener(view -> {
+            if (address != null) {
+                final boolean showChangeType = addressTypeCanChange &&
+                        GenericUtils.hasMultipleTypes(address);
+                ActionMode.Callback callback = new UiUtils.AddressActionModeCallback(
+                        address, application.getApplicationContext(), getFragmentManager()) {
 
-                @Override
-                public boolean onCreateActionMode(ActionMode mode, Menu menu) {
-                    mode.getMenuInflater().inflate(R.menu.address_options_extra, menu);
-                    menu.findItem(R.id.action_change_address_type).setVisible(showChangeType);
-                    return super.onCreateActionMode(mode, menu);
-                }
-
-                @Override
-                public boolean onActionItemClicked(ActionMode mode, MenuItem menuItem) {
-                    switch (menuItem.getItemId()) {
-                        case R.id.action_change_address_type:
-                            if (listener != null) listener.showPayToDialog(getAddress().toString());
-                            mode.finish();
-                            return true;
+                    @Override
+                    public boolean onCreateActionMode(ActionMode mode, Menu menu) {
+                        mode.getMenuInflater().inflate(R.menu.address_options_extra, menu);
+                        menu.findItem(R.id.action_change_address_type).setVisible(showChangeType);
+                        return super.onCreateActionMode(mode, menu);
                     }
-                    return super.onActionItemClicked(mode, menuItem);
+
+                    @Override
+                    public boolean onActionItemClicked(ActionMode mode, MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.action_change_address_type:
+                                if (listener != null) listener.showPayToDialog(getAddress().toString());
+                                mode.finish();
+                                return true;
+                        }
+                        return super.onActionItemClicked(mode, menuItem);
+                    }
+                };
+                actionMode = UiUtils.startActionMode(getActivity(), callback);
+                // Hack to dismiss this action mode when back is pressed
+                if (listener != null && listener instanceof WalletActivity) {
+                    ((WalletActivity) listener).registerActionMode(actionMode);
                 }
-            };
-            actionMode = UiUtils.startActionMode(getActivity(), callback);
-            // Hack to dismiss this action mode when back is pressed
-            if (listener != null && listener instanceof WalletActivity) {
-                ((WalletActivity) listener).registerActionMode(actionMode);
             }
-        }
+        });
     }
 
     private void finishActionMode() {

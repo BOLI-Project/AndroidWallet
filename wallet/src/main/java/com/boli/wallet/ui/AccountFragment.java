@@ -22,6 +22,7 @@ import com.boli.core.wallet.WalletAccount;
 import com.boli.wallet.Constants;
 import com.boli.wallet.R;
 import com.boli.wallet.WalletApplication;
+import com.boli.wallet.databinding.FragmentAccountBinding;
 import com.boli.wallet.util.Keyboard;
 import com.boli.wallet.util.WeakHandler;
 
@@ -55,8 +56,9 @@ public class AccountFragment extends Fragment {
     // Handler ids
     private static final int SEND_TO_URI = 0;
 
+    private FragmentAccountBinding binding;
+
     private int currentScreen;
-    @Bind(R.id.pager) ViewPager viewPager;
     NavigationDrawerFragment mNavigationDrawerFragment;
     @Nullable private WalletAccount account;
     private Listener listener;
@@ -90,14 +92,13 @@ public class AccountFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_account, container, false);
-        ButterKnife.bind(this, view);
+        binding = FragmentAccountBinding.inflate(inflater, container, false);
 
         mNavigationDrawerFragment = (NavigationDrawerFragment)
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
 
-        viewPager.setOffscreenPageLimit(OFF_SCREEN_LIMIT);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        binding.pager.setOffscreenPageLimit(OFF_SCREEN_LIMIT);
+        binding.pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageSelected(int position) {
                 currentScreen = position;
@@ -123,10 +124,10 @@ public class AccountFragment extends Fragment {
             @Override public void onPageScrollStateChanged(int state) { }
         });
 
-        viewPager.setAdapter(
+        binding.pager.setAdapter(
                 new AppSectionsPagerAdapter(getActivity(), getChildFragmentManager(), account));
 
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -174,7 +175,7 @@ public class AccountFragment extends Fragment {
         if (mNavigationDrawerFragment != null && !mNavigationDrawerFragment.isDrawerOpen() &&
                 isVisible() && account != null) {
 
-            switch (viewPager.getCurrentItem()) {
+            switch (binding.pager.getCurrentItem()) {
                 case RECEIVE:
                     inflater.inflate(R.menu.request, menu);
                     MenuItem newAddressItem = menu.findItem(R.id.action_new_address);
@@ -205,8 +206,8 @@ public class AccountFragment extends Fragment {
     }
 
     public void sendToUri(final CoinURI coinUri) {
-        if (viewPager != null) {
-            viewPager.setCurrentItem(SEND);
+        if (binding.pager != null) {
+            binding.pager.setCurrentItem(SEND);
             handler.sendMessage(handler.obtainMessage(SEND_TO_URI, coinUri));
         } else {
             // Should not happen
@@ -215,7 +216,7 @@ public class AccountFragment extends Fragment {
     }
 
     private void setSendToUri(CoinURI coinURI) {
-        if (viewPager != null) viewPager.setCurrentItem(SEND);
+        if (binding.pager != null) binding.pager.setCurrentItem(SEND);
         SendFragment f = getSendFragment();
         if (f != null) {
             try {
@@ -286,8 +287,8 @@ public class AccountFragment extends Fragment {
     }
 
     private boolean goToItem(int item, boolean smoothScroll) {
-        if (viewPager != null && viewPager.getCurrentItem() != item) {
-            viewPager.setCurrentItem(item, smoothScroll);
+        if (binding.pager != null && binding.pager.getCurrentItem() != item) {
+            binding.pager.setCurrentItem(item, smoothScroll);
             return true;
         }
         return false;

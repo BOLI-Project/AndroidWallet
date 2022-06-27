@@ -1,21 +1,21 @@
-apply plugin: 'com.android.application'
+plugins {
+    id 'com.android.application'
+    id 'kotlin-android'
+    id 'kotlin-kapt'
+}
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 32
     buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "com.boli.wallet"
         minSdkVersion 14
-        targetSdkVersion 29
-        versionCode 8
-        versionName "v2.0.6"
+        targetSdkVersion 32
+        versionCode 9
+        versionName "v3.0.0"
         ndk.abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
-        javaCompileOptions {
-            annotationProcessorOptions {
-                includeCompileClasspath = true
-            }
-        }
+
     }
 
     lintOptions {
@@ -71,6 +71,9 @@ android {
             setRoot('src/test')
         }
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 repositories {
@@ -104,4 +107,6 @@ dependencies {
     implementation 'ch.acra:acra:4.8.5'
     implementation 'com.jakewharton:butterknife:7.0.1'
     implementation group: 'org.apache.maven', name: 'maven-artifact', version: '3.0.3'
+
+    implementation "com.squareup.picasso:picasso:2.71828"
 }

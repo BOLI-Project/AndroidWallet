@@ -23,7 +23,7 @@ import java.util.Set;
  */
 public enum CoinID {
     MFCOIN_MAIN(MfcoinMain.get()),
-    AREPACOIN_MAIN(ArepacoinMain.get()),
+    //AREPACOIN_MAIN(ArepacoinMain.get()),
     BOLIVARCOIN_MAIN(BolivarcoinMain.get()),
     BITCOIN_MAIN(BitcoinMain.get()),
     LITECOIN_MAIN(LitecoinMain.get()),

@@ -14,6 +14,7 @@ import com.boli.core.util.GenericUtils;
 import com.boli.core.wallet.WalletAccount;
 import com.boli.wallet.ExchangeRatesProvider.ExchangeRate;
 import com.boli.wallet.R;
+import com.boli.wallet.databinding.CoinListRowBinding;
 import com.boli.wallet.util.WalletUtils;
 
 import butterknife.Bind;
@@ -23,31 +24,27 @@ import butterknife.ButterKnife;
  * @author John L. Jegutanis
  */
 public class CoinListItem extends LinearLayout implements Checkable {
-    final View view;
-    @Bind(R.id.item_icon) ImageView icon;
-    @Bind(R.id.item_text) TextView title;
-    @Bind(R.id.amount) Amount amount;
 
+    private CoinListRowBinding binding;
     private boolean isChecked = false;
     private CoinType type;
 
     public CoinListItem(Context context) {
         super(context);
 
-        view = LayoutInflater.from(context).inflate(R.layout.coin_list_row, this, true);
-        ButterKnife.bind(this, view);
+        binding = CoinListRowBinding.inflate(LayoutInflater.from(context), this, true);
     }
 
     public void setAccount(WalletAccount account) {
         this.type = account.getCoinType();
-        title.setText(account.getDescriptionOrCoinName());
-        icon.setImageResource(WalletUtils.getIconRes(account));
+        binding.itemText.setText(account.getDescriptionOrCoinName());
+        binding.itemIcon.setImageResource(WalletUtils.getIconRes(account));
     }
 
     public void setCoin(CoinType type) {
         this.type = type;
-        title.setText(type.getName());
-        icon.setImageResource(WalletUtils.getIconRes(type));
+        binding.itemText.setText(type.getName());
+        binding.itemIcon.setImageResource(WalletUtils.getIconRes(type));
     }
 
     public void setExchangeRate(ExchangeRate exchangeRate) {
@@ -55,24 +52,24 @@ public class CoinListItem extends LinearLayout implements Checkable {
             Value localAmount = exchangeRate.rate.convert(type.oneCoin());
             setFiatAmount(localAmount);
         } else {
-            amount.setVisibility(View.GONE);
+            binding.amount.setVisibility(View.GONE);
         }
     }
 
     public void setAmount(Value value) {
-        amount.setAmount(GenericUtils.formatCoinValue(value.type, value, true));
-        amount.setSymbol(value.type.getSymbol());
-        amount.setVisibility(View.VISIBLE);
+        binding.amount.setAmount(GenericUtils.formatCoinValue(value.type, value, true));
+        binding.amount.setSymbol(value.type.getSymbol());
+        binding.amount.setVisibility(View.VISIBLE);
     }
 
     private void setFiatAmount(Value value) {
-        amount.setAmount(GenericUtils.formatFiatValue(value));
-        amount.setSymbol(value.type.getSymbol());
-        amount.setVisibility(View.VISIBLE);
+        binding.amount.setAmount(GenericUtils.formatFiatValue(value));
+        binding.amount.setSymbol(value.type.getSymbol());
+        binding.amount.setVisibility(View.VISIBLE);
     }
 
     public void setAmountSingleLine(boolean isSingleLine) {
-        amount.setSingleLine(isSingleLine);
+        binding.amount.setSingleLine(isSingleLine);
     }
 
     @Override
@@ -80,9 +77,9 @@ public class CoinListItem extends LinearLayout implements Checkable {
         isChecked = checked;
 
         if (isChecked) {
-            view.setBackgroundResource(R.color.primary_100);
+            binding.getRoot().setBackgroundResource(R.color.primary_100);
         } else {
-            view.setBackgroundResource(0);
+            binding.getRoot().setBackgroundResource(0);
         }
     }
 

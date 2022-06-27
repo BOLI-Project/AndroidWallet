@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,6 +32,7 @@ import com.boli.core.wallet.families.bitcoin.BitTransaction;
 import com.boli.wallet.Constants;
 import com.boli.wallet.R;
 import com.boli.wallet.WalletApplication;
+import com.boli.wallet.databinding.FragmentSweepBinding;
 import com.boli.wallet.util.Keyboard;
 import com.boli.wallet.util.WeakHandler;
 
@@ -78,14 +81,7 @@ public class SweepWalletFragment extends Fragment {
     private Error error = Error.NONE;
     private TxStatus status = TxStatus.INITIAL;
 
-    @Bind(R.id.private_key_input) View privateKeyInputView;
-    @Bind(R.id.sweep_wallet_key) EditText privateKeyText;
-    @Bind(R.id.passwordView) View passwordView;
-    @Bind(R.id.sweep_error) TextView errorΜessage;
-    @Bind(R.id.passwordInput) EditText password;
-    @Bind(R.id.sweep_loading) View sweepLoadingView;
-    @Bind(R.id.sweeping_status) TextView sweepStatus;
-    @Bind(R.id.button_next) Button nextButton;
+    private FragmentSweepBinding binding;
 
     public SweepWalletFragment() { }
 
@@ -134,14 +130,17 @@ public class SweepWalletFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_sweep, container, false);
-        ButterKnife.bind(this, view);
+        binding = FragmentSweepBinding.inflate(inflater, container, false);
 
         if (getArguments().containsKey(Constants.ARG_PRIVATE_KEY)) {
-            privateKeyText.setText(getArguments().getString(Constants.ARG_PRIVATE_KEY));
+            binding.sweepWalletKey.setText(getArguments().getString(Constants.ARG_PRIVATE_KEY));
         }
 
-        return view;
+        setOnclickListeners();
+        onPrivateKeyInputFocusChange();
+        onPrivateKeyInputTextChange();
+
+        return binding.getRoot();
     }
 
     @Override
@@ -192,34 +191,54 @@ public class SweepWalletFragment extends Fragment {
         listener = null;
     }
 
-    @OnClick(R.id.scan_qr_code)
+    private void setOnclickListeners(){
+        handleScan();
+        verifyKeyAndProceed();
+    }
+
     void handleScan() {
-        startActivityForResult(new Intent(getActivity(), ScanActivity.class), REQUEST_CODE_SCAN);
+        binding.scanQrCode.setOnClickListener(view -> startActivityForResult(new Intent(getActivity(), ScanActivity.class), REQUEST_CODE_SCAN));
     }
 
-    @OnClick(R.id.button_next)
     void verifyKeyAndProceed() {
-        Keyboard.hideKeyboard(getActivity());
-        if (validatePrivateKey()) {
-            maybeStartSweepTask();
-        }
+        binding.buttonNext.setOnClickListener(view -> {
+            Keyboard.hideKeyboard(getActivity());
+            if (validatePrivateKey()) {
+                maybeStartSweepTask();
+            }
+        });
     }
 
-    @OnFocusChange(R.id.sweep_wallet_key)
-    void onPrivateKeyInputFocusChange(final boolean hasFocus) {
-        if (!hasFocus) validatePrivateKey();
+    void onPrivateKeyInputFocusChange() {
+        binding.sweepWalletKey.setOnFocusChangeListener((view, b) -> {
+            if (!b) validatePrivateKey();
+        });
     }
 
-    @OnTextChanged(value = R.id.sweep_wallet_key, callback = AFTER_TEXT_CHANGED)
     void onPrivateKeyInputTextChange() {
-        validatePrivateKey(true);
+        binding.sweepWalletKey.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                validatePrivateKey(true);
+            }
+        });
     }
 
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
         if (requestCode == REQUEST_CODE_SCAN) {
             if (resultCode == Activity.RESULT_OK) {
-                privateKeyText.setText(intent.getStringExtra(ScanActivity.INTENT_EXTRA_RESULT));
+                binding.sweepWalletKey.setText(intent.getStringExtra(ScanActivity.INTENT_EXTRA_RESULT));
                 validatePrivateKey();
             }
         }
@@ -228,37 +247,37 @@ public class SweepWalletFragment extends Fragment {
     private void updateView() {
         updateErrorView();
         updateStatusView();
-        nextButton.setEnabled(status == TxStatus.INITIAL);
+        binding.buttonNext.setEnabled(status == TxStatus.INITIAL);
     }
 
     private void updateErrorView() {
         switch (error) {
             case NONE:
-                setGone(errorΜessage);
+                setGone(binding.sweepError);
                 break;
             case BAD_FORMAT:
-                errorΜessage.setText(R.string.sweep_wallet_bad_format);
-                setVisible(errorΜessage);
+                binding.sweepError.setText(R.string.sweep_wallet_bad_format);
+                setVisible(binding.sweepError);
                 break;
             case BAD_COIN_TYPE:
-                errorΜessage.setText(R.string.sweep_wallet_bad_coin_type);
-                setVisible(errorΜessage);
+                binding.sweepError.setText(R.string.sweep_wallet_bad_coin_type);
+                setVisible(binding.sweepError);
                 break;
             case BAD_PASSWORD:
-                errorΜessage.setText(R.string.sweep_wallet_bad_password);
-                setVisible(errorΜessage);
+                binding.sweepError.setText(R.string.sweep_wallet_bad_password);
+                setVisible(binding.sweepError);
                 break;
             case ZERO_COINS:
-                errorΜessage.setText(R.string.sweep_wallet_zero_coins);
-                setVisible(errorΜessage);
+                binding.sweepError.setText(R.string.sweep_wallet_zero_coins);
+                setVisible(binding.sweepError);
                 break;
             case NO_CONNECTION:
-                errorΜessage.setText(R.string.disconnected_label);
-                setVisible(errorΜessage);
+                binding.sweepError.setText(R.string.disconnected_label);
+                setVisible(binding.sweepError);
                 break;
             case GENERIC_ERROR:
-                errorΜessage.setText(R.string.error_generic);
-                setVisible(errorΜessage);
+                binding.sweepError.setText(R.string.error_generic);
+                setVisible(binding.sweepError);
                 break;
         }
     }
@@ -266,36 +285,36 @@ public class SweepWalletFragment extends Fragment {
     private void updateStatusView() {
         // Hide when error
         if (error != Error.NONE) {
-            setGone(sweepLoadingView);
-            setVisible(privateKeyInputView);
+            setGone(binding.sweepLoading);
+            setVisible(binding.privateKeyInput);
             return;
         }
 
         switch (status) {
             case DECODING:
-                sweepStatus.setText(R.string.sweep_wallet_key_decoding);
+                binding.sweepingStatus.setText(R.string.sweep_wallet_key_decoding);
                 break;
             case LOADING:
-                sweepStatus.setText(R.string.sweep_wallet_key_loading);
+                binding.sweepingStatus.setText(R.string.sweep_wallet_key_loading);
                 break;
             case SIGNING:
-                sweepStatus.setText(R.string.sweep_wallet_key_signing);
+                binding.sweepingStatus.setText(R.string.sweep_wallet_key_signing);
                 break;
         }
 
         if (status == TxStatus.INITIAL) {
-            setGone(sweepLoadingView);
-            setVisible(privateKeyInputView);
+            setGone(binding.sweepLoading);
+            setVisible(binding.privateKeyInput);
 
             if (serializedKey != null && serializedKey.isEncrypted()) {
-                passwordView.setVisibility(View.VISIBLE);
+                binding.passwordView.setVisibility(View.VISIBLE);
             } else {
-                passwordView.setVisibility(View.GONE);
-                password.setText("");
+                binding.passwordView.setVisibility(View.GONE);
+                binding.passwordInput.setText("");
             }
         } else {
-            setVisible(sweepLoadingView);
-            setGone(privateKeyInputView);
+            setVisible(binding.sweepLoading);
+            setGone(binding.privateKeyInput);
         }
     }
     private void onTransactionPrepared(SendRequest request) {
@@ -323,7 +342,7 @@ public class SweepWalletFragment extends Fragment {
     private void maybeStartSweepTask() {
         if (sweepWalletTask == null) {
             sweepWalletTask = new SweepWalletTask(handler, serverClients, account, serializedKey,
-                    password.getText().toString());
+                    binding.passwordInput.getText().toString());
             sweepWalletTask.execute();
             error = Error.NONE;
             status = TxStatus.DECODING;
@@ -336,9 +355,9 @@ public class SweepWalletFragment extends Fragment {
     }
 
     private boolean validatePrivateKey(boolean isTyping) {
-        if (privateKeyText == null) return false;
+        if (binding.sweepWalletKey == null) return false;
 
-        String privateKey = privateKeyText.getText().toString().trim();
+        String privateKey = binding.sweepWalletKey.getText().toString().trim();
 
         if (privateKey.isEmpty()) return false;
 

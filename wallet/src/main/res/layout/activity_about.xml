@@ -29,8 +29,8 @@
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
-                android:src="@drawable/intro_logo"
-                android:contentDescription="@string/main_logo" />
+                android:contentDescription="@string/main_logo"
+                android:src="@drawable/bolicoin_logo" />
 
             <TextView
                 android:id="@+id/textView"

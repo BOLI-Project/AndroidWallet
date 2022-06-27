@@ -187,7 +187,7 @@ public class WalletProtobufSerializer {
                 seed = new DeterministicSeed(new byte[16], mnemonic, 0);
             } else if (key.hasEncryptedData()) {
                 EncryptedData data = new EncryptedData(key.getEncryptedData().getInitialisationVector().toByteArray(),
-                        key.getEncryptedData().getEncryptedPrivateKey().toByteArray());
+                        key.getEncryptedData().getEncryptedprotectedKey().toByteArray());
                 seed = new DeterministicSeed(data, null, 0);
             } else {
                 throw new UnreadableWalletException("Malformed key proto: " + key.toString());

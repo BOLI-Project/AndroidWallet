@@ -135,8 +135,8 @@ public class Constants {
     public static final List<CoinAddress> DEFAULT_COINS_SERVERS = ImmutableList.of(
             new CoinAddress(MfcoinMain.get(),
                     new ServerAddress("electrumx.mfcoin.net", 50001)),
-            new CoinAddress(ArepacoinMain.get(),
-                    new ServerAddress("electrum.arepacripto.org", 50001)),
+            /*new CoinAddress(ArepacoinMain.get(),
+                    new ServerAddress("electrum.arepacripto.org", 50001)),*/
             new CoinAddress(BitcoinMain.get(),
                     new ServerAddress("btc-1.indexer.coinomi.net", 5001),
                     new ServerAddress("btc-2.indexer.coinomi.net", 5001)),
@@ -240,9 +240,9 @@ public class Constants {
     static {
         COINS_ICONS = new HashMap<>();
         COINS_ICONS.put(CoinID.MFCOIN_MAIN.getCoinType(), R.mipmap.mfcoin);
-        COINS_ICONS.put(CoinID.AREPACOIN_MAIN.getCoinType(), R.mipmap.arepacoin);
+        //COINS_ICONS.put(CoinID.AREPACOIN_MAIN.getCoinType(), R.mipmap.arepacoin);
         COINS_ICONS.put(CoinID.BITCOIN_MAIN.getCoinType(), R.mipmap.bitcoin);
-        COINS_ICONS.put(CoinID.BOLIVARCOIN_MAIN.getCoinType(), R.mipmap.bolivarcoin);
+        COINS_ICONS.put(CoinID.BOLIVARCOIN_MAIN.getCoinType(), R.drawable.bolicoin_logo);
         COINS_ICONS.put(CoinID.LITECOIN_MAIN.getCoinType(), R.mipmap.litecoin);
         COINS_ICONS.put(CoinID.DOGECOIN_MAIN.getCoinType(), R.mipmap.dogecoin);
         COINS_ICONS.put(CoinID.DASH_MAIN.getCoinType(), R.mipmap.dash);
@@ -290,7 +290,7 @@ public class Constants {
 
         COINS_BLOCK_EXPLORERS = new HashMap<>();
         COINS_BLOCK_EXPLORERS.put(CoinID.MFCOIN_MAIN.getCoinType(), "https://explorer.mfcoin.net/tx/%s");
-        COINS_BLOCK_EXPLORERS.put(CoinID.AREPACOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/arepa/tx.dws?%s");
+        //COINS_BLOCK_EXPLORERS.put(CoinID.AREPACOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/arepa/tx.dws?%s");
         COINS_BLOCK_EXPLORERS.put(CoinID.BITCOIN_MAIN.getCoinType(), "https://blockchain.info/tx/%s");
         COINS_BLOCK_EXPLORERS.put(CoinID.BOLIVARCOIN_MAIN.getCoinType(), "https://chainz.cryptoid.info/boli/tx.dws?%s");
         COINS_BLOCK_EXPLORERS.put(CoinID.LITECOIN_MAIN.getCoinType(), "http://explorer.litecoin.net/tx/%s");
@@ -345,7 +345,7 @@ public class Constants {
 
     public static final List<CoinType> SUPPORTED_COINS = ImmutableList.of(
             BitcoinMain.get(),
-            ArepacoinMain.get(),
+            //ArepacoinMain.get(),
             BolivarcoinMain.get(),
             LitecoinMain.get(),
             DogecoinMain.get(),

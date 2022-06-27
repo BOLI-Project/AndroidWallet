@@ -643,7 +643,7 @@ final public class WalletActivity extends BaseWalletActivity implements
             sweepWallet(null);
             return true;
         } else if (id == R.id.action_support) {
-            sendSupportEmail();
+            goToBoliWeb();
             return true;
         } else if (id == R.id.action_about) {
             startActivity(new Intent(WalletActivity.this, AboutActivity.class));
@@ -653,11 +653,8 @@ final public class WalletActivity extends BaseWalletActivity implements
         return super.onOptionsItemSelected(item);
     }
 
-    private void sendSupportEmail() {
-        Intent intent = new Intent(Intent.ACTION_SENDTO);
-        intent.setData(Uri.parse("mailto:")); // only email apps should handle this
-        intent.putExtra(Intent.EXTRA_EMAIL, new String[]{Constants.SUPPORT_EMAIL});
-        intent.putExtra(Intent.EXTRA_SUBJECT, "");
+    private void goToBoliWeb() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://bolis.info/"));
         try {
             startActivity(Intent.createChooser(intent,
                     getResources().getString(R.string.support_message)));
