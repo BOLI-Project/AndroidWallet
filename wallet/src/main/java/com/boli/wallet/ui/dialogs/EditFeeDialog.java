@@ -6,8 +6,7 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
-import android.view.View;
-import android.widget.TextView;
+import android.view.LayoutInflater;
 
 import com.boli.core.coins.CoinID;
 import com.boli.core.coins.CoinType;
@@ -19,10 +18,6 @@ import com.boli.wallet.R;
 import com.boli.wallet.WalletApplication;
 import com.boli.wallet.databinding.EditFeeDialogBinding;
 import com.boli.wallet.ui.DialogBuilder;
-import com.boli.wallet.ui.widget.AmountEditView;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
 
 import static com.boli.core.Preconditions.checkState;
 
@@ -53,7 +48,7 @@ public class EditFeeDialog extends DialogFragment {
 
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         checkState(getArguments().containsKey(Constants.ARG_COIN_ID), "Must provide coin id");
-        binding = EditFeeDialogBinding.inflate(getLayoutInflater(), null, false);
+        binding = EditFeeDialogBinding.inflate(LayoutInflater.from(getContext()));
 
         // TODO move to xml
         binding.feeAmount.setSingleLine(true);
