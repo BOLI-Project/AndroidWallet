@@ -51,13 +51,6 @@ android {
         }
         debug {
             minifyEnabled true
-            shrinkResources true
-            zipAlignEnabled true
-            debuggable false
-            jniDebuggable false
-            renderscriptDebuggable false
-            pseudoLocalesEnabled false
-            zipAlignEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
