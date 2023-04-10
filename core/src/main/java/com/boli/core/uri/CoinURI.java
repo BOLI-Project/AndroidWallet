@@ -554,7 +554,7 @@ public class CoinURI implements Serializable {
         }
         
         StringBuilder builder = new StringBuilder();
-        builder.append(type.getUriScheme()).append(":").append(addressStr);
+        builder.append(addressStr);
         
         boolean questionMarkHasBeenOutput = false;
         
