@@ -66,6 +66,15 @@
             android:paddingTop="14dp"
             android:text="@string/web_site" />
 
+        <TextView
+            style="@style/NormalText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:autoLink="web"
+            android:gravity="center"
+            android:paddingTop="14dp"
+            android:text="@string/faucet_web_site" />
+
         <LinearLayout
             android:layout_width="379dp"
             android:layout_height="wrap_content"
@@ -105,20 +114,6 @@
                 android:layout_weight="1" />
 
             <ImageButton
-                android:id="@+id/Instagram"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/social_bg"
-                android:onClick="myInstag"
-                app:srcCompat="@mipmap/instagram"
-                android:contentDescription="@string/instagram" />
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <ImageButton
                 android:id="@+id/Twitter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -141,19 +136,6 @@
                 app:srcCompat="@mipmap/telegram"
                 android:contentDescription="@string/telegram" />
 
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <ImageButton
-                android:id="@+id/Discord"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/social_bg"
-                android:onClick="myDiscord"
-                app:srcCompat="@mipmap/discord"
-                android:contentDescription="@string/discord" />
         </LinearLayout>
 
         <!--

@@ -402,6 +402,7 @@
 
     <!-- About -->
     <string name="web_site">Our website: https://bolis.info/</string>
+    <string name="faucet_web_site">Our faucet: https://boligrifo.com/</string>
     <string name="social_networks">Our social networks</string>
     <string name="main_logo">Bolicoin</string>
     <string name="facebook">Facebook</string>
