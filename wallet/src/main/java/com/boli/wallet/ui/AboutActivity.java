@@ -40,11 +40,6 @@ public class AboutActivity extends BaseWalletActivity {
         startActivity(browserIntent);
     }
 
-    public void myInstag(View view){
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.instagram.com/bolicoin/"));
-        startActivity(browserIntent);
-    }
-
     public void myTwitt(View view){
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://twitter.com/BolivarCoin_XT"));
         startActivity(browserIntent);
@@ -52,11 +47,6 @@ public class AboutActivity extends BaseWalletActivity {
 
     public void myTeleg(View view){
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/bolivarcoinoficial"));
-        startActivity(browserIntent);
-    }
-
-    public void myDiscord(View view){
-        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://discordapp.com/invite/Ea8Xprg"));
         startActivity(browserIntent);
     }
 }

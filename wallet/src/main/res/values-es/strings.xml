@@ -357,6 +357,7 @@
 
     <!-- About -->
     <string name="web_site">Nuestra Página Web: https://bolis.info/</string>
+    <string name="faucet_web_site">Nuestra Faucet: https://boligrifo.com/</string>
     <string name="social_networks">Nuestras Redes Sociales</string>
     <string name="main_logo">Bolicoin</string>
     <string name="facebook">Facebook</string>
