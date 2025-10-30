@@ -448,13 +448,7 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
                 if (pending1 != pending2)
                     return pending1 ? -1 : 1;
 
-                // TODO use dates once implemented
-//                final Date updateTime1 = tx1.getUpdateTime();
-//                final long time1 = updateTime1 != null ? updateTime1.getTime() : 0;
-//                final Date updateTime2 = tx2.getUpdateTime();
-//                final long time2 = updateTime2 != null ? updateTime2.getTime() : 0;
-
-                // If both not pending
+                // If both not pending, compare by chain height
                 if (!pending1 && !pending2) {
                     final int time1 = tx1.getAppearedAtChainHeight();
                     final int time2 = tx2.getAppearedAtChainHeight();
@@ -462,7 +456,8 @@ public class BalanceFragment extends WalletFragment implements LoaderCallbacks<L
                         return time1 > time2 ? -1 : 1;
                 }
 
-                return Arrays.equals(tx1.getHashBytes(),tx2.getHashBytes()) ? 1 : -1;
+                // If both have the same chain height, consider them equal
+                return 0;
             }
         };
     }

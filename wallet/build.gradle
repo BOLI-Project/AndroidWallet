@@ -5,15 +5,15 @@ plugins {
 }
 
 android {
-    compileSdkVersion 34
+    compileSdkVersion 35
     buildToolsVersion '28.0.3'
 
     defaultConfig {
         applicationId "com.boli.wallet"
         minSdkVersion 14
-        targetSdkVersion 34
-        versionCode 12
-        versionName "v3.0.1"
+        targetSdkVersion 35
+        versionCode 13
+        versionName "v3.0.3"
         ndk.abiFilters 'armeabi-v7a', 'arm64-v8a', 'x86', 'x86_64'
 
     }
